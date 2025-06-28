@@ -56,12 +56,29 @@ section {
 
 /* Skills */
 ul {
-  list-style: disc;
-  padding-left: 1.5rem;
+  list-style-type: none;
+  color: #9ABDDC;
+  content: "◉";
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+ul li::before {
+  content: "◌";
+  margin-right: 0.5rem;
 }
 
 ul li {
   margin-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+ul li::hover {
+  color: #9ABDDC;
+  transform: translateX(5px);
+  transition: 0.2s ease-in-out;
 }
 
 /* Containers */
