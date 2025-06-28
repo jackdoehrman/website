@@ -15,19 +15,19 @@ body {
 
 /* Typography */
 h1, h2, h3 {
-  color: #64ffda;
+  color: #E5F3FD;
   margin-bottom: 0.5rem;
 }
 
 p {
   margin-bottom: 1rem;
-  color: #8892b0;
+  color: #F5FBFF;
   max-width: 800px;
 }
 
 /* Links */
 a {
-  color: #64ffda;
+  color: #BDD5E7;
   text-decoration: none;
 }
 
@@ -89,7 +89,7 @@ section:not(:last-of-type) {
 }
 
 a {
-  color: #64ffda;
+  color: #BDD5E7;
   text-decoration: none;
   transition: all 0.3s ease;
 }
