@@ -8,26 +8,25 @@
 body {
   font-family: 'Inter', sans-serif;
   background-color: #0a192f;
-  color: #ccd6f6;
   line-height: 1.6;
   padding: 2rem;
 }
 
 /* Typography */
 h1, h2, h3 {
-  color: #9ABDDC;
+  color: #f7f7f7;
   margin-bottom: 0.5rem;
 }
 
 p {
   margin-bottom: 1rem;
-  color: #D1E5F4;
+  color: #dfe3ee;
   max-width: 800px;
 }
 
 /* Links */
 a {
-  color: #BDD5E7;
+  color: #8b9dc3;
   text-decoration: none;
 }
 
@@ -57,7 +56,7 @@ section {
 /* Skills */
 ul {
   list-style-type: none;
-  color: #9ABDDC;
+  color: #dfe3ee;
   padding-left: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -67,12 +66,6 @@ ul {
 ul li {
   margin-bottom: 0.5rem;
   padding-left: 1rem;
-}
-
-ul li::hover {
-  color: #9ABDDC;
-  transform: translateX(5px);
-  transition: 0.2s ease-in-out;
 }
 
 /* Containers */
@@ -99,15 +92,10 @@ section:not(:last-of-type) {
   }
 }
 
-a {
-  color: #BDD5E7;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
 a:hover {
   transform: translateY(-2px);
   opacity: 0.9;
+  color: #ffffff;
 }
 
 .fade-in {
