@@ -58,16 +58,11 @@ section {
 ul {
   list-style-type: none;
   color: #9ABDDC;
-  content: "◉";
+  content: "◌";
   padding-left: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-}
-
-ul li::before {
-  content: "◌";
-  margin-right: 0.5rem;
 }
 
 ul li {
