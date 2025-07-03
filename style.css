@@ -1,8 +1,8 @@
       :root {
         --bg: #0a192f;
-        --accent: #64ffda;
-        --text: #ccd6f6;
-        --subtext: #8892b0;
+        --accent: #f7f7f7;
+        --text: #dfe3ee;
+        --subtext: #8b9dc3;
         --font: 'Inter', sans-serif;
       }
 
