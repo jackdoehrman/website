@@ -1,208 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <link rel="stylesheet" href="style.css" />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-      <meta charset="utf-8">
-      <meta name ="viewport" content="width-device-width, initial-scale=1.0"">
-      <style>
-        html {
-          scroll-behavior: smooth;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jack Doehrman</title>
+    <meta name="description" content="Jack Doehrman | Data Analyst & Engineer" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0a192f;
+        --accent: #64ffda;
+        --text: #ccd6f6;
+        --subtext: #8892b0;
+        --font: 'Inter', sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        line-height: 1.6;
+        padding: 2rem;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      h1, h2, h3 {
+        color: var(--text);
+        margin-bottom: 1rem;
+      }
+
+      header {
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        text-align: left;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      nav ul li a:hover {
+        color: var(--accent);
+        border-bottom: 1px solid var(--accent);
+      }
+
+      section {
+        max-width: 800px;
+        margin: 0 auto 4rem;
+        animation: fadeIn 1s ease-in forwards;
+      }
+
+      ul {
+        list-style: disc;
+        padding-left: 1.5rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
         }
-      </style>
-      <title>Jack Doehrman</title>
-      <meta name="description" content="Jack Doehrman is a Data Engineer and Analyst who is excited to expand his skillset in any way that he can.">
-   </head>
-   <body>
-      <div>
-         <div>
-            <div>
-               <header>
-                  <div>
-                     <h1>
-                        <p>Work in Progress!</p>
-                     </h1>
-                     <h1>
-                        <a href="/">Jack Doehrman</a>
-                     </h1>
-                     <h2>
-                        Data Analyst & Engineer
-                     </h2>
-                     <p>
-                        I am a data analyst and data engineer who transforms raw data into actionable insights and scalable solutions to drive smarter business decisions.
-                     </p>
-                  </div>
-               </header>
-               <main id="content">
-                  <section id="about" aria-label="About me">
-                     <div>
-                        <h2>
-                           About
-                        </h2>
-                     </div>
-                     <div>
-                        <p>
-                           I’m a passionate and driven data professional currently working as a 
-                           Business Intelligence and Strategy Analyst with Houston Dynamo FC. 
-                           I thrive in environments where analytics and strategy intersect, 
-                           especially within the sports industry. My work ranges from CRM administration 
-                           and dashboard development to creating innovative scoring models that help 
-                           drive smarter decision-making and elevate fan experiences.
-                        </p>
-                        <p>
-                           My background includes a Master’s in Information Science from Indiana University, 
-                           where I also completed a B.S. in Informatics. Throughout my academic and professional journey, 
-                           I've consistently pursued excellence, earning scholarships, academic honors, 
-                           and valuable real-world experience through roles with organizations like 
-                           Pacers Sports & Entertainment. Whether it's Salesforce, SQL, Tableau, or Python, 
-                           I’m always eager to build, explore, and apply tools that transform raw data into impactful insights.
-                        </p>
-                        <p>
-                           Above all, I’m committed to continuous growth. Every challenge is an opportunity 
-                           to learn something new, expand my perspective, and make a bigger impact. 
-                           Whether it’s diving deeper into data science, optimizing CRM ecosystems, 
-                           or leading collaborative projects, I’m always seeking ways to grow both personally and professionally.
-                        </p>
-                     </div>
-                  </section>
-                  <section id="skills" aria-label="Skills">
-                     <div>Skills</div>
-                     <div>
-                        <div>
-                           <div>
-                              <div>Technical & Analytical Skills</div>
-                              <ul>
-                                 <li><strong>SQL & Database Management</strong> - SQL, Agilitek Solutions, Databricks</li>
-                                 <li><strong>Data Analysis & Visualization</strong> - Tableau, PowerBI, Excel</li>
-                                 <li><strong>Programming & Data Science</strong> - Python (Pandas, NumPy, Matplotlib), R, Jupyter</li>
-                                 <li><strong>CRM Administration & Strategy</strong> - Salesforce (Certified Administrator), Salesforce Marketing Cloud</li>
-                                 <li><strong>API Integration</strong> - Connecting and managing data across platforms</li>
-                                 <li><strong>Survey Design & Analysis</strong> - End-to-end development & reporting</li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </section>
-                  <section id="experience" aria-label="Experience">
-                     <div>
-                        <h2>
-                           Experience
-                        </h2>
-                     </div>
-                     <div>
-                        <ul>
-                           <li>
-                              <div>
-                                 <header>
-                                    October 2023 - Present
-                                 </header>
-                                 <div>
-                                    <h3>
-                                       <div>
-                                          <a href="https://www.houstondynamofc.com/"><strong>Houston Dynamo FC</strong></a>
-                                       </div>
-                                    </h3>
-                                    <p>
-                                       As the Business Intelligence and Strategy Analyst at Houston Dynamo FC, 
-                                       I manage the organization's Salesforce CRM platform and lead data-driven 
-                                       initiatives that support ticketing, marketing, sponsorship, and fan engagement strategies. 
-                                       My work involves building and maintaining dashboards that provide actionable insights on ticket sales, 
-                                       attendance trends, and membership renewals. I also design predictive models, such as engagement scores and 
-                                       RFM analyses—to help the team optimize customer outreach, maximize revenue, and enhance the overall fan experience. 
-                                       Through a blend of technical expertise and strategic thinking, I help the club make smarter, faster business decisions.
-                                    </p>
-                                    <ul>
-                                       <li>SQL</li>
-                                       <li>PowerBI</li>
-                                       <li>Excel</li>
-                                    </ul>
-                                 </div>
-                              </div>
-                           </li>
-                           <li>
-                              <div>
-                                 <header>
-                                    September 2022 - May 2023
-                                 </header>
-                                 <div>
-                                    <h3>
-                                       <div>
-                                          <a href="https://www.nba.com/pacers/">Pacers Sports and Entertainment</a>
-                                       </div>
-                                    </h3>
-                                    <p>
-                                       During my time with Pacers Sports & Entertainment, 
-                                       I supported the data team by transforming and cleaning raw data 
-                                       from various sources to ensure smooth integration into the organization’s 
-                                       data infrastructure. I developed several dashboards and reporting tools, 
-                                       including a social media performance dashboard used across digital departments, 
-                                       and survey analysis platforms for part-time staff and game-day events. 
-                                       I also worked on merging legacy e-commerce data into the current system, 
-                                       helping improve continuity and analytics across platforms. 
-                                       This role sharpened my technical skills and taught me how to deliver clear, 
-                                       actionable insights to diverse teams within a fast-paced sports environment.
-                                    </p>
-                                    <ul>
-                                       <li>Tableau</li>
-                                       <li>Databricks</li>
-                                    </ul>
-                                 </div>
-                              </div>
-                           </li>
-                        </ul>
-                     </div>
-                  </section>
-                  <section id="projects" aria-label="Projects">
-                     <div>
-                        <h2>Projects</h2>
-                        <div>
-                           <ul>
-                              <li>
-                                 <div>
-                                    <div>
-                                       <h3>
-                                          <a href="STMscoring.html">Season Ticket Member "At-Risk" Scoring</a>
-                                       </h3>
-                                       <p>Developed a predictive model to identify most likely season ticket members of not renewing their tickets using historical engagement, 
-                                          attendance, and past member renewal data. Designed an "At-Risk" scoring system to support proactive retention strategies, 
-                                          enabling sales teams to prioritize outreach and improve renewal rates.
-                                       </p>
-                                       <ul>
-                                          <li>Statistical Analysis</li>
-                                          <li>Predictive Modeling</li>
-                                          <li>CRM Integration</li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div>
-                                    <div>
-                                       <h3>
-                                          <a href="SecurityMonetizationROI.html">Security Upgrade - Monetization & ROI Analysis</a>
-                                       </h3>
-                                       <p>Analyzed stadium entry operations by evaluating current security system throughput and average fan wait times. 
-                                          Modeled potential revenue gains from reducing wait times and staffing costs through upgraded scanning technology. 
-                                          Delivered actionable insights on operational efficiency and fan experience improvements.</p>
-                                       <ul>
-                                          <li>Statistical Modeling</li>
-                                          <li>Cost-Benefit Analysis</li>
-                                          <li>Operational Strategy</li>
-                                          <li>Process Optimization</li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </li>
-                           </ul>
-                        </div>
-                     </div>
-                  </section>
-                  <p>
-                     link to full resume
-                  </p>
-               </main>
-            </div>
-         </div>
-      </div>
-   </body>
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .project-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid #112240;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .project-card:hover {
+        transform: scale(1.02);
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Jack Doehrman</h1>
+      <h2>Data Analyst & Engineer</h2>
+      <p>I transform raw data into insights and scalable solutions for smarter decisions. Currently at Houston Dynamo FC.</p>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="about">
+        <h2>About</h2>
+        <p>I'm a passionate data professional working as a Business Intelligence and Strategy Analyst for Houston Dynamo FC. I specialize in CRM strategy, dashboarding, and predictive modeling to optimize operations and enhance the fan experience.</p>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+          <li><strong>SQL & Databases</strong>: Agilitek, Databricks</li>
+          <li><strong>Data Viz</strong>: Tableau, Power BI, Excel</li>
+          <li><strong>Programming</strong>: Python, R, Jupyter</li>
+          <li><strong>CRM & Marketing</strong>: Salesforce, SFMC</li>
+          <li><strong>Survey & Analysis</strong>: SurveyMonkey, custom analytics</li>
+        </ul>
+      </section>
+
+      <section id="experience">
+        <h2>Experience</h2>
+        <p><strong>Houston Dynamo FC</strong> (Oct 2023 - Present)</p>
+        <p>Lead Salesforce CRM and BI strategy. Build dashboards, RFM models, and optimize ticketing and fan engagement workflows.</p>
+
+        <p><strong>Pacers Sports & Entertainment</strong> (Sep 2022 - May 2023)</p>
+        <p>Built dashboards, analyzed surveys, and integrated legacy data systems to improve operational insights across digital and sales teams.</p>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+
+        <div class="project-card">
+          <h3><a href="STMscoring.html">STM "At-Risk" Scoring</a></h3>
+          <p>Built a predictive model to identify likely non-renewals using historical data. Delivered outreach prioritization through an "At-Risk" scoring system integrated in CRM.</p>
+        </div>
+
+        <div class="project-card">
+          <h3><a href="SecurityMonetizationROI.html">Security ROI & Optimization</a></h3>
+          <p>Analyzed wait times and staffing costs to model ROI for upgraded security systems. Produced revenue estimates and staffing reduction strategies.</p>
+        </div>
+      </section>
+
+      <footer>
+        <p><a href="#">View Full Resume</a></p>
+      </footer>
+    </main>
+  </body>
 </html>
