@@ -30,8 +30,13 @@
       height: 100vh;
     }
 
-    a.button {
+    .buttons {
       margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .button {
       padding: 0.75rem 1.5rem;
       background-color: transparent;
       border: 1px solid #64ffda;
@@ -41,7 +46,7 @@
       transition: 0.3s ease;
     }
 
-    a.button:hover {
+    .button:hover {
       background-color: #64ffda;
       color: #0a192f;
     }
@@ -50,8 +55,11 @@
 <body>
   <h1>My Resume</h1>
 
-  <iframe src="jack_doehrman_resume.pdf" type="application/pdf"></iframe>
+  <iframe src=""C:\Users\jackd\OneDrive\Documents\OFFICIAL JOB DOCUMENTS\Jack Doehrman Resume 2025.pdf"" type="application/pdf"></iframe>
 
-  <a class="button" href="index.html">← Back to Home</a>
+  <div class="buttons">
+    <a class="button" href="jack_doehrman_resume.pdf" download>⬇ Download PDF</a>
+    <a class="button" href="index.html">← Back to Home</a>
+  </div>
 </body>
 </html>
