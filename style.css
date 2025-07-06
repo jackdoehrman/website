@@ -83,3 +83,23 @@
         transform: scale(1.02);
         border-color: var(--accent);
       }
+
+/* Prevent global styles from leaking into Instagram embed */
+      .instagram-wrapper * {
+        all: unset;
+        all: revert;
+      }
+
+      #instagram {
+        max-width: 900px;
+        margin: 0 auto 4rem;
+        padding: 2rem;
+      }
+      
+      #instagram h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: var(--accent);
+      }
+
+
