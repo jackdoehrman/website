@@ -83,33 +83,3 @@
         transform: scale(1.02);
         border-color: var(--accent);
       }
-
-/* Instagram section layout */
-#instagram {
-  max-width: 1000px;
-  margin: 4rem auto;
-  padding: 2rem;
-}
-
-.instagram-title {
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 1.5rem;
-}
-
-/* This wraps the entire embed and applies outer spacing */
-.instagram-wrapper {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-/* Scoped styles for elements rendered inside the Instaplug container */
-.custom-instagram-widget * {
-  background-color: white !important;
-  color: black !important;
-  font-family: inherit !important;
-}
-
