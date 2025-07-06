@@ -88,6 +88,7 @@
       .instagram-wrapper * {
         all: unset;
         all: revert;
+        background-color: #ffffff;
       }
 
       #instagram {
