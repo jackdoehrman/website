@@ -1,0 +1,222 @@
+import { useEffect } from "react";
+import Head from "next/head";
+
+export default function Home() {
+  useEffect(() => {
+    // Load Instagram embed script
+    const script = document.createElement("script");
+    script.src = "https://embedsocial.com/cdn/ht.js";
+    script.id = "EmbedSocialHashtagScript";
+    document.head.appendChild(script);
+
+    // Spotify widget logic
+    async function fetchNowPlaying() {
+      try {
+        const res = await fetch("/api/now-playing");
+        const data = await res.json();
+        const el = document.getElementById("spotify-widget");
+        if (el) {
+          if (data.isPlaying) {
+            el.innerHTML = `<img src="${data.albumImageUrl}" width="64" style="border-radius:6px;vertical-align:middle"/>
+              <span style="margin-left:1rem;color:#64ffda">${data.title}</span> — <span style="color:#8892b0">${data.artist}</span>`;
+          } else {
+            el.textContent = "Not playing anything 🎶";
+          }
+        }
+      } catch (err) {
+        console.error("Spotify widget error:", err);
+      }
+    }
+
+    fetchNowPlaying();
+    const interval = setInterval(fetchNowPlaying, 20000);
+
+    return () => {
+      clearInterval(interval);
+      // Clean up Instagram script on unmount
+      const existingScript = document.getElementById("EmbedSocialHashtagScript");
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
+
+  return (
+    <>
+      <Head>
+        <title>Jack Doehrman</title>
+        <meta
+          name="description"
+          content="Jack Doehrman | Data Analyst & Engineer"
+        />
+        <link rel="stylesheet" href="/style.css" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+
+      {/* Remove the <body> tag here */}
+
+      <header>
+        <h1>Jack Doehrman</h1>
+        <h2>Data Analyst & Engineer</h2>
+        <p>
+          I transform raw data into insights and scalable solutions for smarter
+          decisions. Currently at Houston Dynamo FC.
+        </p>
+        <nav>
+          <ul>
+            <li>
+              <a href="#about">About</a>
+            </li>
+            <li>
+              <a href="#skills">Skills</a>
+            </li>
+            <li>
+              <a href="#experience">Experience</a>
+            </li>
+            <li>
+              <a href="#projects">Projects</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section id="about">
+          <h2>About</h2>
+          <p>
+            I'm a passionate data professional working as a Business
+            Intelligence and Strategy Analyst for Houston Dynamo FC. I
+            specialize in CRM strategy, dashboarding, and predictive modeling
+            to optimize operations and enhance the fan experience.
+          </p>
+        </section>
+
+        <section id="skills">
+          <h2>Skills</h2>
+          <ul>
+            <li>
+              <strong>SQL & Databases</strong>: Agilitek, Databricks
+            </li>
+            <li>
+              <strong>Data Viz</strong>: Tableau, Power BI, Excel
+            </li>
+            <li>
+              <strong>Programming</strong>: Python, R, Jupyter
+            </li>
+            <li>
+              <strong>CRM & Marketing</strong>: Salesforce, SFMC
+            </li>
+            <li>
+              <strong>Survey & Analysis</strong>: Qualtrics, SurveyMonkey,
+              Intellistack
+            </li>
+          </ul>
+        </section>
+
+        <section id="experience">
+          <h2>Experience</h2>
+          <p>
+            <strong>Houston Dynamo FC</strong>
+          </p>
+          <p>(Oct 2023 - Present)</p>
+          <p>
+            Lead Salesforce CRM and BI strategy. Build dashboards, RFM models,
+            and optimize ticketing and fan engagement workflows.
+          </p>
+          <br />
+          <p>
+            <strong>Pacers Sports & Entertainment</strong>
+          </p>
+          <p>(Sep 2022 - May 2023)</p>
+          <p>
+            Built dashboards, analyzed surveys, and integrated legacy data
+            systems to improve operational insights across digital and sales
+            teams.
+          </p>
+          <br />
+          <a
+            href="/resume.html"
+            className="resume-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Full Resume
+          </a>
+        </section>
+
+        <section id="projects">
+          <h2>Projects</h2>
+
+          <div className="project-card">
+            <a href="STMscoring.html">
+              <h3>STM "At-Risk" Scoring</h3>
+              <p>
+                Built a predictive model to identify likely non-renewals using
+                historical data. Delivered outreach prioritization through an
+                "At-Risk" scoring system integrated in CRM.
+              </p>
+            </a>
+          </div>
+
+          <div className="project-card">
+            <a href="SecurityMonetizationROI.html">
+              <h3>Security ROI & Optimization</h3>
+              <p>
+                Analyzed wait times and staffing costs to model ROI for upgraded
+                security systems. Produced revenue estimates and staffing
+                reduction strategies.
+              </p>
+            </a>
+          </div>
+        </section>
+
+        <section id="social">
+          <h2>Social</h2>
+          <div
+            className="embedsocial-hashtag"
+            data-ref="d5f7c4665fe69ac0eb6d4e61d7c2a23ff4ea50d4"
+          >
+            <a
+              className="feed-powered-by-es feed-powered-by-es-slider-img es-widget-branding"
+              href="https://embedsocial.com/social-media-aggregator/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Instagram widget"
+            >
+              <img
+                src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp"
+                alt="EmbedSocial"
+              />
+              <div className="es-widget-branding-text">Instagram widget</div>
+            </a>
+          </div>
+        </section>
+
+        <section id="now-playing">
+          <h2>🎧 Now Playing</h2>
+          <div id="spotify-widget">Loading...</div>
+        </section>
+      </main>
+
+      <style jsx>{`
+        .resume-button {
+          display: inline-block;
+          padding: 0.5rem 1rem;
+          background-color: #3b5998;
+          color: white;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: 500;
+          transition: background-color 0.3s ease;
+        }
+
+        .resume-button:hover {
+          background-color: #8b9dc3;
+        }
+      `}</style>
+    </>
+  );
+}
