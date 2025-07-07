@@ -198,6 +198,22 @@ export default function Home() {
         <section id="now-playing">
           <h2>🎧 Now Playing</h2>
           <div id="spotify-widget">Loading...</div>
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              async function fetchNowPlaying() {
+                const res = await fetch("/api/now-playing");
+                const data = await res.json();
+                const el = document.getElementById("spotify-widget");
+                if (data.isPlaying) {
+                  el.innerHTML = '<img src="' + data.albumImageUrl + '" width="64" style="border-radius:6px;vertical-align:middle"/> <span style="margin-left:1rem;color:#64ffda">' + data.title + '</span> — <span style="color:#8892b0">' + data.artist + '</span>';
+                } else {
+                  el.textContent = "Not playing anything 🎶";
+                }
+              }
+              fetchNowPlaying();
+              setInterval(fetchNowPlaying, 20000);
+            `
+          }} />
         </section>
       </main>
 
