@@ -80,4 +80,133 @@ export default function Home() {
               I'm a passionate data professional working as a Business
               Intelligence and Strategy Analyst for Houston Dynamo FC. I
               specialize in CRM strategy, dashboarding, and predictive modeling
-              to optimize operat
+              to optimize operations and enhance the fan experience.
+            </p>
+          </section>
+
+          <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+              <li>
+                <strong>SQL & Databases</strong>: Agilitek, Databricks
+              </li>
+              <li>
+                <strong>Data Viz</strong>: Tableau, Power BI, Excel
+              </li>
+              <li>
+                <strong>Programming</strong>: Python, R, Jupyter
+              </li>
+              <li>
+                <strong>CRM & Marketing</strong>: Salesforce, SFMC
+              </li>
+              <li>
+                <strong>Survey & Analysis</strong>: Qualtrics, SurveyMonkey,
+                Intellistack
+              </li>
+            </ul>
+          </section>
+
+          <section id="experience">
+            <h2>Experience</h2>
+            <p>
+              <strong>Houston Dynamo FC</strong>
+            </p>
+            <p>(Oct 2023 - Present)</p>
+            <p>
+              Lead Salesforce CRM and BI strategy. Build dashboards, RFM models,
+              and optimize ticketing and fan engagement workflows.
+            </p>
+            <br />
+            <p>
+              <strong>Pacers Sports & Entertainment</strong>
+            </p>
+            <p>(Sep 2022 - May 2023)</p>
+            <p>
+              Built dashboards, analyzed surveys, and integrated legacy data
+              systems to improve operational insights across digital and sales
+              teams.
+            </p>
+            <br />
+            <a
+              href="/resume.html"
+              className="resume-button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Full Resume
+            </a>
+          </section>
+
+          <section id="projects">
+            <h2>Projects</h2>
+
+            <div className="project-card">
+              <a href="STMscoring.html">
+                <h3>STM "At-Risk" Scoring</h3>
+                <p>
+                  Built a predictive model to identify likely non-renewals using
+                  historical data. Delivered outreach prioritization through an
+                  "At-Risk" scoring system integrated in CRM.
+                </p>
+              </a>
+            </div>
+
+            <div className="project-card">
+              <a href="SecurityMonetizationROI.html">
+                <h3>Security ROI & Optimization</h3>
+                <p>
+                  Analyzed wait times and staffing costs to model ROI for
+                  upgraded security systems. Produced revenue estimates and
+                  staffing reduction strategies.
+                </p>
+              </a>
+            </div>
+          </section>
+
+          <section id="now-playing">
+            <h2>Social</h2>
+            <div
+              className="embedsocial-hashtag"
+              data-ref="d5f7c4665fe69ac0eb6d4e61d7c2a23ff4ea50d4"
+            >
+              <a
+                className="feed-powered-by-es feed-powered-by-es-slider-img es-widget-branding"
+                href="https://embedsocial.com/social-media-aggregator/"
+                target="_blank"
+                title="Instagram widget"
+              >
+                <img
+                  src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp"
+                  alt="EmbedSocial"
+                />
+                <div className="es-widget-branding-text">Instagram widget</div>
+              </a>
+            </div>
+          </section>
+
+          <section id="now-playing">
+            <h2>🎧 Now Playing</h2>
+            <div id="spotify-widget">Loading...</div>
+          </section>
+        </main>
+
+        <style jsx>{`
+          .resume-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #3b5998;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+          }
+
+          .resume-button:hover {
+            background-color: #8b9dc3;
+          }
+        `}</style>
+      </body>
+    </>
+  );
+}
