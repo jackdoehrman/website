@@ -75,7 +75,7 @@
         </section>
         <script>
           async function fetchNowPlaying() {
-            const res = await fetch("https://vercel.com/jack-doehrmans-projects/spotify-now-playing/7tgAJHby8yXRaUTzYD1FpWrBdfPP");
+            const res = await fetch("https://spotify-now-playing-jack-doehrmans-projects.vercel.app/");
             const data = await res.json();
             const el = document.getElementById("spotify-widget");
             if (data.isPlaying) {
