@@ -49,7 +49,7 @@ export default function Home() {
           name="description"
           content="Jack Doehrman | Data Analyst & Engineer"
         />
-        <link rel="stylesheet" href="/style.css" />
+        <link rel="stylesheet" href="../styles/style.css" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
           rel="stylesheet"
@@ -138,7 +138,7 @@ export default function Home() {
           </p>
           <br />
           <a
-            href="/resume.html"
+            href="../public/resume.html"
             className="resume-button"
             target="_blank"
             rel="noopener noreferrer"
