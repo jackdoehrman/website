@@ -138,49 +138,36 @@
   </main>
 
   <script>
-    // Instagram embed script
-    (function() {
-      var script = document.createElement('script');
-      script.src = "https://embedsocial.com/cdn/ht.js";
-      script.id = "EmbedSocialHashtagScript";
-      document.head.appendChild(script);
-    })();
+  // Instagram embed script
+  (function() {
+    var script = document.createElement('script');
+    script.src = "https://embedsocial.com/cdn/ht.js";
+    script.id = "EmbedSocialHashtagScript";
+    document.head.appendChild(script);
+  })();
 
-    // Spotify widget logic (calls your Next.js API if available)
-    import { useEffect, useState } from 'react';
-
-export default function Home() {
-  const [nowPlaying, setNowPlaying] = useState(null);
-
-  useEffect(() => {
-    async function fetchNowPlaying() {
+  // Spotify widget logic for static HTML
+  async function fetchNowPlaying() {
+    try {
       const res = await fetch('/api/now-playing');
       const data = await res.json();
-      setNowPlaying(data);
+      const el = document.getElementById("spotify-widget");
+      if (el) {
+        if (data.isPlaying) {
+          el.innerHTML =
+            `<img src="${data.albumImageUrl}" width="64" style="border-radius:6px;vertical-align:middle"/><span style="margin-left:1rem;color:#64ffda">${data.title}</span> — <span style="color:#8892b0">${data.artist}</span>`;
+        } else {
+          el.textContent = "Not playing anything 🎶";
+        }
+      }
+    } catch (err) {
+      const el = document.getElementById("spotify-widget");
+      if (el) el.textContent = "Error loading Spotify widget";
     }
-    fetchNowPlaying();
-    const interval = setInterval(fetchNowPlaying, 20000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div>
-      <h2>🎧 Now Playing</h2>
-      {nowPlaying ? (
-        nowPlaying.isPlaying ? (
-          <div>
-            <img src={nowPlaying.albumImageUrl} width={64} style={{borderRadius: 6, verticalAlign: 'middle'}} />
-            <span style={{marginLeft: '1rem', color: '#64ffda'}}>{nowPlaying.title}</span> — 
-            <span style={{color: '#8892b0'}}>{nowPlaying.artist}</span>
-          </div>
-        ) : (
-          <div>Not playing anything 🎶</div>
-        )
-      ) : (
-        <div>Loading...</div>
-      )}
-    </div>
-  );
-}
+  }
+  fetchNowPlaying();
+  setInterval(fetchNowPlaying, 20000);
+</script>
+<div id="spotify-widget">Loading...</div>
 </body>
 </html>
