@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   useEffect(() => {
@@ -125,7 +126,7 @@ export default function Home() {
           <h2>Projects</h2>
 
           <div className="project-card">
-            <a href="STMscoring.html">
+            <a href="/STMscoring.html">
               <h3>STM "At-Risk" Scoring</h3>
               <p>
                 Built a predictive model to identify likely non-renewals using historical data.
@@ -135,7 +136,7 @@ export default function Home() {
           </div>
 
           <div className="project-card">
-            <a href="SecurityMonetizationROI.html">
+            <a href="/SecurityMonetizationROI.html">
               <h3>Security ROI & Optimization</h3>
               <p>
                 Analyzed wait times and staffing costs to model ROI for upgraded security systems.
@@ -172,23 +173,6 @@ export default function Home() {
           <div id="spotify-widget">Loading...</div>
         </section>
       </main>
-
-      <style jsx>{`
-        .resume-button {
-          display: inline-block;
-          padding: 0.5rem 1rem;
-          background-color: #3b5998;
-          color: white;
-          text-decoration: none;
-          border-radius: 6px;
-          font-weight: 500;
-          transition: background-color 0.3s ease;
-        }
-
-        .resume-button:hover {
-          background-color: #8b9dc3;
-        }
-      `}</style>
     </>
   );
 }
