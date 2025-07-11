@@ -149,7 +149,7 @@
   // Spotify widget logic for static HTML
   async function fetchNowPlaying() {
     try {
-      const res = await fetch('/api/now-playing');
+      const res = await fetch('/pages/api/now-playing');
       const data = await res.json();
       const el = document.getElementById("spotify-widget");
       if (el) {
@@ -168,6 +168,5 @@
   fetchNowPlaying();
   setInterval(fetchNowPlaying, 20000);
 </script>
-<div id="spotify-widget">Loading...</div>
 </body>
 </html>
