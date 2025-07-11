@@ -149,7 +149,7 @@
   // Spotify widget logic for static HTML
   async function fetchNowPlaying() {
     try {
-      const res = await fetch('/pages/api/now-playing.js');
+      const res = await fetch('https://spotify-now-playing-eight-eta.vercel.app/api/now-playing.js');
       const data = await res.json();
       const el = document.getElementById("spotify-widget");
       if (el) {
