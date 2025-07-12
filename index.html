@@ -145,10 +145,10 @@
         </a>
       </div>
     </section>
-
-    <section id="now-playing">
-      <h2>🎧 Now Playing</h2>
-      <div id="spotify-widget">Loading...</div>
+    <section>
+      <a href="https://spotify-now-playing-widget-jack-doehrmans-projects.vercel.app/api/now-playing">
+        <img src="https://spotify-now-playing-widget-jack-doehrmans-projects.vercel.app/api/now-playing" width="256" height="64" alt="Now Playing">`
+      </a>
     </section>
   </main>
 
@@ -160,28 +160,6 @@
     script.id = "EmbedSocialHashtagScript";
     document.head.appendChild(script);
   })();
-
-  // Spotify widget logic for static HTML
-  async function fetchNowPlaying() {
-    try {
-      const res = await fetch('https://spotify-now-playing-widget-jack-doehrmans-projects.vercel.app/api/now-playing');
-      const data = await res.json();
-      const el = document.getElementById("spotify-widget");
-      if (el) {
-        if (data.isPlaying) {
-          el.innerHTML =
-            `<img src="${data.albumImageUrl}" width="64" style="border-radius:6px;vertical-align:middle"/><span style="margin-left:1rem;color:#64ffda">${data.title}</span> — <span style="color:#8892b0">${data.artist}</span>`;
-        } else {
-          el.textContent = "Not playing anything 🎶";
-        }
-      }
-    } catch (err) {
-      const el = document.getElementById("spotify-widget");
-      if (el) el.textContent = "Error loading Spotify widget";
-    }
-  }
-  fetchNowPlaying();
-  setInterval(fetchNowPlaying, 20000);
 </script>
 </body>
 </html>
