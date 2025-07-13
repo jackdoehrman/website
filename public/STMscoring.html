@@ -24,6 +24,58 @@
     .section {
       margin-bottom: 3rem;
     }
+    .carousel-container {
+      position: relative;
+      max-width: 800px;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      background-color: #fff;
+    }
+
+    .carousel-slide {
+      display: none;
+      text-align: center;
+    }
+
+    .carousel-slide.active {
+      display: block;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      border-bottom: 1px solid #eee;
+    }
+
+    .caption {
+      padding: 1rem;
+      font-size: 1rem;
+      color: #dfe3ee;
+    }
+
+    .carousel-controls {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .carousel-button {
+      padding: 0.5rem 1rem;
+      background-color: #3b5998;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .carousel-button:hover {
+      background-color: #8b9dc3;
+    }
+
   </style>
 </head>
 <body>
@@ -32,7 +84,7 @@
     <h1>Season Ticket Member - "At-Risk" Scoring</h1>
     <h2>Predictive Modeling Project by Jack Doehrman</h2>
     <p>
-      This project was designed to identify season ticket members (STMs) at risk of non-renewal using historical behaviors, CRM activity, and engagement data.
+      This project was designed to identify season ticket members (STMs) at risk of not renewing their memberships using historical STM behavior, CRM activity, and engagement data.
     </p>
   </header>
 
@@ -40,8 +92,8 @@
     <section class="section" id="overview">
       <h2>Overview</h2>
       <p>
-        <!-- Replace this with your project introduction -->
-        The STM Scoring model was developed to support retention efforts by scoring each STM’s likelihood of renewal on a 0–100 scale.
+        The "At-Risk" scoring model started with a concept of attributing points to an account in CRM based on the Member's interactions with the team and their service representative.
+        These actions are meant to show the value of a membership, and can interacting more with the team in these ways can significantly increase the Member's likeliness to renew.
       </p>
     </section>
 
@@ -51,38 +103,86 @@
         <li>CRM activity logs (Salesforce)</li>
         <li>Ticket scans and attendance</li>
         <li>Historical renewal behavior</li>
-        <li>Marketing and email engagement (SFMC)</li>
       </ul>
     </section>
 
     <section class="section" id="methodology">
       <h2>Methodology</h2>
       <p>
-        <!-- Insert your modeling approach here -->
-        The model was built using logistic regression and calibrated with historical seasons. Key features included tenure, last touchpoint, and engagement velocity.
+         Using historical Member attendance data, I was able to discover the correlation between the Member tiers, the average attended games each year by tier, and the average renewal rate of that tier.
+      </br>
+          I learned that our Veteran Members (5+ years tenured) were able to reach an 80%+ renewal rate no matter how many games they attended, but on average, attended about 9 of the 18 regular season matches.
+          Our Established Members (1-4 years tenured) were able to reach an 80% renewal rate by attending 12 of the 18 matches.
+          Our Newcomer Members (first-year members) achieved an 80% renewal rate by attending 15 out of 18 matches.
+      </br>
+          These groupings allowed us to set a goal for each Member tier.
+      <ul>
+        <li>Veterans: 120 Points</li>
+        <li>Established: 160 Points</li>
+        <li>Newcomers: 180 Points</li>
+      </ul>
+        And Members would earn points through their interactions with the Team and their Service Representative, based on how important we saw the activity towards their value perception of the Membership.
+        <ul>
+            <li>Attending games: 10 Points per Match</li>
+            <li>Attending gameday Fan Experiences: 5 Points per Experience</li>
+            <li>Attending non-gameday Member Events: 5 Points per Event</li>
+            <li>Receiving a free Seat Upgrade: 3 Points per Match</li>
+            <li>Having a conversation with their service representative: 3 Points if at a match / 1 Point if a call/email</li>
+        </ul>
+        Finally, I created a Score Prediction Model that calculated the Member's current total score, the total days since they renewed for the current season, and the total days until the new renewal period.
+        This was the final product that each Service Representative was able to view. The reason a rep could only see if someone was "On Pace" or "At Risk" was a simplistic approach to grouping all Members rather than needing to keep tabs on what tier they are and the score goal for that tier.
       </p>
     </section>
 
     <section class="section" id="impact">
       <h2>Results & Impact</h2>
       <p>
-        <!-- Insert any measurable outcomes here -->
-        Accounts flagged "at risk" showed 4x higher churn rate. Reps used the score to prioritize outreach, increasing renewal rate in low-score segments by 12%.
+        Accounts flagged "at risk" were able to be segmented and targeted for outreach through targeted campaigns and events. Once the renewal period arrived, our Member Services team had a clear list of Members who may have needed more convincing to renew.
       </p>
     </section>
 
     <section class="section" id="visuals">
       <h2>Visuals & Dashboards</h2>
-      <p>
-        <!-- Embed dashboard images or Tableau/PowerBI links -->
-        Example scoring distribution, segmentation heatmaps, and rep outreach tracking dashboards.
-      </p>
+        <div class="carousel-container">
+          <div class="carousel-slide active">
+            <img src="/public/images/STMScore1.png" alt="STM Member Score Dashboard 1">
+            <div class="caption">Figure 1: Distribution of STM Renewal Scores</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="/public/images/STMScore2.png" alt="STM Member Score Dashboard 2">
+            <div class="caption">Figure 2: Wait Times Before vs After Security Upgrade</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="/public/images/STMScore3.png" alt="STM Member Score Dashboard 3">
+            <div class="caption">Figure 3: Gate-Level Staffing Efficiency Heatmap</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="/public/images/STMScore4.png" alt="STM Member Score Dashboard 4">
+            <div class="caption">Figure 4: Gate-Level Staffing Efficiency Heatmap</div>
+          </div>
+        </div>
+      
+        <div class="carousel-controls">
+          <button class="carousel-button" onclick="changeSlide(-1)">← Prev</button>
+          <button class="carousel-button" onclick="changeSlide(1)">Next →</button>
+        </div>
     </section>
 
     <section class="section">
       <a href="/" class="resume-button">← Back to Home</a>
     </section>
   </main>
+
+    <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".carousel-slide");
+
+    function changeSlide(direction) {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+  </script>
 
 </body>
 </html>
