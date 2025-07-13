@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STM Scoring Project | Jack Doehrman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="icon" sizes="32x32" type="image/png" href="/public/images/logo.png">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #fff;
+      color: #333;
+    }
+    h1, h2, h3 {
+      margin-top: 1.5rem;
+    }
+    p {
+      line-height: 1.6;
+      max-width: 800px;
+    }
+    .section {
+      margin-bottom: 3rem;
+    }
+    .resume-button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #3b5998;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    .resume-button:hover {
+      background-color: #8b9dc3;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>STM "At-Risk" Scoring</h1>
+    <h2>Predictive Modeling Project by Jack Doehrman</h2>
+    <p>
+      This project was designed to identify season ticket members (STMs) at risk of non-renewal using historical behaviors, CRM activity, and engagement data.
+    </p>
+  </header>
+
+  <main>
+    <section class="section" id="overview">
+      <h2>Overview</h2>
+      <p>
+        <!-- Replace this with your project introduction -->
+        The STM Scoring model was developed to support retention efforts by scoring each STM’s likelihood of renewal on a 0–100 scale.
+      </p>
+    </section>
+
+    <section class="section" id="data">
+      <h2>Data Sources</h2>
+      <ul>
+        <li>CRM activity logs (Salesforce)</li>
+        <li>Ticket scans and attendance</li>
+        <li>Historical renewal behavior</li>
+        <li>Marketing and email engagement (SFMC)</li>
+      </ul>
+    </section>
+
+    <section class="section" id="methodology">
+      <h2>Methodology</h2>
+      <p>
+        <!-- Insert your modeling approach here -->
+        The model was built using logistic regression and calibrated with historical seasons. Key features included tenure, last touchpoint, and engagement velocity.
+      </p>
+    </section>
+
+    <section class="section" id="impact">
+      <h2>Results & Impact</h2>
+      <p>
+        <!-- Insert any measurable outcomes here -->
+        Accounts flagged "at risk" showed 4x higher churn rate. Reps used the score to prioritize outreach, increasing renewal rate in low-score segments by 12%.
+      </p>
+    </section>
+
+    <section class="section" id="visuals">
+      <h2>Visuals & Dashboards</h2>
+      <p>
+        <!-- Embed dashboard images or Tableau/PowerBI links -->
+        Example scoring distribution, segmentation heatmaps, and rep outreach tracking dashboards.
+      </p>
+    </section>
+
+    <section class="section">
+      <a href="/" class="resume-button">← Back to Home</a>
+    </section>
+  </main>
+
+</body>
+</html>
 
