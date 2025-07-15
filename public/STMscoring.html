@@ -60,6 +60,36 @@
       gap: 1rem;
     }
 
+    .zoom-modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+  }
+
+  .zoom-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .carousel-slide img {
+    cursor: zoom-in;
+    transition: 0.2s ease;
+  }
+
+  .carousel-slide img:hover {
+    opacity: 0.95;
+  }
+
     .carousel-button {
       padding: 0.5rem 1rem;
       background-color: #3b5998;
@@ -186,6 +216,9 @@
           <button class="carousel-button" onclick="changeSlide(-1)">← Prev</button>
           <button class="carousel-button" onclick="changeSlide(1)">Next →</button>
         </div>
+      <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+        <img id="zoomImage" src="" alt="Zoomed Image" />
+      </div>
     </section>
 
     <section class="buttons">
@@ -202,6 +235,24 @@
       currentSlide = (currentSlide + direction + slides.length) % slides.length;
       slides[currentSlide].classList.add("active");
     }
+      const zoomModal = document.getElementById("zoomModal");
+  const zoomImage = document.getElementById("zoomImage");
+
+  document.querySelectorAll(".carousel-slide img").forEach(img => {
+    img.addEventListener("click", function (e) {
+      zoomImage.src = this.src;
+      zoomModal.style.display = "flex";
+      e.stopPropagation();
+    });
+  });
+
+  function closeZoom() {
+    zoomModal.style.display = "none";
+    zoomImage.src = "";
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeZoom();
+  });
   </script>
 
 </body>
