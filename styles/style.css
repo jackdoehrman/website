@@ -100,7 +100,6 @@ ul {
 
 
 #top-artists {
-  text-align: center;
   padding: 2rem;
 }
 
@@ -113,7 +112,6 @@ ul {
 
 .artist {
   max-width: 150px;
-  text-align: center;
 }
 
 .artist img {
