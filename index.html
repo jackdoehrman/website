@@ -151,19 +151,31 @@
   })();
 
   // Spotify widget script
-  fetch('/api/spotify')
-    .then(res => res.json())
-    .then(artists => {
-      const list = document.getElementById('artist-list');
-      artists.forEach(artist => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <img src="${artist.images[0]?.url}" alt="${artist.name}" width="50" />
-          ${artist.name}
-        `;
-        list.appendChild(li);
-      });
+    fetch('/api/spotify')
+  .then(res => {
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+    return res.json();
+  })
+  .then(artists => {
+    const list = document.getElementById('artist-list');
+    if (!Array.isArray(artists)) {
+      console.error("API did not return a list:", artists);
+      return;
+    }
+    artists.forEach(artist => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <img src="${artist.images[0]?.url}" alt="${artist.name}" width="50" />
+        ${artist.name}
+      `;
+      list.appendChild(li);
     });
+  })
+  .catch(err => {
+    console.error("Failed to load artists:", err);
+  });
 </script>
 </body>
 </html>
