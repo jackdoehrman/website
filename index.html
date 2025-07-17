@@ -113,6 +113,11 @@
       </a>
     </section>
 
+    <section id="top-artists">
+      <h2>Spotify - Who I am Listening to This Month</h2>
+      <div id="artists-container"></div>
+    </section>
+
     <section id="social">
       <h2>Social - Instagram</h2>
       <div
@@ -133,10 +138,6 @@
         </a>
       </div>
     </section>
-    <section>
-        <a href="https://open.spotify.com/user/jackdoehrman?trackId=07qjj9wba17ggEb2RQCoIa"><h2>Spotify - Now Playing</h2>
-        <img src="https://spotify-now-playing-widget-jack-doehrmans-projects.vercel.app/api/now-playing" width="100%" height="300" alt="Now Playing"></a>
-    </section>
   </main>
 
   <script>
@@ -147,6 +148,28 @@
     script.id = "EmbedSocialHashtagScript";
     document.head.appendChild(script);
   })();
+
+  // Spotify widget script
+  async function loadTopArtists() {
+    const res = await fetch('/api/spotify');
+    const data = await res.json();
+
+    const container = document.getElementById("artists-container");
+
+    data.items.forEach(artist => {
+      const div = document.createElement("div");
+      div.className = "artist";
+
+      div.innerHTML = `
+        <img src="${artist.images[0]?.url}" alt="${artist.name}" />
+        <p>${artist.name}</p>
+      `;
+
+      container.appendChild(div);
+    });
+  }
+
+  loadTopArtists();
 </script>
 </body>
 </html>
