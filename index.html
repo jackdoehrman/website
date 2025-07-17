@@ -151,7 +151,7 @@
   })();
 
   // Spotify widget script
-  fetch('/api/top-artists')
+  fetch('/api/spotify')
     .then(res => res.json())
     .then(artists => {
       const list = document.getElementById('artist-list');
