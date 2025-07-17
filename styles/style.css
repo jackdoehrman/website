@@ -97,3 +97,27 @@ ul {
 .resume-button:hover {
   background-color: #8b9dc3;
 }
+
+
+#top-artists {
+  text-align: center;
+  padding: 2rem;
+}
+
+#artists-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.artist {
+  max-width: 150px;
+  text-align: center;
+}
+
+.artist img {
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
