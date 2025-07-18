@@ -4,7 +4,6 @@ export default async function handler(req, res) {
     `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
   ).toString("base64");
 
-  // Step 1: Get Access Token from Refresh Token
   const tokenRes = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
@@ -19,7 +18,6 @@ export default async function handler(req, res) {
 
   const { access_token } = await tokenRes.json();
 
-  // Step 2: Get Top Artists from Spotify
   const artistsRes = await fetch(
     "https://api.spotify.com/v1/me/top/artists?limit=5&time_range=short_term",
     {
@@ -39,7 +37,6 @@ export default async function handler(req, res) {
     name: artist.name,
     url: artist.external_urls.spotify,
     image: artist.images[0]?.url || null,
-    genres: artist.genres,
   }));
 
   res.status(200).json(topArtists);
