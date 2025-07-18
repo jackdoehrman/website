@@ -4,11 +4,295 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles/style.css" />
   <link rel="icon" sizes="32x32" type="image/png" href="public/images/logo.png">
   <title>Jack Doehrman</title>
   <style>
-    
+    :root {
+      --bg: #0a192f;
+      --accent: #f7f7f7;
+      --text: #dfe3ee;
+      --subtext: #8b9dc3;
+      --spotify-green: #1db954;
+      --font: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    h1, h2, h3 {
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    header {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      text-align: left;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+    }
+
+    section {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      animation: fadeIn 1s ease-in forwards;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid #112240;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .project-card:hover {
+      transform: scale(1.02);
+      border-color: var(--accent);
+    }
+
+    .resume-button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #3b5998;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .resume-button:hover {
+      background-color: #8b9dc3;
+    }
+
+    /* Enhanced Spotify Carousel Styles */
+    .spotify-section {
+      background: rgba(29, 185, 84, 0.05);
+      border: 1px solid rgba(29, 185, 84, 0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .spotify-section h2 {
+      color: var(--spotify-green);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .spotify-logo {
+      width: 24px;
+      height: 24px;
+      fill: var(--spotify-green);
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      min-height: 400px;
+    }
+
+    .carousel-wrapper {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      min-width: 100%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide h3 {
+      color: var(--spotify-green);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-controls:hover {
+      background: rgba(29, 185, 84, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-controls.prev {
+      left: 1rem;
+    }
+
+    .carousel-controls.next {
+      right: 1rem;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .indicator.active {
+      background: var(--spotify-green);
+    }
+
+    /* Content Styles */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .content-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .content-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .content-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+      border: 2px solid var(--spotify-green);
+    }
+
+    .content-title {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .content-subtitle {
+      color: var(--subtext);
+      font-size: 0.8rem;
+    }
+
+    .now-playing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .now-playing-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 3px solid var(--spotify-green);
+      box-shadow: 0 8px 32px rgba(29, 185, 84, 0.3);
+    }
+
+    .loading-state, .error-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      color: var(--subtext);
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(29, 185, 84, 0.3);
+      border-top: 4px solid var(--spotify-green);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -25,6 +309,7 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#spotify">Spotify</a></li>
       </ul>
     </nav>
   </header>
@@ -60,7 +345,7 @@
           and fan engagement workflows.
         </p>
       </div>
-    </br>
+      <br>
       <div>
         <strong>Pacers Sports & Entertainment</strong>
         <p>(Sep 2022 - May 2023)</p>
@@ -69,7 +354,7 @@
           operational insights across digital and sales teams.
         </p>
       </div>
-    </br>
+      <br>
       <a href="/public/resume.html" class="resume-button" rel="noopener noreferrer">
         View Full Resume
       </a>
@@ -95,23 +380,52 @@
           </p>
         </a>
       </div>
-    </br>
+      <br>
       <a href="/public/allProjects.html" class="resume-button" rel="noopener noreferrer">
         View All Projects
       </a>
     </section>
 
-    <section id="top-artists">
-      <h2>Spotify</h2>
-      <div class="carousel-container">
-        <button class="carousel-btn left" onclick="changeSlide(-1)">‹</button>
+    <section id="spotify" class="spotify-section">
+      <h2>
+        <svg class="spotify-logo" viewBox="0 0 24 24">
+          <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/>
+        </svg>
+        My Music
+      </h2>
       
-        <div class="carousel-slide" id="carousel-slide">
-          <div class="slide" id="slide-0">Loading Top Artists...</div>
-          <div class="slide" id="slide-1">Loading Recently Played...</div>
-          <div class="slide" id="slide-2">Loading Currently Playing...</div>
+      <div class="carousel-container">
+        <div class="carousel-wrapper" id="carousel-wrapper">
+          <div class="slide" id="slide-top-artists">
+            <div class="loading-state">
+              <div class="loading-spinner"></div>
+              <p>Loading Top Artists...</p>
+            </div>
+          </div>
+          
+          <div class="slide" id="slide-recently-played">
+            <div class="loading-state">
+              <div class="loading-spinner"></div>
+              <p>Loading Recently Played...</p>
+            </div>
+          </div>
+          
+          <div class="slide" id="slide-currently-playing">
+            <div class="loading-state">
+              <div class="loading-spinner"></div>
+              <p>Loading Currently Playing...</p>
+            </div>
+          </div>
         </div>
-        <button class="carousel-btn right" onclick="changeSlide(1)">›</button>
+        
+        <button class="carousel-controls prev" onclick="changeSlide(-1)">‹</button>
+        <button class="carousel-controls next" onclick="changeSlide(1)">›</button>
+      </div>
+      
+      <div class="carousel-indicators">
+        <div class="indicator active" onclick="goToSlide(0)"></div>
+        <div class="indicator" onclick="goToSlide(1)"></div>
+        <div class="indicator" onclick="goToSlide(2)"></div>
       </div>
     </section>
 
@@ -138,83 +452,158 @@
   </main>
 
   <script>
-  // Instagram embed script
-  (function() {
-    var script = document.createElement('script');
-    script.src = "https://embedsocial.com/cdn/ht.js";
-    script.id = "EmbedSocialHashtagScript";
-    document.head.appendChild(script);
-  })();
+    // Instagram embed script
+    (function() {
+      var script = document.createElement('script');
+      script.src = "https://embedsocial.com/cdn/ht.js";
+      script.id = "EmbedSocialHashtagScript";
+      document.head.appendChild(script);
+    })();
 
-async function fetchTopArtists() {
-    const res = await fetch("/api/top-artists");
-    const artists = await res.json();
-
-    const container = document.getElementById("top-artists");
-    container.innerHTML = "<h2>Top 5 Artists (Last 4 Weeks)</h2>";
-
-    artists.forEach((artist) => {
-      const artistCard = document.createElement("div");
-      artistCard.style.marginBottom = "1em";
-
-      artistCard.innerHTML = `
-        <a href="${artist.url}" target="_blank" style="text-decoration: none; color: inherit;">
-          <img src="${artist.image}" width="100" style="border-radius: 50%;"/><br/>
-          <strong>${artist.name}</strong><br/>
-          <small>${artist.genres.join(", ")}</small>
-        </a>
-      `;
-      container.appendChild(artistCard);
-    });
-  }
-
-  fetchTopArtists();
-
+    // Carousel functionality
     let currentSlide = 0;
+    const totalSlides = 3;
 
-  function changeSlide(dir) {
-    const slideContainer = document.getElementById("carousel-slide");
-    const totalSlides = 4;
+    function updateCarousel() {
+      const wrapper = document.getElementById('carousel-wrapper');
+      const indicators = document.querySelectorAll('.indicator');
+      
+      wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+      });
+    }
 
-    currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
-    slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-  }
+    function changeSlide(direction) {
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      updateCarousel();
+    }
 
-  async function loadSlides() {
-    // Top Artists
-    const topArtists = await fetch("/api/top-artists").then(res => res.json());
-    document.getElementById("slide-0").innerHTML = `
-      <h3>Top 5 Artists</h3>
-      ${topArtists.map(a => `
-        <div><img src="${a.image}" width="80"/><br/>
-        <a href="${a.url}" target="_blank" style="color:white;">${a.name}</a></div>
-      `).join("")}
-    `;
+    function goToSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+    }
 
-    // Recently Played
-    const recent = await fetch("/api/recently-played").then(res => res.json());
-    document.getElementById("slide-1").innerHTML = `
-      <h3>Recently Played</h3>
-      ${recent.map(t => `
-        <div><img src="${t.image}" width="80"/><br/>
-        <a href="${t.url}" target="_blank" style="color:white;">${t.name}</a><br/>
-        <small>${t.artist}</small></div>
-      `).join("")}
-    `;
+    // Auto-advance carousel every 10 seconds
+    setInterval(() => {
+      changeSlide(1);
+    }, 10000);
 
-    // Currently Playing
-    const current = await fetch("/api/currently-playing").then(res => res.json());
-    document.getElementById("slide-2").innerHTML = current.isPlaying ? `
-      <h3>Now Playing</h3>
-      <img src="${current.albumImageUrl}" width="100"/><br/>
-      <a href="${current.songUrl}" target="_blank" style="color:white;">${current.title}</a><br/>
-      <small>${current.artist}</small>
-    ` : `<p>Not playing anything right now.</p>`;
+    // API Functions with better error handling
+    async function fetchWithErrorHandling(url, fallbackData = null) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return await response.json();
+      } catch (error) {
+        console.error(`Error fetching ${url}:`, error);
+        return fallbackData;
+      }
+    }
 
-  }
+    async function loadTopArtists() {
+      const artists = await fetchWithErrorHandling('/api/top-artists', []);
+      const container = document.getElementById('slide-top-artists');
+      
+      if (!artists || artists.length === 0) {
+        container.innerHTML = `
+          <div class="error-state">
+            <h3>Top Artists</h3>
+            <p>Unable to load top artists right now</p>
+          </div>
+        `;
+        return;
+      }
 
-  loadSlides();
+      container.innerHTML = `
+        <h3>Top 5 Artists (Last 4 Weeks)</h3>
+        <div class="content-grid">
+          ${artists.map(artist => `
+            <div class="content-item">
+              <img src="${artist.image}" alt="${artist.name}" class="content-image" />
+              <a href="${artist.url}" target="_blank" class="content-title">${artist.name}</a>
+              <div class="content-subtitle">${artist.genres ? artist.genres.join(', ') : 'Artist'}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
 
-</script>
+    async function loadRecentlyPlayed() {
+      const tracks = await fetchWithErrorHandling('/api/recently-played', []);
+      const container = document.getElementById('slide-recently-played');
+      
+      if (!tracks || tracks.length === 0) {
+        container.innerHTML = `
+          <div class="error-state">
+            <h3>Recently Played</h3>
+            <p>Unable to load recently played tracks</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <h3>Recently Played</h3>
+        <div class="content-grid">
+          ${tracks.map(track => `
+            <div class="content-item">
+              <img src="${track.image}" alt="${track.name}" class="content-image" />
+              <a href="${track.url}" target="_blank" class="content-title">${track.name}</a>
+              <div class="content-subtitle">${track.artist}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    async function loadCurrentlyPlaying() {
+      const current = await fetchWithErrorHandling('/api/currently-playing', { isPlaying: false });
+      const container = document.getElementById('slide-currently-playing');
+      
+      if (!current.isPlaying) {
+        container.innerHTML = `
+          <div class="error-state">
+            <h3>Currently Playing</h3>
+            <p>Not playing anything right now</p>
+            <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--subtext);">
+              Check back later to see what I'm listening to!
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <h3>Now Playing</h3>
+        <div class="now-playing">
+          <img src="${current.albumImageUrl}" alt="${current.album}" class="now-playing-image" />
+          <div class="content-item" style="background: transparent;">
+            <a href="${current.songUrl}" target="_blank" class="content-title" style="font-size: 1.2rem;">${current.title}</a>
+            <div class="content-subtitle" style="font-size: 1rem;">${current.artist}</div>
+            <div class="content-subtitle">${current.album}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Load all carousel content
+    async function loadAllSpotifyData() {
+      await Promise.all([
+        loadTopArtists(),
+        loadRecentlyPlayed(),
+        loadCurrentlyPlaying()
+      ]);
+    }
+
+    // Initialize
+    loadAllSpotifyData();
+
+    // Refresh currently playing every 30 seconds
+    setInterval(loadCurrentlyPlaying, 30000);
+  </script>
 </body>
 </html>
