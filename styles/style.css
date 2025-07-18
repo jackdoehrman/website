@@ -163,3 +163,36 @@ ul {
       color: #999;
       padding: 20px;
     }
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.carousel-slide {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 400%;
+}
+
+.slide {
+  width: 100%;
+  padding: 1rem;
+  flex-shrink: 0;
+  background: #111;
+  color: white;
+}
+
+.carousel-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  z-index: 10;
+  cursor: pointer;
+}
