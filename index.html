@@ -219,63 +219,29 @@
     document.head.appendChild(script);
   })();
 
-  // Spotify widget
-  async function loadSpotifyArtists() {
-    const artistList = document.getElementById('artist-list');
-    
-    artistList.innerHTML = '<li class="loading-state">🎵 Loading your top artists...</li>';
-    
-    try {
-      const response = await fetch('/api/spotify');
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      
-      const artists = await response.json();
-      
-      artistList.innerHTML = '';
-      
-      if (!Array.isArray(artists) || artists.length === 0) {
-        artistList.innerHTML = '<li class="error-state">No artists found for the last 4 weeks.</li>';
-        return;
-      }
-      
-      artists.forEach((artist, index) => {
-        const li = document.createElement('li');
-        
-        const imageUrl = artist.images?.[0]?.url || '/images/default-artist.png';
-        const spotifyUrl = artist.external_urls?.spotify || '#';
-        
-        li.innerHTML = `
-          <img 
-            src="${imageUrl}" 
-            alt="${artist.name}" 
-            class="artist-image"
-            onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiNmMGYwZjAiLz4KPHN2ZyB4PSIxNSIgeT0iMTUiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjOTk5Ij4KPHA+4pmqPC9wPgo8L3N2Zz4KPC9zdmc+'"
-          />
-          <div class="artist-info">
-            <a href="${spotifyUrl}" target="_blank" rel="noopener noreferrer" class="artist-name">
-              ${artist.name}
-            </a>
-            ${artist.genres?.length > 0 ? 
-              `<div class="artist-genres">
-                ${artist.genres.slice(0, 2).join(' • ')}
-              </div>` : ''
-            }
-          </div>
-        `;
-        
-        artistList.appendChild(li);
-      });
-      
-    } catch (error) {
-      console.error('Failed to load Spotify artists:', error);
-      artistList.innerHTML = '<li class="error-state">Unable to load artists at this time. Please try again later.</li>';
-    }
+async function fetchTopArtists() {
+    const res = await fetch("/api/top-artists");
+    const artists = await res.json();
+
+    const container = document.getElementById("top-artists");
+    container.innerHTML = "<h2>Top 5 Artists (Last 4 Weeks)</h2>";
+
+    artists.forEach((artist) => {
+      const artistCard = document.createElement("div");
+      artistCard.style.marginBottom = "1em";
+
+      artistCard.innerHTML = `
+        <a href="${artist.url}" target="_blank" style="text-decoration: none; color: inherit;">
+          <img src="${artist.image}" width="100" style="border-radius: 50%;"/><br/>
+          <strong>${artist.name}</strong><br/>
+          <small>${artist.genres.join(", ")}</small>
+        </a>
+      `;
+      container.appendChild(artistCard);
+    });
   }
 
-  document.addEventListener('DOMContentLoaded', loadSpotifyArtists);
+  fetchTopArtists();
 
 </script>
 </body>
