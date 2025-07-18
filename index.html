@@ -170,6 +170,51 @@ async function fetchTopArtists() {
 
   fetchTopArtists();
 
+    let currentSlide = 0;
+
+  function changeSlide(dir) {
+    const slideContainer = document.getElementById("carousel-slide");
+    const totalSlides = 4;
+
+    currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+    slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+
+  async function loadSlides() {
+    // Top Artists
+    const topArtists = await fetch("/api/top-artists").then(res => res.json());
+    document.getElementById("slide-0").innerHTML = `
+      <h3>Top 5 Artists</h3>
+      ${topArtists.map(a => `
+        <div><img src="${a.image}" width="80"/><br/>
+        <a href="${a.url}" target="_blank" style="color:white;">${a.name}</a></div>
+      `).join("")}
+    `;
+
+    // Recently Played
+    const recent = await fetch("/api/recently-played").then(res => res.json());
+    document.getElementById("slide-1").innerHTML = `
+      <h3>Recently Played</h3>
+      ${recent.map(t => `
+        <div><img src="${t.image}" width="80"/><br/>
+        <a href="${t.url}" target="_blank" style="color:white;">${t.name}</a><br/>
+        <small>${t.artist}</small></div>
+      `).join("")}
+    `;
+
+    // Currently Playing
+    const current = await fetch("/api/currently-playing").then(res => res.json());
+    document.getElementById("slide-2").innerHTML = current.isPlaying ? `
+      <h3>Now Playing</h3>
+      <img src="${current.albumImageUrl}" width="100"/><br/>
+      <a href="${current.songUrl}" target="_blank" style="color:white;">${current.title}</a><br/>
+      <small>${current.artist}</small>
+    ` : `<p>Not playing anything right now.</p>`;
+
+  }
+
+  loadSlides();
+
 </script>
 </body>
 </html>
