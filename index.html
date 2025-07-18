@@ -293,6 +293,66 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    /* Experience Section Styling */
+    .experience-item {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-duration {
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    /* Smooth scroll for navigation */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Focus states for accessibility */
+    button:focus, a:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Responsive design improvements */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+      
+      .content-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+      }
+      
+      .carousel-controls {
+        font-size: 1.2rem;
+        padding: 0.25rem 0.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -337,24 +397,28 @@
 
     <section id="experience">
       <h2>Experience</h2>
-      <div>
-        <strong>Houston Dynamo FC</strong>
-        <p>(Oct 2023 - Present)</p>
+      <div class="experience-item">
+        <div class="experience-header">
+          <strong>Houston Dynamo FC</strong>
+          <span class="experience-duration">(Oct 2023 - Present)</span>
+        </div>
         <p>
           Lead Salesforce CRM and BI strategy. Build dashboards, RFM models, and optimize ticketing
           and fan engagement workflows.
         </p>
       </div>
-      <br>
-      <div>
-        <strong>Pacers Sports & Entertainment</strong>
-        <p>(Sep 2022 - May 2023)</p>
+      
+      <div class="experience-item">
+        <div class="experience-header">
+          <strong>Pacers Sports & Entertainment</strong>
+          <span class="experience-duration">(Sep 2022 - May 2023)</span>
+        </div>
         <p>
           Built dashboards, analyzed surveys, and integrated legacy data systems to improve
           operational insights across digital and sales teams.
         </p>
       </div>
-      <br>
+      
       <a href="/public/resume.html" class="resume-button" rel="noopener noreferrer">
         View Full Resume
       </a>
@@ -380,7 +444,7 @@
           </p>
         </a>
       </div>
-      <br>
+      
       <a href="/public/allProjects.html" class="resume-button" rel="noopener noreferrer">
         View All Projects
       </a>
