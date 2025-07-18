@@ -98,23 +98,69 @@ ul {
       background-color: #8b9dc3;
     }
 
-#top-artists {
-  padding: 2rem;
-}
-
-#artists-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.artist {
-  max-width: 150px;
-}
-
-.artist img {
-  width: 100%;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
+    
+    /* Enhanced Spotify section styling */
+    #artist-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #artist-list li {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.2s ease;
+    }
+    
+    #artist-list li:hover {
+      background-color: #f9f9f9;
+      padding-left: 8px;
+      border-radius: 4px;
+    }
+    
+    #artist-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .artist-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #1db954;
+    }
+    
+    .artist-info {
+      flex: 1;
+    }
+    
+    .artist-name {
+      text-decoration: none;
+      color: #1db954;
+      font-weight: 500;
+      font-size: 1.1em;
+      transition: color 0.2s ease;
+    }
+    
+    .artist-name:hover {
+      color: #1ed760;
+    }
+    
+    .artist-genres {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 4px;
+    }
+    
+    .loading-state {
+      color: #666;
+      font-style: italic;
+      padding: 20px;
+    }
+    
+    .error-state {
+      color: #999;
+      padding: 20px;
+    }
