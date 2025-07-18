@@ -1,23 +1,36 @@
-// /pages/api/spotify.js
 export default async function handler(req, res) {
-  try {
-    // Only allow GET requests
-    if (req.method !== 'GET') {
-      return res.status(405).json({ error: 'Method not allowed' });
-    }
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // Check for required environment variables
-    if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET || !process.env.SPOTIFY_REFRESH_TOKEN) {
-      console.error('Missing required Spotify environment variables');
-      return res.status(500).json({ error: 'Server configuration error' });
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
+
+    if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
+      return res.status(500).json({ 
+        error: 'Missing environment variables',
+        missing: {
+          client_id: !SPOTIFY_CLIENT_ID,
+          client_secret: !SPOTIFY_CLIENT_SECRET,
+          refresh_token: !SPOTIFY_REFRESH_TOKEN
+        }
+      });
     }
 
     // Get access token
-    const basic = Buffer.from(
-      `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-    ).toString("base64");
-
-    const tokenRes = await fetch("https://accounts.spotify.com/api/token", {
+    const basic = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString("base64");
+    
+    const tokenResponse = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       headers: {
         Authorization: `Basic ${basic}`,
@@ -25,37 +38,37 @@ export default async function handler(req, res) {
       },
       body: new URLSearchParams({
         grant_type: "refresh_token",
-        refresh_token: process.env.SPOTIFY_REFRESH_TOKEN,
+        refresh_token: SPOTIFY_REFRESH_TOKEN,
       }),
     });
 
-    if (!tokenRes.ok) {
-      console.error('Token request failed:', tokenRes.status);
-      return res.status(500).json({ error: 'Failed to get access token' });
+    if (!tokenResponse.ok) {
+      const errorText = await tokenResponse.text();
+      return res.status(tokenResponse.status).json({ 
+        error: 'Token request failed',
+        details: errorText
+      });
     }
 
-    const tokenData = await tokenRes.json();
-    
-    if (!tokenData.access_token) {
-      console.error('No access token in response:', tokenData);
-      return res.status(500).json({ error: 'Invalid token response' });
-    }
+    const tokenData = await tokenResponse.json();
 
-    // Get top artists (short_term = last 4 weeks)
-    const topRes = await fetch("https://api.spotify.com/v1/me/top/artists?limit=5&time_range=short_term", {
+    // Get top artists
+    const artistsResponse = await fetch("https://api.spotify.com/v1/me/top/artists?limit=5&time_range=short_term", {
       headers: {
         Authorization: `Bearer ${tokenData.access_token}`,
       },
     });
 
-    if (!topRes.ok) {
-      console.error('Top artists request failed:', topRes.status);
-      return res.status(500).json({ error: 'Failed to get top artists' });
+    if (!artistsResponse.ok) {
+      const errorText = await artistsResponse.text();
+      return res.status(artistsResponse.status).json({ 
+        error: 'Artists request failed',
+        details: errorText
+      });
     }
 
-    const data = await topRes.json();
+    const data = await artistsResponse.json();
     
-    // Transform the data to include only what we need
     const artists = data.items?.map(artist => ({
       name: artist.name,
       images: artist.images,
@@ -64,12 +77,14 @@ export default async function handler(req, res) {
       popularity: artist.popularity
     })) || [];
 
-    // Add cache headers (cache for 1 hour)
     res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
-    
     res.status(200).json(artists);
+
   } catch (error) {
-    console.error('Spotify API error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('API Error:', error);
+    res.status(500).json({ 
+      error: 'Internal server error',
+      details: error.message
+    });
   }
 }
