@@ -84,7 +84,7 @@ ul {
   border-color: var(--accent);
 }
 
-    .resume-button {
+.resume-button {
       display: inline-block;
       padding: 0.5rem 1rem;
       background-color: #3b5998;
@@ -97,7 +97,6 @@ ul {
     .resume-button:hover {
       background-color: #8b9dc3;
     }
-
     
     /* Enhanced Spotify section styling */
     #artist-list {
