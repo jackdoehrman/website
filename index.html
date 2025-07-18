@@ -103,8 +103,16 @@
 
     <section id="top-artists">
       <h2>Spotify</h2>
-      <h3>Who I am Listening to This Month</h3>
-      <ul id="artist-list"></ul>
+      <div class="carousel-container">
+        <button class="carousel-btn left" onclick="changeSlide(-1)">‹</button>
+      
+        <div class="carousel-slide" id="carousel-slide">
+          <div class="slide" id="slide-0">Loading Top Artists...</div>
+          <div class="slide" id="slide-1">Loading Recently Played...</div>
+          <div class="slide" id="slide-2">Loading Currently Playing...</div>
+        </div>
+        <button class="carousel-btn right" onclick="changeSlide(1)">›</button>
+      </div>
     </section>
 
     <section id="social">
