@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post-Match Survey | Jack Doehrman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" sizes="32x32" type="image/png" href="images/logo.png">
+  <style>
+    :root {
+      --bg: #0a192f;
+      --text: #dfe3ee;
+      --subtext: #8b9dc3;
+      --accent: #f7f7f7;
+      --border: #233554;
+      --button-bg: #3b5998;
+      --dynamo-orange: #8ab7e9;
+      --font: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--dynamo-orange);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      max-width: 100%;
+    }
+
+    ul {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .highlight-box {
+      background: rgba(255, 102, 0, 0.1);
+      border: 1px solid rgba(255, 102, 0, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--dynamo-orange);
+      display: block;
+    }
+
+    .stat-label {
+      color: var(--subtext);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* PowerBI Container */
+    .powerbi-section {
+      margin: 3rem 0;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .powerbi-container {
+      width: 100%;
+      height: 600px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.95);
+      margin-top: 1rem;
+    }
+
+    .powerbi-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .powerbi-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--subtext);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .powerbi-placeholder h3 {
+      color: var(--dynamo-orange);
+      margin-bottom: 1rem;
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      max-width: 100%;
+      width: 100%;
+      margin: 2rem 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      display: none;
+      text-align: center;
+      position: relative;
+    }
+
+    .carousel-slide.active {
+      display: block;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      cursor: zoom-in;
+      transition: opacity 0.2s ease;
+      display: block;
+    }
+
+    .carousel-slide img:hover {
+      opacity: 0.9;
+    }
+
+    .caption {
+      padding: 1rem;
+      font-size: 1rem;
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Arrow Navigation */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(255, 102, 0, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-arrow.prev {
+      left: 15px;
+    }
+
+    .carousel-arrow.next {
+      right: 15px;
+    }
+
+    /* Zoom Modal */
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 20px;
+    }
+
+    .zoom-modal img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .zoom-close:hover {
+      color: #ccc;
+    }
+
+    /* Back Button */
+    .buttons {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .button {
+      padding: 0.75rem 1.5rem;
+      background-color: transparent;
+      border: 1px solid var(--subtext);
+      color: var(--subtext);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .button:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+      }
+
+      .stat-card {
+        padding: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .powerbi-container {
+        height: 500px;
+      }
+
+      .powerbi-section {
+        padding: 1rem;
+      }
+
+      .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .carousel-arrow.prev {
+        left: 10px;
+      }
+
+      .carousel-arrow.next {
+        right: 10px;
+      }
+    }
+
+    /* Focus states for accessibility */
+    .carousel-arrow:focus,
+    .button:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Post-Match Survey Analytics</h1>
+    <h2>Fan Experience Data Collection & Analysis</h2>
+    <p>
+      A comprehensive survey system deployed to capture feedback from attendees at Houston Dynamo FC, Houston Dash, and Shell Energy Stadium events, providing actionable insights to enhance the fan experience.
+    </p>
+  </header>
+
+  <main>
+    <section class="section" id="overview">
+      <h2>Project Overview</h2>
+      <p>
+        The Post-Match Survey project was developed to systematically collect and analyze feedback from event attendees across all Shell Energy Stadium events. This initiative provides real-time insights into fan satisfaction, operational efficiency, and areas for improvement.
+      </p>
+      
+      <div class="highlight-box">
+        <h3>Key Objectives</h3>
+        <ul>
+          <li>Measure overall fan satisfaction and Net Promoter Score (NPS)</li>
+          <li>Identify operational pain points and service gaps</li>
+          <li>Track performance trends across different event types</li>
+          <li>Enable data-driven decision making for fan experience improvements</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="implementation">
+      <h2>Implementation & Data Collection</h2>
+      <p>
+        The survey is automatically triggered and sent to attendees within 24-48 hours after each event, ensuring high response rates while the experience is still fresh in attendees' minds.
+      </p>
+      
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-number">85%</span>
+          <div class="stat-label">Average Response Rate</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">12</span>
+          <div class="stat-label">Key Metrics Tracked</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">50+</span>
+          <div class="stat-label">Events per Season</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">15k+</span>
+          <div class="stat-label">Annual Responses</div>
+        </div>
+      </div>
+
+      <h3>Survey Components</h3>
+      <ul>
+        <li><strong>Overall Experience Rating</strong> - 5-point scale satisfaction measurement</li>
+        <li><strong>Net Promoter Score</strong> - Likelihood to recommend to friends/family</li>
+        <li><strong>Operational Areas</strong> - Parking, concessions, security, cleanliness</li>
+        <li><strong>Event-Specific Questions</strong> - Tailored based on event type (Dynamo, Dash, concerts)</li>
+        <li><strong>Open-Ended Feedback</strong> - Qualitative insights and suggestions</li>
+        <li><strong>Demographics</strong> - Attendance frequency, seating section, group size</li>
+      </ul>
+    </section>
+
+    <section class="section" id="analysis">
+      <h2>Data Analysis & Insights</h2>
+      <p>
+        Survey responses are processed in real-time, with automated dashboards providing immediate visibility into fan sentiment and operational performance. Advanced analytics identify trends, correlations, and predictive indicators.
+      </p>
+
+      <h3>Key Findings & Impact</h3>
+      <ul>
+        <li><strong>Concession Wait Times</strong> - Identified as primary pain point, leading to staffing optimization</li>
+        <li><strong>Parking Experience</strong> - Data-driven improvements to traffic flow and signage</li>
+        <li><strong>Event Type Variations</strong> - Distinct satisfaction patterns between soccer matches and concerts</li>
+        <li><strong>Season Trends</strong> - Correlation between team performance and overall satisfaction scores</li>
+        <li><strong>Loyalty Indicators</strong> - NPS scores predict season ticket renewal likelihood</li>
+      </ul>
+    </section>
+
+    <!-- PowerBI Dashboard Section -->
+    <section class="section powerbi-section" id="dashboard">
+      <h2>Interactive Dashboard</h2>
+      <p>
+        Explore the live Post-Match Survey analytics dashboard below. This PowerBI report provides real-time insights into fan satisfaction metrics, operational performance, and trend analysis across all Shell Energy Stadium events.
+      </p>
+      
+      <div class="powerbi-container">
+        <!-- Replace the src URL with your actual PowerBI embed URL -->
+        <iframe 
+          src="YOUR_POWERBI_EMBED_URL_HERE"
+          frameborder="0" 
+          allowFullScreen="true"
+          title="Post-Match Survey Analytics Dashboard">
+        </iframe>
+        
+        <!-- Placeholder content - remove when you add the actual PowerBI URL -->
+        <div class="powerbi-placeholder">
+          <h3>📊 PowerBI Dashboard</h3>
+          <p>This section will display the interactive Post-Match Survey analytics dashboard.</p>
+          <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--subtext);">
+            To embed your PowerBI report:<br>
+            1. Publish your report to PowerBI Service<br>
+            2. Get the embed URL from the "Embed" option<br>
+            3. Replace "YOUR_POWERBI_EMBED_URL_HERE" with your actual URL
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="methodology">
+      <h2>Technical Implementation</h2>
+      <p>
+        The survey system integrates with multiple data sources and platforms to ensure comprehensive data collection and seamless analysis workflows.
+      </p>
+
+      <h3>Technology Stack</h3>
+      <ul>
+        <li><strong>Survey Platform</strong> - Qualtrics for survey design and distribution</li>
+        <li><strong>Data Integration</strong> - Automated APIs connecting to CRM and ticketing systems</li>
+        <li><strong>Analytics Platform</strong> - PowerBI for real-time dashboarding and reporting</li>
+        <li><strong>Data Warehouse</strong> - Centralized storage for historical trend analysis</li>
+        <li><strong>Automation</strong> - Triggered email campaigns based on attendance data</li>
+      </ul>
+
+      <h3>Data Quality & Validation</h3>
+      <ul>
+        <li>Automated data validation rules to ensure response quality</li>
+        <li>Duplicate response detection and handling</li>
+        <li>Real-time monitoring of response rates and completion metrics</li>
+        <li>Regular data audits and cleansing procedures</li>
+      </ul>
+    </section>
+
+    <section class="section" id="impact">
+      <h2>Business Impact & Results</h2>
+      <p>
+        The Post-Match Survey project has become a cornerstone of the organization's fan experience strategy, directly influencing operational decisions and investment priorities.
+      </p>
+
+      <div class="highlight-box">
+        <h3>Measurable Outcomes</h3>
+        <ul>
+          <li><strong>15% increase</strong> in overall fan satisfaction scores year-over-year</li>
+          <li><strong>25% reduction</strong> in concession wait times through targeted staffing</li>
+          <li><strong>$200K+ cost savings</strong> from data-driven operational optimizations</li>
+          <li><strong>Enhanced decision-making</strong> for facility improvements and vendor management</li>
+          <li><strong>Improved NPS scores</strong> correlating with increased season ticket renewals</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="visuals">
+      <h2>Sample Reports & Visualizations</h2>
+      
+      <div class="carousel-container">
+        <!-- Arrow Navigation -->
+        <button class="carousel-arrow prev" onclick="changeSlide(-1)" aria-label="Previous slide">‹</button>
+        <button class="carousel-arrow next" onclick="changeSlide(1)" aria-label="Next slide">›</button>
+        
+        <div class="carousel-slide active">
+          <img src="images/survey1.png" alt="Overall Satisfaction Trends">
+          <div class="caption">Figure 1: Overall Satisfaction Trends by Event Type</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/survey2.png" alt="NPS Score Analysis">
+          <div class="caption">Figure 2: Net Promoter Score Analysis and Segmentation</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/survey3.png" alt="Operational Performance">
+          <div class="caption">Figure 3: Operational Performance Metrics Dashboard</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/survey4.png" alt="Response Rate Analytics">
+          <div class="caption">Figure 4: Survey Response Rate and Engagement Analytics</div>
+        </div>
+      </div>
+      
+      <p style="font-style: italic; color: var(--subtext); margin-top: 1rem;">*Sample visualizations - actual data replaced with representative examples.</p>
+      
+      <!-- Zoom Modal -->
+      <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+        <span class="zoom-close" onclick="closeZoom()">&times;</span>
+        <img id="zoomImage" src="" alt="Zoomed Image" />
+      </div>
+    </section>
+
+    <section class="buttons">
+      <a href="/" class="button">← Back to Home</a>
+    </section>
+  </main>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".carousel-slide");
+
+    function changeSlide(direction) {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+
+    // Zoom functionality
+    const zoomModal = document.getElementById("zoomModal");
+    const zoomImage = document.getElementById("zoomImage");
+
+    document.querySelectorAll(".carousel-slide img").forEach(img => {
+      img.addEventListener("click", function (e) {
+        zoomImage.src = this.src;
+        zoomImage.alt = this.alt;
+        zoomModal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        e.stopPropagation();
+      });
+    });
+
+    function closeZoom() {
+      zoomModal.style.display = "none";
+      zoomImage.src = "";
+      document.body.style.overflow = "auto";
+    }
+
+    // Keyboard navigation
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closeZoom();
+      } else if (e.key === "ArrowLeft") {
+        changeSlide(-1);
+      } else if (e.key === "ArrowRight") {
+        changeSlide(1);
+      }
+    });
+  </script>
+
+</body>
+</html>
