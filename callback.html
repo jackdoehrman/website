@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spotify Authentication</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a192f;
+      color: #dfe3ee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(29, 185, 84, 0.3);
+      border-top: 4px solid #1db954;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="spinner"></div>
+    <p>Connecting to Spotify...</p>
+  </div>
+
+  <script>
+    // Spotify Configuration - Must match your main page
+    const SPOTIFY_CONFIG = {
+      CLIENT_ID: 'cb130966aa6d47b79b68cbc990532b62',
+      REDIRECT_URI: window.location.origin.includes('vercel.app') 
+        ? window.location.origin + '/callback'
+        : 'https://jackdoehrman.com/callback'
+    };
+
+    // Token storage functions
+    function storeTokens(accessToken, refreshToken, expiresIn) {
+      const expiresAt = Date.now() + (expiresIn * 1000);
+      sessionStorage.setItem('spotify_access_token', accessToken);
+      if (refreshToken) {
+        sessionStorage.setItem('spotify_refresh_token', refreshToken);
+      }
+      sessionStorage.setItem('spotify_expires_at', expiresAt.toString());
+    }
+
+    async function handleAuthCallback() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const error = urlParams.get('error');
+      
+      if (error) {
+        console.error('Spotify auth error:', error);
+        if (window.opener) {
+          window.opener.postMessage({
+            type: 'SPOTIFY_AUTH_ERROR',
+            error: error
+          }, window.location.origin);
+          window.close();
+        }
+        return;
+      }
+
+      if (!code) {
+        console.error('No authorization code received');
+        if (window.opener) {
+          window.opener.postMessage({
+            type: 'SPOTIFY_AUTH_ERROR',
+            error: 'No authorization code received'
+          }, window.location.origin);
+          window.close();
+        }
+        return;
+      }
+
+      // Get code verifier from sessionStorage (shared between windows)
+      const codeVerifier = sessionStorage.getItem('code_verifier');
+      if (!codeVerifier) {
+        console.error('No code verifier found');
+        if (window.opener) {
+          window.opener.postMessage({
+            type: 'SPOTIFY_AUTH_ERROR',
+            error: 'No code verifier found'
+          }, window.location.origin);
+          window.close();
+        }
+        return;
+      }
+
+      try {
+        const response = await fetch('https://accounts.spotify.com/api/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            client_id: SPOTIFY_CONFIG.CLIENT_ID,
+            grant_type: 'authorization_code',
+            code: code,
+            redirect_uri: SPOTIFY_CONFIG.REDIRECT_URI,
+            code_verifier: codeVerifier
+          })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(`Token exchange failed: ${response.status} - ${errorData.error || 'Unknown error'}`);
+        }
+
+        const data = await response.json();
+        
+        // Store tokens
+        storeTokens(data.access_token, data.refresh_token, data.expires_in);
+        
+        // Send success message to parent window
+        if (window.opener) {
+          window.opener.postMessage({
+            type: 'SPOTIFY_AUTH_SUCCESS',
+            tokens: {
+              accessToken: data.access_token,
+              refreshToken: data.refresh_token,
+              expiresIn: data.expires_in
+            }
+          }, window.location.origin);
+          
+          // Close the popup
+          window.close();
+        } else {
+          // If not in popup, redirect to main page
+          window.location.href = '/';
+        }
+        
+      } catch (error) {
+        console.error('Auth callback error:', error);
+        
+        if (window.opener) {
+          window.opener.postMessage({
+            type: 'SPOTIFY_AUTH_ERROR',
+            error: error.message
+          }, window.location.origin);
+          window.close();
+        }
+      }
+    }
+
+    // Run the callback handler when page loads
+    if (window.location.search) {
+      handleAuthCallback();
+    } else {
+      // No query parameters, probably accessed directly
+      if (window.opener) {
+        window.close();
+      } else {
+        window.location.href = '/';
+      }
+    }
+  </script>
+</body>
+</html>
