@@ -108,7 +108,6 @@
     .resume-button:hover {
       background-color: #8b9dc3;
     }
-    
 
     /* Enhanced Spotify Carousel Styles */
     .spotify-section {
@@ -671,14 +670,43 @@
       }, 1000);
 
       // Listen for messages from popup (when auth completes)
-      window.addEventListener('message', function(event) {
+      const messageHandler = (event) => {
         if (event.origin !== window.location.origin) return;
         
         if (event.data.type === 'SPOTIFY_AUTH_SUCCESS') {
+          clearInterval(checkClosed);
           popup.close();
+          
+          // Store the tokens in this window's sessionStorage
+          if (event.data.tokens) {
+            storeTokens(event.data.tokens.accessToken, event.data.tokens.refreshToken, event.data.tokens.expiresIn);
+          }
+          
+          // Load Spotify data
           loadAllSpotifyData();
+          
+          window.removeEventListener('message', messageHandler);
+        } else if (event.data.type === 'SPOTIFY_AUTH_ERROR') {
+          clearInterval(checkClosed);
+          popup.close();
+          console.error('Spotify auth error:', event.data.error);
+          
+          // Show error message
+          const authSection = document.getElementById('spotify-auth-section');
+          authSection.innerHTML = `
+            <div class="auth-section">
+              <h3>Connection Failed</h3>
+              <p style="margin-bottom: 1rem; color: #ff6b6b;">Failed to connect to Spotify: ${event.data.error}</p>
+              <button id="spotify-login-retry" class="auth-button">Try Again</button>
+            </div>
+          `;
+          
+          document.getElementById('spotify-login-retry').addEventListener('click', redirectToSpotifyAuth);
+          window.removeEventListener('message', messageHandler);
         }
-      }, { once: true });
+      };
+      
+      window.addEventListener('message', messageHandler);
     }
 
     async function handleAuthCallback() {
