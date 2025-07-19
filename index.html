@@ -109,7 +109,6 @@
       background-color: #8b9dc3;
     }
 
-    /* Enhanced Spotify Carousel Styles */
     .spotify-section {
       background: rgba(29, 185, 84, 0.05);
       border: 1px solid rgba(29, 185, 84, 0.2);
@@ -208,7 +207,6 @@
       background: var(--spotify-green);
     }
 
-    /* Content Styles */
     .content-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -294,7 +292,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Experience Section Styling */
+
     .experience-item {
       margin-bottom: 2rem;
       padding: 1.5rem;
@@ -315,18 +313,15 @@
       font-size: 0.9rem;
     }
 
-    /* Smooth scroll for navigation */
     html {
       scroll-behavior: smooth;
     }
 
-    /* Focus states for accessibility */
     button:focus, a:focus {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
-    /* Responsive design improvements */
     @media (max-width: 768px) {
       body {
         padding: 1rem;
@@ -556,7 +551,7 @@
 
     // Spotify Configuration
     const SPOTIFY_CONFIG = {
-      CLIENT_ID: 'YOUR_CLIENT_ID_HERE', // Replace with your actual client ID
+      CLIENT_ID: 'cb130966aa6d47b79b68cbc990532b62',
       REDIRECT_URI: window.location.origin + window.location.pathname,
       SCOPES: 'user-read-currently-playing user-read-recently-played user-top-read'
     };
