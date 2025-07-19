@@ -353,6 +353,30 @@
         padding: 0.25rem 0.5rem;
       }
     }
+
+    .auth-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--spotify-green);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .auth-button:hover {
+      background-color: #1ed760;
+      transform: translateY(-2px);
+    }
+
+    .auth-section {
+      text-align: center;
+      padding: 2rem;
+    }
   </style>
 </head>
 <body>
@@ -458,7 +482,13 @@
         My Music
       </h2>
       
-      <div class="carousel-container">
+      <div id="spotify-auth-section" class="auth-section" style="display: none;">
+        <h3>Connect to Spotify</h3>
+        <p style="margin-bottom: 1rem;">To see my music data, please connect your Spotify account:</p>
+        <button id="spotify-login" class="auth-button">Connect Spotify</button>
+      </div>
+      
+      <div class="carousel-container" id="spotify-carousel">
         <div class="carousel-wrapper" id="carousel-wrapper">
           <div class="slide" id="slide-top-artists">
             <div class="loading-state">
@@ -524,6 +554,13 @@
       document.head.appendChild(script);
     })();
 
+    // Spotify Configuration
+    const SPOTIFY_CONFIG = {
+      CLIENT_ID: 'YOUR_CLIENT_ID_HERE', // Replace with your actual client ID
+      REDIRECT_URI: window.location.origin + window.location.pathname,
+      SCOPES: 'user-read-currently-playing user-read-recently-played user-top-read'
+    };
+
     // Carousel functionality
     let currentSlide = 0;
     const totalSlides = 3;
@@ -550,124 +587,390 @@
     }
 
     // Auto-advance carousel every 10 seconds
-    setInterval(() => {
+    let carouselInterval = setInterval(() => {
       changeSlide(1);
     }, 10000);
 
-    // API Functions with better error handling
-    async function fetchWithErrorHandling(url, fallbackData = null) {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return await response.json();
-      } catch (error) {
-        console.error(`Error fetching ${url}:`, error);
-        return fallbackData;
+    // Spotify Token Management
+    function getStoredTokens() {
+      const accessToken = sessionStorage.getItem('spotify_access_token');
+      const refreshToken = sessionStorage.getItem('spotify_refresh_token');
+      const expiresAt = sessionStorage.getItem('spotify_expires_at');
+      
+      return { accessToken, refreshToken, expiresAt: expiresAt ? parseInt(expiresAt) : null };
+    }
+
+    function storeTokens(accessToken, refreshToken, expiresIn) {
+      const expiresAt = Date.now() + (expiresIn * 1000);
+      sessionStorage.setItem('spotify_access_token', accessToken);
+      if (refreshToken) {
+        sessionStorage.setItem('spotify_refresh_token', refreshToken);
       }
+      sessionStorage.setItem('spotify_expires_at', expiresAt.toString());
+    }
+
+    function isTokenExpired(expiresAt) {
+      return !expiresAt || Date.now() >= expiresAt - 60000; // Refresh 1 minute before expiry
+    }
+
+    // Spotify Authentication
+    function generateCodeChallenge() {
+      const codeVerifier = generateCodeVerifier();
+      sessionStorage.setItem('code_verifier', codeVerifier);
+      return codeVerifier;
+    }
+
+    function generateCodeVerifier() {
+      const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+      let text = '';
+      for (let i = 0; i < 128; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      return text;
+    }
+
+    function redirectToSpotifyAuth() {
+      const codeChallenge = generateCodeChallenge();
+      const params = new URLSearchParams({
+        client_id: SPOTIFY_CONFIG.CLIENT_ID,
+        response_type: 'code',
+        redirect_uri: SPOTIFY_CONFIG.REDIRECT_URI,
+        code_challenge_method: 'S256',
+        code_challenge: codeChallenge,
+        scope: SPOTIFY_CONFIG.SCOPES
+      });
+
+      window.location = `https://accounts.spotify.com/authorize?${params}`;
+    }
+
+    async function handleAuthCallback() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      
+      if (!code) return false;
+
+      const codeVerifier = sessionStorage.getItem('code_verifier');
+      if (!codeVerifier) {
+        console.error('No code verifier found');
+        return false;
+      }
+
+      try {
+        const response = await fetch('https://accounts.spotify.com/api/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            client_id: SPOTIFY_CONFIG.CLIENT_ID,
+            grant_type: 'authorization_code',
+            code: code,
+            redirect_uri: SPOTIFY_CONFIG.REDIRECT_URI,
+            code_verifier: codeVerifier
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to exchange code for tokens');
+        }
+
+        const data = await response.json();
+        storeTokens(data.access_token, data.refresh_token, data.expires_in);
+        
+        // Clear URL parameters
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
+        return true;
+      } catch (error) {
+        console.error('Auth callback error:', error);
+        return false;
+      }
+    }
+
+    async function refreshAccessToken() {
+      const { refreshToken } = getStoredTokens();
+      if (!refreshToken) return false;
+
+      try {
+        const response = await fetch('https://accounts.spotify.com/api/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            client_id: SPOTIFY_CONFIG.CLIENT_ID,
+            grant_type: 'refresh_token',
+            refresh_token: refreshToken
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to refresh token');
+        }
+
+        const data = await response.json();
+        storeTokens(data.access_token, data.refresh_token || refreshToken, data.expires_in);
+        
+        return true;
+      } catch (error) {
+        console.error('Token refresh error:', error);
+        return false;
+      }
+    }
+
+    async function getValidAccessToken() {
+      let { accessToken, expiresAt } = getStoredTokens();
+      
+      if (!accessToken) return null;
+      
+      if (isTokenExpired(expiresAt)) {
+        const refreshed = await refreshAccessToken();
+        if (!refreshed) return null;
+        ({ accessToken } = getStoredTokens());
+      }
+      
+      return accessToken;
+    }
+
+    // Spotify API Calls
+    async function spotifyApiCall(endpoint) {
+      const accessToken = await getValidAccessToken();
+      if (!accessToken) {
+        throw new Error('No valid access token');
+      }
+
+      const response = await fetch(`https://api.spotify.com/v1${endpoint}`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Spotify API error: ${response.status}`);
+      }
+
+      return response.json();
     }
 
     async function loadTopArtists() {
-      const artists = await fetchWithErrorHandling('/api/top-artists', []);
       const container = document.getElementById('slide-top-artists');
       
-      if (!artists || artists.length === 0) {
+      try {
+        const data = await spotifyApiCall('/me/top/artists?limit=5&time_range=short_term');
+        
+        if (!data.items || data.items.length === 0) {
+          container.innerHTML = `
+            <div class="error-state">
+              <h3>Top Artists</h3>
+              <p>No top artists data available</p>
+            </div>
+          `;
+          return;
+        }
+
+        const artists = data.items.map(artist => ({
+          name: artist.name,
+          url: artist.external_urls.spotify,
+          image: artist.images[0]?.url || 'https://via.placeholder.com/80',
+          genres: artist.genres || []
+        }));
+
+        container.innerHTML = `
+          <h3>Top 5 Artists (Last 4 Weeks)</h3>
+          <div class="content-grid">
+            ${artists.map(artist => `
+              <div class="content-item">
+                <img src="${artist.image}" alt="${artist.name}" class="content-image" />
+                <a href="${artist.url}" target="_blank" class="content-title">${artist.name}</a>
+                <div class="content-subtitle">${artist.genres.slice(0, 2).join(', ') || 'Artist'}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } catch (error) {
+        console.error('Error loading top artists:', error);
         container.innerHTML = `
           <div class="error-state">
             <h3>Top Artists</h3>
-            <p>Unable to load top artists right now</p>
+            <p>Unable to load top artists</p>
           </div>
         `;
-        return;
       }
-
-      container.innerHTML = `
-        <h3>Top 5 Artists (Last 4 Weeks)</h3>
-        <div class="content-grid">
-          ${artists.map(artist => `
-            <div class="content-item">
-              <img src="${artist.image}" alt="${artist.name}" class="content-image" />
-              <a href="${artist.url}" target="_blank" class="content-title">${artist.name}</a>
-              <div class="content-subtitle">${artist.genres ? artist.genres.join(', ') : 'Artist'}</div>
-            </div>
-          `).join('')}
-        </div>
-      `;
     }
 
     async function loadRecentlyPlayed() {
-      const tracks = await fetchWithErrorHandling('/api/recently-played', []);
       const container = document.getElementById('slide-recently-played');
       
-      if (!tracks || tracks.length === 0) {
+      try {
+        const data = await spotifyApiCall('/me/player/recently-played?limit=5');
+        
+        if (!data.items || data.items.length === 0) {
+          container.innerHTML = `
+            <div class="error-state">
+              <h3>Recently Played</h3>
+              <p>No recently played tracks</p>
+            </div>
+          `;
+          return;
+        }
+
+        const tracks = data.items.map(item => ({
+          name: item.track.name,
+          artist: item.track.artists.map(a => a.name).join(', '),
+          url: item.track.external_urls.spotify,
+          image: item.track.album.images[0]?.url || 'https://via.placeholder.com/80'
+        }));
+
+        container.innerHTML = `
+          <h3>Recently Played</h3>
+          <div class="content-grid">
+            ${tracks.map(track => `
+              <div class="content-item">
+                <img src="${track.image}" alt="${track.name}" class="content-image" />
+                <a href="${track.url}" target="_blank" class="content-title">${track.name}</a>
+                <div class="content-subtitle">${track.artist}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } catch (error) {
+        console.error('Error loading recently played:', error);
         container.innerHTML = `
           <div class="error-state">
             <h3>Recently Played</h3>
             <p>Unable to load recently played tracks</p>
           </div>
         `;
-        return;
       }
-
-      container.innerHTML = `
-        <h3>Recently Played</h3>
-        <div class="content-grid">
-          ${tracks.map(track => `
-            <div class="content-item">
-              <img src="${track.image}" alt="${track.name}" class="content-image" />
-              <a href="${track.url}" target="_blank" class="content-title">${track.name}</a>
-              <div class="content-subtitle">${track.artist}</div>
-            </div>
-          `).join('')}
-        </div>
-      `;
     }
 
     async function loadCurrentlyPlaying() {
-      const current = await fetchWithErrorHandling('/api/currently-playing', { isPlaying: false });
       const container = document.getElementById('slide-currently-playing');
       
-      if (!current.isPlaying) {
+      try {
+        const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+          headers: {
+            'Authorization': `Bearer ${await getValidAccessToken()}`
+          }
+        });
+
+        if (response.status === 204) {
+          container.innerHTML = `
+            <div class="error-state">
+              <h3>Currently Playing</h3>
+              <p>Not playing anything right now</p>
+              <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--subtext);">
+                Check back later to see what I'm listening to!
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!data || !data.item || !data.is_playing) {
+          container.innerHTML = `
+            <div class="error-state">
+              <h3>Currently Playing</h3>
+              <p>Not playing anything right now</p>
+              <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--subtext);">
+                Check back later to see what I'm listening to!
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        const current = {
+          title: data.item.name,
+          artist: data.item.artists.map(a => a.name).join(', '),
+          album: data.item.album.name,
+          albumImageUrl: data.item.album.images[0]?.url || 'https://via.placeholder.com/120',
+          songUrl: data.item.external_urls.spotify
+        };
+
         container.innerHTML = `
-          <div class="error-state">
-            <h3>Currently Playing</h3>
-            <p>Not playing anything right now</p>
-            <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--subtext);">
-              Check back later to see what I'm listening to!
+          <h3>Now Playing</h3>
+          <div class="now-playing">
+            <img src="${current.albumImageUrl}" alt="${current.album}" class="now-playing-image" />
+            <div class="content-item" style="background: transparent;">
+              <a href="${current.songUrl}" target="_blank" class="content-title" style="font-size: 1.2rem;">${current.title}</a>
+              <div class="content-subtitle" style="font-size: 1rem;">${current.artist}</div>
+              <div class="content-subtitle">${current.album}</div>
             </div>
           </div>
         `;
+      } catch (error) {
+        console.error('Error loading currently playing:', error);
+        container.innerHTML = `
+          <div class="error-state">
+            <h3>Currently Playing</h3>
+            <p>Unable to load currently playing track</p>
+          </div>
+        `;
+      }
+    }
+
+    // Load all Spotify data
+    async function loadAllSpotifyData() {
+      const { accessToken } = getStoredTokens();
+      
+      if (!accessToken) {
+        showAuthSection();
         return;
       }
 
-      container.innerHTML = `
-        <h3>Now Playing</h3>
-        <div class="now-playing">
-          <img src="${current.albumImageUrl}" alt="${current.album}" class="now-playing-image" />
-          <div class="content-item" style="background: transparent;">
-            <a href="${current.songUrl}" target="_blank" class="content-title" style="font-size: 1.2rem;">${current.title}</a>
-            <div class="content-subtitle" style="font-size: 1rem;">${current.artist}</div>
-            <div class="content-subtitle">${current.album}</div>
-          </div>
-        </div>
-      `;
+      hideAuthSection();
+      
+      try {
+        await Promise.all([
+          loadTopArtists(),
+          loadRecentlyPlayed(),
+          loadCurrentlyPlaying()
+        ]);
+      } catch (error) {
+        console.error('Error loading Spotify data:', error);
+        showAuthSection();
+      }
     }
 
-    // Load all carousel content
-    async function loadAllSpotifyData() {
-      await Promise.all([
-        loadTopArtists(),
-        loadRecentlyPlayed(),
-        loadCurrentlyPlaying()
-      ]);
+    function showAuthSection() {
+      document.getElementById('spotify-auth-section').style.display = 'block';
+      document.getElementById('spotify-carousel').style.display = 'none';
+      document.querySelector('.carousel-indicators').style.display = 'none';
     }
+
+    function hideAuthSection() {
+      document.getElementById('spotify-auth-section').style.display = 'none';
+      document.getElementById('spotify-carousel').style.display = 'block';
+      document.querySelector('.carousel-indicators').style.display = 'flex';
+    }
+
+    // Event Listeners
+    document.getElementById('spotify-login').addEventListener('click', redirectToSpotifyAuth);
 
     // Initialize
-    loadAllSpotifyData();
+    async function initialize() {
+      // Handle auth callback if present
+      const authSuccess = await handleAuthCallback();
+      
+      if (authSuccess || getStoredTokens().accessToken) {
+        await loadAllSpotifyData();
+        
+        // Refresh currently playing every 30 seconds
+        setInterval(loadCurrentlyPlaying, 30000);
+      } else {
+        showAuthSection();
+      }
+    }
 
-    // Refresh currently playing every 30 seconds
-    setInterval(loadCurrentlyPlaying, 30000);
+    // Start the app
+    initialize();
   </script>
 </body>
 </html>
