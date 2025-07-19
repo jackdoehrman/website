@@ -557,7 +557,7 @@
     // Spotify Configuration
     const SPOTIFY_CONFIG = {
       CLIENT_ID: 'cb130966aa6d47b79b68cbc990532b62',
-      REDIRECT_URI: 'https://jackdoehrman.com/',
+      REDIRECT_URI: window.location.origin + '/',
       SCOPES: 'user-read-currently-playing user-read-recently-played user-top-read'
     };
 
@@ -641,6 +641,10 @@
       });
 
       const authUrl = `https://accounts.spotify.com/authorize?${params}`;
+      
+      // Debug logging
+      console.log('Redirect URI being used:', SPOTIFY_CONFIG.REDIRECT_URI);
+      console.log('Full auth URL:', authUrl);
       
       // Open in popup window
       const popup = window.open(
