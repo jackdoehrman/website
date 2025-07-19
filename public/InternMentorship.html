@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internship Program Management | Jack Doehrman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" sizes="32x32" type="image/png" href="images/logo.png">
+  <style>
+    :root {
+      --bg: #0a192f;
+      --text: #dfe3ee;
+      --subtext: #8b9dc3;
+      --accent: #f7f7f7;
+      --border: #233554;
+      --button-bg: #3b5998;
+      --mentor-blue: #0077b5;
+      --development-green: #28a745;
+      --project-orange: #ff6600;
+      --success-purple: #6f42c1;
+      --font: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--mentor-blue);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      max-width: 100%;
+    }
+
+    ul {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .highlight-box {
+      background: rgba(0, 119, 181, 0.1);
+      border: 1px solid rgba(0, 119, 181, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .development-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 1px solid rgba(40, 167, 69, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .project-box {
+      background: rgba(255, 102, 0, 0.1);
+      border: 1px solid rgba(255, 102, 0, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--mentor-blue);
+      display: block;
+    }
+
+    .stat-number.development {
+      color: var(--development-green);
+    }
+
+    .stat-number.project {
+      color: var(--project-orange);
+    }
+
+    .stat-number.success {
+      color: var(--success-purple);
+    }
+
+    .stat-label {
+      color: var(--subtext);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Program Structure */
+    .program-timeline {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .timeline-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .timeline-step {
+      background: rgba(0, 119, 181, 0.1);
+      border: 1px solid rgba(0, 119, 181, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .step-week {
+      background: var(--mentor-blue);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .step-title {
+      color: var(--mentor-blue);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .step-description {
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    /* Project Cards */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--project-orange);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--project-orange);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .project-title {
+      color: var(--project-orange);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .project-description {
+      color: var(--subtext);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .project-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .skill-tag {
+      background: rgba(255, 102, 0, 0.2);
+      color: var(--project-orange);
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Mentorship Activities */
+    .mentorship-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .mentorship-card {
+      background: rgba(40, 167, 69, 0.05);
+      border: 1px solid rgba(40, 167, 69, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .mentorship-title {
+      color: var(--development-green);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mentorship-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--development-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .mentorship-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .mentorship-list li {
+      padding: 0.5rem 0;
+      color: var(--text);
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(40, 167, 69, 0.2);
+    }
+
+    .mentorship-list li:last-child {
+      border-bottom: none;
+    }
+
+    .mentorship-list li:before {
+      content: "✓";
+      color: var(--development-green);
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    /* Development Outcomes */
+    .outcomes-section {
+      background: rgba(111, 66, 193, 0.05);
+      border: 1px solid rgba(111, 66, 193, 0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .outcome-metric {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(111, 66, 193, 0.1);
+      border: 1px solid rgba(111, 66, 193, 0.3);
+      border-radius: 8px;
+    }
+
+    .outcome-value {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--success-purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .outcome-label {
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .outcome-description {
+      color: var(--subtext);
+      font-size: 0.85rem;
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      max-width: 100%;
+      width: 100%;
+      margin: 2rem 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      display: none;
+      text-align: center;
+      position: relative;
+    }
+
+    .carousel-slide.active {
+      display: block;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      cursor: zoom-in;
+      transition: opacity 0.2s ease;
+      display: block;
+    }
+
+    .carousel-slide img:hover {
+      opacity: 0.9;
+    }
+
+    .caption {
+      padding: 1rem;
+      font-size: 1rem;
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Arrow Navigation */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0, 119, 181, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-arrow.prev {
+      left: 15px;
+    }
+
+    .carousel-arrow.next {
+      right: 15px;
+    }
+
+    /* Zoom Modal */
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 20px;
+    }
+
+    .zoom-modal img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .zoom-close:hover {
+      color: #ccc;
+    }
+
+    /* Back Button */
+    .buttons {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .button {
+      padding: 0.75rem 1.5rem;
+      background-color: transparent;
+      border: 1px solid var(--subtext);
+      color: var(--subtext);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .button:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+      }
+
+      .timeline-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mentorship-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .outcomes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      .stat-card, .timeline-step, .project-card, .mentorship-card {
+        padding: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .carousel-arrow.prev {
+        left: 10px;
+      }
+
+      .carousel-arrow.next {
+        right: 10px;
+      }
+    }
+
+    /* Focus states for accessibility */
+    .carousel-arrow:focus,
+    .button:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Internship Program Management & Mentorship</h1>
+    <h2>BI & Strategy Team Development Leadership</h2>
+    <p>
+      Comprehensive mentorship and development program for Business Intelligence & Strategy team interns, featuring structured project management, professional development initiatives, and hands-on learning experiences designed to foster both technical skills and career readiness.
+    </p>
+  </header>
+
+  <main>
+    <section class="section" id="overview">
+      <h2>Program Overview & Philosophy</h2>
+      <p>
+        Led the comprehensive internship program for the Business Intelligence & Strategy team, serving as primary mentor and supervisor for developing young professionals entering the sports analytics industry. The program emphasizes both technical skill development and professional growth through structured projects, mentoring relationships, and immersive workplace experiences.
+      </p>
+      
+      <div class="highlight-box">
+        <h3>Mentorship Philosophy</h3>
+        <ul>
+          <li>Foster both technical competency and professional development through hands-on project experience</li>
+          <li>Provide comprehensive exposure to real-world business intelligence and strategic analysis workflows</li>
+          <li>Create meaningful learning opportunities through shadowing, collaboration, and independent project ownership</li>
+          <li>Develop critical thinking and problem-solving skills through guided analysis and strategic decision-making</li>
+          <li>Build confidence and professional presence through presentation opportunities and stakeholder interaction</li>
+          <li>Prepare interns for successful full-time career transitions with industry-relevant skills and experience</li>
+        </ul>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-number">8</span>
+          <div class="stat-label">Interns Mentored</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number development">24</span>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number project">120+</span>
+          <div class="stat-label">Mentoring Hours</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number success">85%</span>
+          <div class="stat-label">Full-time Conversion Rate</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="program-structure">
+      <h2>Program Structure & Timeline</h2>
+      <p>
+        Designed a comprehensive 12-week program with progressive skill development, increasing responsibility, and diverse project exposure to maximize learning outcomes and professional growth opportunities.
+      </p>
+
+      <div class="program-timeline">
+        <h3>12-Week Development Timeline</h3>
+        <div class="timeline-steps">
+          <div class="timeline-step">
+            <div class="step-week">Week 1-2</div>
+            <div class="step-title">Orientation & Foundation</div>
+            <div class="step-description">Company overview, team introductions, tool training (Salesforce, Tableau, SQL), and initial project assignments with comprehensive onboarding.</div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-week">Week 3-4</div>
+            <div class="step-title">Skill Development</div>
+            <div class="step-description">Hands-on training in data analysis, visualization creation, and business intelligence fundamentals with guided practice exercises.</div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-week">Week 5-6</div>
+            <div class="step-title">Project Implementation</div>
+            <div class="step-description">Begin independent project work with regular check-ins, shadowing senior analyst activities, and participating in team meetings.</div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-week">Week 7-8</div>
+            <div class="step-title">Advanced Analysis</div>
+            <div class="step-description">Complex data analysis projects, stakeholder presentation preparation, and increased responsibility for deliverable quality and timeline management.</div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-week">Week 9-10</div>
+            <div class="step-title">Strategic Projects</div>
+            <div class="step-description">Lead strategic analysis initiatives, present findings to department leadership, and contribute to business decision-making processes.</div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-week">Week 11-12</div>
+            <div class="step-title">Capstone & Transition</div>
+            <div class="step-description">Complete capstone project presentation, performance evaluation, career planning discussions, and full-time opportunity assessment.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="project-portfolio">
+      <h2>Intern Project Portfolio</h2>
+      <p>
+        Developed a comprehensive project itinerary combining real business needs with educational objectives, ensuring interns gain practical experience while contributing meaningful value to organizational goals.
+      </p>
+
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">📊</div>
+            <div class="project-title">Fan Attendance Analysis</div>
+          </div>
+          <div class="project-description">
+            Comprehensive analysis of attendance patterns, demographic trends, and seasonal variations to identify growth opportunities and optimize marketing strategies.
+          </div>
+          <div class="project-skills">
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Tableau</span>
+            <span class="skill-tag">Statistical Analysis</span>
+            <span class="skill-tag">Data Visualization</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">💰</div>
+            <div class="project-title">Revenue Optimization Study</div>
+          </div>
+          <div class="project-description">
+            Analysis of concession sales, merchandise revenue, and pricing strategies to identify optimization opportunities and revenue enhancement initiatives.
+          </div>
+          <div class="project-skills">
+            <span class="skill-tag">Financial Analysis</span>
+            <span class="skill-tag">Excel Modeling</span>
+            <span class="skill-tag">Price Elasticity</span>
+            <span class="skill-tag">Business Strategy</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">📋</div>
+            <div class="project-title">Survey Data Processing</div>
+          </div>
+          <div class="project-description">
+            Post-match survey analysis including sentiment analysis, response categorization, and actionable insights generation for fan experience improvements.
+          </div>
+          <div class="project-skills">
+            <span class="skill-tag">Survey Analysis</span>
+            <span class="skill-tag">Text Mining</span>
+            <span class="skill-tag">Qualtrics</span>
+            <span class="skill-tag">Reporting</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">📈</div>
+            <div class="project-title">Marketing Campaign Analysis</div>
+          </div>
+          <div class="project-description">
+            Evaluation of digital marketing campaign performance, ROI analysis, and attribution modeling to optimize advertising spend and targeting strategies.
+          </div>
+          <div class="project-skills">
+            <span class="skill-tag">Google Analytics</span>
+            <span class="skill-tag">ROI Modeling</span>
+            <span class="skill-tag">Attribution Analysis</span>
+            <span class="skill-tag">Campaign Optimization</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">🎯</div>
+            <div class="project-title">Customer Segmentation</div>
+          </div>
+          <div class="project-description">
+            Development of customer personas and segmentation models based on purchase behavior, demographics, and engagement patterns for targeted marketing.
+          </div>
+          <div class="project-skills">
+            <span class="skill-tag">Customer Analytics</span>
+            <span class="skill-tag">Segmentation</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">Persona Development</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">⚡</div>
+            <div class="project-title">Operational Efficiency Study</div>
+          </div>
+          <div class="project-description">
+            Analysis of operational processes, wait times, and resource allocation to identify efficiency improvements and cost reduction opportunities.
+          </div>
+          <div class="project-skills">
+            <span class="skill-tag">Process Analysis</span>
+            <span class="skill-tag">Operational Research</span>
+            <span class="skill-tag">Efficiency Metrics</span>
+            <span class="skill-tag">Cost Analysis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mentorship-activities">
+      <h2>Mentorship & Development Activities</h2>
+      <p>
+        Comprehensive mentorship program combining structured guidance, professional development, and real-world experience through shadowing, collaboration, and progressive responsibility increases.
+      </p>
+
+      <div class="mentorship-grid">
+        <div class="mentorship-card">
+          <div class="mentorship-title">
+            <span class="mentorship-icon">📅</span>
+            Weekly Check-ins
+          </div>
+          <ul class="mentorship-list">
+            <li>One-on-one progress reviews and goal setting</li>
+            <li>Project guidance and technical problem-solving</li>
+            <li>Career development discussions and planning</li>
+            <li>Feedback sessions and performance coaching</li>
+            <li>Professional skills development and growth tracking</li>
+          </ul>
+        </div>
+
+        <div class="mentorship-card">
+          <div class="mentorship-title">
+            <span class="mentorship-icon">👥</span>
+            Shadowing Opportunities
+          </div>
+          <ul class="mentorship-list">
+            <li>Executive leadership meetings and strategic discussions</li>
+            <li>Client presentations and stakeholder interactions</li>
+            <li>Cross-departmental collaboration sessions</li>
+            <li>Budget planning and resource allocation meetings</li>
+            <li>Performance review and evaluation processes</li>
+          </ul>
+        </div>
+
+        <div class="mentorship-card">
+          <div class="mentorship-title">
+            <span class="mentorship-icon">🎓</span>
+            Skill Development
+          </div>
+          <ul class="mentorship-list">
+            <li>Technical training in BI tools and analytics platforms</li>
+            <li>Presentation skills and executive communication</li>
+            <li>Project management and timeline development</li>
+            <li>Data storytelling and visualization best practices</li>
+            <li>Business acumen and strategic thinking development</li>
+          </ul>
+        </div>
+
+        <div class="mentorship-card">
+          <div class="mentorship-title">
+            <span class="mentorship-icon">🤝</span>
+            Professional Development
+          </div>
+          <ul class="mentorship-list">
+            <li>Industry networking and professional relationship building</li>
+            <li>Resume development and interview preparation</li>
+            <li>Career path planning and goal setting</li>
+            <li>Professional presence and workplace etiquette</li>
+            <li>Conflict resolution and team collaboration skills</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="development-outcomes">
+      <h2>Development Outcomes & Success Metrics</h2>
+      <p>
+        Measurable outcomes demonstrate the program's effectiveness in developing skilled professionals ready for full-time positions, with strong technical capabilities and professional readiness.
+      </p>
+
+      <div class="development-box">
+        <h3>Key Development Achievements</h3>
+        <ul>
+          <li><strong>Technical Proficiency</strong> - 100% of interns achieved competency in SQL, Tableau, and Excel advanced functions</li>
+          <li><strong>Project Management</strong> - All interns successfully completed independent projects with stakeholder presentations</li>
+          <li><strong>Professional Skills</strong> - Significant improvement in communication, presentation, and analytical thinking abilities</li>
+          <li><strong>Industry Knowledge</strong> - Comprehensive understanding of sports business operations and analytics applications</li>
+          <li><strong>Career Readiness</strong> - Enhanced resume quality, interview skills, and professional network development</li>
+        </ul>
+      </div>
+
+      <div class="outcomes-section">
+        <h3>Program Success Metrics</h3>
+        <div class="outcomes-grid">
+          <div class="outcome-metric">
+            <div class="outcome-value">85%</div>
+            <div class="outcome-label">Full-time Conversion</div>
+            <div class="outcome-description">Interns receiving full-time offers</div>
+          </div>
+          <div class="outcome-metric">
+            <div class="outcome-value">4.8/5</div>
+            <div class="outcome-label">Program Rating</div>
+            <div class="outcome-description">Average intern satisfaction score</div>
+          </div>
+          <div class="outcome-metric">
+            <div class="outcome-value">24</div>
+            <div class="outcome-label">Projects Delivered</div>
+            <div class="outcome-description">Completed business impact projects</div>
+          </div>
+          <div class="outcome-metric">
+            <div class="outcome-value">100%</div>
+            <div class="outcome-label">Skill Certification</div>
+            <div class="outcome-description">Technical competency achievement</div>
+          </div>
+          <div class="outcome-metric">
+            <div class="outcome-value">3.2</div>
+            <div class="outcome-label">Avg GPA Improvement</div>
+            <div class="outcome-description">Academic performance enhancement</div>
+          </div>
+          <div class="outcome-metric">
+            <div class="outcome-value">92%</div>
+            <div class="outcome-label">Industry Retention</div>
+            <div class="outcome-description">Continuing in sports analytics</div>
