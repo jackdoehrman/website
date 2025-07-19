@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Automation & Lead Generation | Jack Doehrman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" sizes="32x32" type="image/png" href="images/logo.png">
+  <style>
+    :root {
+      --bg: #0a192f;
+      --text: #dfe3ee;
+      --subtext: #8b9dc3;
+      --accent: #f7f7f7;
+      --border: #233554;
+      --button-bg: #3b5998;
+      --formstack-green: #28a745;
+      --surveymonkey-yellow: #ffc107;
+      --zapier-orange: #ff6600;
+      --revenue-blue: #007bff;
+      --font: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--formstack-green);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      max-width: 100%;
+    }
+
+    ul {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .highlight-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 1px solid rgba(40, 167, 69, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .automation-box {
+      background: rgba(255, 102, 0, 0.1);
+      border: 1px solid rgba(255, 102, 0, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .revenue-box {
+      background: rgba(0, 123, 255, 0.1);
+      border: 1px solid rgba(0, 123, 255, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--formstack-green);
+      display: block;
+    }
+
+    .stat-number.revenue {
+      color: var(--revenue-blue);
+    }
+
+    .stat-number.conversion {
+      color: var(--zapier-orange);
+    }
+
+    .stat-number.automation {
+      color: var(--surveymonkey-yellow);
+    }
+
+    .stat-label {
+      color: var(--subtext);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Form Type Cards */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .form-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .form-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--formstack-green);
+    }
+
+    .form-card h4 {
+      color: var(--formstack-green);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--formstack-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .form-description {
+      color: var(--subtext);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .form-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .form-metric {
+      text-align: center;
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 4px;
+    }
+
+    .metric-value {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      color: var(--subtext);
+    }
+
+    /* Automation Flow */
+    .automation-flow {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .flow-step {
+      background: rgba(255, 102, 0, 0.1);
+      border: 1px solid rgba(255, 102, 0, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      background: var(--zapier-orange);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin: 0 auto 1rem;
+    }
+
+    .step-title {
+      color: var(--zapier-orange);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-description {
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    .platform-badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      background: rgba(255, 102, 0, 0.2);
+      color: var(--zapier-orange);
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    /* Interest Form Section */
+    .interest-section {
+      background: rgba(0, 123, 255, 0.05);
+      border: 1px solid rgba(0, 123, 255, 0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .conversion-funnel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .funnel-stage {
+      background: rgba(0, 123, 255, 0.1);
+      border: 1px solid rgba(0, 123, 255, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .funnel-number {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--revenue-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .funnel-label {
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .funnel-description {
+      color: var(--subtext);
+      font-size: 0.85rem;
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      max-width: 100%;
+      width: 100%;
+      margin: 2rem 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      display: none;
+      text-align: center;
+      position: relative;
+    }
+
+    .carousel-slide.active {
+      display: block;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      cursor: zoom-in;
+      transition: opacity 0.2s ease;
+      display: block;
+    }
+
+    .carousel-slide img:hover {
+      opacity: 0.9;
+    }
+
+    .caption {
+      padding: 1rem;
+      font-size: 1rem;
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Arrow Navigation */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(40, 167, 69, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-arrow.prev {
+      left: 15px;
+    }
+
+    .carousel-arrow.next {
+      right: 15px;
+    }
+
+    /* Zoom Modal */
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 20px;
+    }
+
+    .zoom-modal img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .zoom-close:hover {
+      color: #ccc;
+    }
+
+    /* Back Button */
+    .buttons {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .button {
+      padding: 0.75rem 1.5rem;
+      background-color: transparent;
+      border: 1px solid var(--subtext);
+      color: var(--subtext);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .button:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .conversion-funnel {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card, .form-card, .flow-step, .funnel-stage {
+        padding: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .carousel-arrow.prev {
+        left: 10px;
+      }
+
+      .carousel-arrow.next {
+        right: 10px;
+      }
+    }
+
+    /* Focus states for accessibility */
+    .carousel-arrow:focus,
+    .button:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Form Automation & Lead Generation System</h1>
+    <h2>Multi-Platform Form Development & Automated Sales Pipeline</h2>
+    <p>
+      Comprehensive form development and automation system using Formstack and SurveyMonkey, integrated with Zapier and Salesforce to streamline lead capture, opportunity creation, and revenue generation across multiple fan engagement touchpoints.
+    </p>
+  </header>
+
+  <main>
+    <section class="section" id="overview">
+      <h2>Platform Overview</h2>
+      <p>
+        Designed and implemented a sophisticated form ecosystem that captures fan interest across multiple touchpoints, automatically processes submissions through intelligent automation workflows, and converts prospects into revenue-generating opportunities. The system seamlessly integrates form platforms with CRM automation to maximize conversion rates and sales team efficiency.
+      </p>
+      
+      <div class="highlight-box">
+        <h3>System Capabilities</h3>
+        <ul>
+          <li>Multi-platform form development using Formstack and SurveyMonkey for optimized user experiences</li>
+          <li>Automated lead processing and opportunity creation through Zapier and Salesforce integration</li>
+          <li>Intelligent form routing and manager notification systems for rapid response</li>
+          <li>Comprehensive analytics and conversion tracking across the entire sales funnel</li>
+          <li>Scalable automation workflows supporting multiple event types and fan engagement scenarios</li>
+        </ul>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-number">47</span>
+          <div class="stat-label">Active Forms</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">28K+</span>
+          <div class="stat-label">Annual Submissions</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number conversion">23%</span>
+          <div class="stat-label">Average Conversion Rate</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number revenue">$1.8M</span>
+          <div class="stat-label">Revenue Generated</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="form-types">
+      <h2>Form Portfolio & Applications</h2>
+      <p>
+        Created specialized forms for diverse fan engagement scenarios, each optimized for specific conversion goals and integrated with tailored automation workflows to maximize effectiveness and response rates.
+      </p>
+
+      <div class="form-grid">
+        <div class="form-card">
+          <h4><span class="form-icon">🎫</span>Ticket Interest Forms</h4>
+          <div class="form-description">
+            Capture prospect information for season tickets, group sales, and premium experiences with automated opportunity creation and immediate manager notification.
+          </div>
+          <div class="form-metrics">
+            <div class="form-metric">
+              <div class="metric-value">8,245</div>
+              <div class="metric-label">Annual Submissions</div>
+            </div>
+            <div class="form-metric">
+              <div class="metric-value">31%</div>
+              <div class="metric-label">Conversion Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h4><span class="form-icon">🎁</span>Sweepstakes & Contests</h4>
+          <div class="form-description">
+            Promotional forms for fan engagement campaigns, prize drawings, and marketing activations with automated entry processing and winner selection.
+          </div>
+          <div class="form-metrics">
+            <div class="form-metric">
+              <div class="metric-value">12,850</div>
+              <div class="metric-label">Annual Entries</div>
+            </div>
+            <div class="form-metric">
+              <div class="metric-value">18%</div>
+              <div class="metric-label">Lead Conversion</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h4><span class="form-icon">⚽</span>Grassroots Events</h4>
+          <div class="form-description">
+            Community event registration and youth program enrollment forms with automated confirmation emails and roster management.
+          </div>
+          <div class="form-metrics">
+            <div class="form-metric">
+              <div class="metric-value">3,420</div>
+              <div class="metric-label">Event Registrations</div>
+            </div>
+            <div class="form-metric">
+              <div class="metric-value">89%</div>
+              <div class="metric-label">Attendance Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h4><span class="form-icon">👑</span>Member Events</h4>
+          <div class="form-description">
+            Exclusive member event RSVPs and VIP experience bookings with automated waitlist management and capacity tracking.
+          </div>
+          <div class="form-metrics">
+            <div class="form-metric">
+              <div class="metric-value">2,180</div>
+              <div class="metric-label">Member RSVPs</div>
+            </div>
+            <div class="form-metric">
+              <div class="metric-label">95%</div>
+              <div class="metric-label">Show-up Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h4><span class="form-icon">📊</span>Post-Match Surveys</h4>
+          <div class="form-description">
+            Fan experience feedback collection with automated analysis, sentiment tracking, and follow-up action item creation for service improvements.
+          </div>
+          <div class="form-metrics">
+            <div class="form-metric">
+              <div class="metric-value">15,200</div>
+              <div class="metric-label">Survey Responses</div>
+            </div>
+            <div class="form-metric">
+              <div class="metric-value">4.2/5</div>
+              <div class="metric-label">Avg Satisfaction</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h4><span class="form-icon">🏢</span>Corporate Interest</h4>
+          <div class="form-description">
+            B2B partnership and sponsorship inquiry forms with automated lead qualification and executive team routing for high-value prospects.
+          </div>
+          <div class="form-metrics">
+            <div class="form-metric">
+              <div class="metric-value">890</div>
+              <div class="metric-label">Corporate Inquiries</div>
+            </div>
+            <div class="form-metric">
+              <div class="metric-value">45%</div>
+              <div class="metric-label">Qualified Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section interest-section" id="ticket-interest">
+      <h2>Ticket Interest Forms - Deep Dive</h2>
+      <p>
+        The ticket interest form system represents the cornerstone of our digital lead generation strategy, converting website visitors and campaign prospects into qualified sales opportunities through sophisticated automation workflows and immediate response protocols.
+      </p>
+
+      <div class="automation-flow">
+        <h3>Automated Processing Workflow</h3>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-number">1</div>
+            <div class="step-title">Form Submission</div>
+            <div class="step-description">Prospect completes interest form with contact details and preferences</div>
+            <div class="platform-badge">Formstack</div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-number">2</div>
+            <div class="step-title">Data Validation</div>
+            <div class="step-description">Automatic email validation, duplicate detection, and data enrichment</div>
+            <div class="platform-badge">Zapier</div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-number">3</div>
+            <div class="step-title">Lead Scoring</div>
+            <div class="step-description">Intelligent scoring based on interest type, budget, and timing indicators</div>
+            <div class="platform-badge">Zapier</div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-number">4</div>
+            <div class="step-title">Opportunity Creation</div>
+            <div class="step-description">Automatic opportunity creation in Salesforce with lead source tracking</div>
+            <div class="platform-badge">Salesforce</div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-number">5</div>
+            <div class="step-title">Manager Notification</div>
+            <div class="step-description">Instant SMS/email alerts to appropriate ticketing managers with prospect details</div>
+            <div class="platform-badge">Zapier</div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-number">6</div>
+            <div class="step-title">Rep Assignment</div>
+            <div class="step-description">Intelligent routing to sales reps based on territory and capacity</div>
+            <div class="platform-badge">Salesforce</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Conversion Funnel Performance</h3>
+      <div class="conversion-funnel">
+        <div class="funnel-stage">
+          <div class="funnel-number">8,245</div>
+          <div class="funnel-label">Form Submissions</div>
+          <div class="funnel-description">Annual ticket interest inquiries</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-number">7,892</div>
+          <div class="funnel-label">Qualified Leads</div>
+          <div class="funnel-description">Passed validation and scoring</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-number">6,245</div>
+          <div class="funnel-label">Opportunities</div>
+          <div class="funnel-description">Created in Salesforce pipeline</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-number">2,580</div>
+          <div class="funnel-label">Tickets Sold</div>
+          <div class="funnel-description">Converted to purchase</div>
+        </div>
+      </div>
+
+      <div class="revenue-box">
+        <h3>Revenue Impact & ROI</h3>
+        <ul>
+          <li><strong>$1,240,000 in ticket revenue</strong> directly attributed to interest form submissions</li>
+          <li><strong>31% conversion rate</strong> from form submission to ticket purchase</li>
+          <li><strong>48-hour average response time</strong> through automated notification system</li>
+          <li><strong>95% lead capture accuracy</strong> with automated validation and enrichment</li>
+          <li><strong>$560,000 additional revenue</strong> from upsells and premium packages</li>
+          <li><strong>67% reduction in manual processing time</strong> through automation workflows</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="automation-details">
+      <h2>Automation Architecture & Integration</h2>
+      <p>
+        The system leverages sophisticated automation workflows connecting Formstack and SurveyMonkey with Salesforce through Zapier, creating seamless data flow and immediate response capabilities that maximize conversion opportunities.
+      </p>
+
+      <h3>Platform Integration Strategy</h3>
+      <ul>
+        <li><strong>Formstack Forms</strong> - Primary platform for ticket interest and corporate inquiries with advanced conditional logic</li>
+        <li><strong>SurveyMonkey</strong> - Specialized for feedback collection and member satisfaction surveys with analytics integration</li>
+        <li><strong>Zapier Automation</strong> - Central orchestration platform managing data flow and business logic between systems</li>
+        <li><strong>Salesforce CRM</strong> - Ultimate destination for lead management, opportunity tracking, and sales process automation</li>
+        <li><strong>Notification Systems</strong> - Multi-channel alerting via email, SMS, and Slack for immediate manager awareness</li>
+      </ul>
+
+      <div class="automation-box">
+        <h3>Advanced Automation Features</h3>
+        <ul>
+          <li><strong>Conditional Routing</strong> - Dynamic form routing based on interest type, budget range, and geographic location</li>
+          <li><strong>Smart Deduplication</strong> - Automatic duplicate detection with merge logic and preference management</li>
+          <li><strong>Lead Enrichment</strong> - Integration with data services to append company and demographic information</li>
+          <li><strong>Multi-touch Attribution</strong> - UTM parameter tracking and campaign source attribution for ROI analysis</li>
+          <li><strong>Escalation Protocols</strong> - Automated follow-up reminders and manager escalation for uncontacted leads</li>
+          <li><strong>Performance Analytics</strong> - Real-time conversion tracking and form optimization recommendations</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="platform-comparison">
+      <h2>Platform Selection & Optimization</h2>
+      <p>
+        Strategic platform selection based on use case requirements, with Formstack optimized for lead generation forms and SurveyMonkey specialized for comprehensive feedback collection and analysis.
+      </p>
+
+      <h3>Formstack Advantages</h3>
+      <ul>
+        <li><strong>Advanced Conditional Logic</strong> - Complex form branching based on user responses</li>
+        <li><strong>Salesforce Native Integration</strong> - Direct field mapping and real-time data sync</li>
+        <li><strong>Mobile Optimization</strong> - Responsive design with offline submission capability</li>
+        <li><strong>Payment Integration</strong> - Embedded payment processing for immediate transactions</li>
+        <li><strong>Custom Branding</strong> - Full design customization matching team brand guidelines</li>
+      </ul>
+
+      <h3>SurveyMonkey Strengths</h3>
+      <ul>
+        <li><strong>Advanced Analytics</strong> - Built-in statistical analysis and trend identification</li>
+        <li><strong>Survey Logic</strong> - Sophisticated question routing and randomization</li>
+        <li><strong>Response Management</strong> - Automated reminders and completion tracking</li>
+        <li><strong>Benchmark Comparisons</strong> - Industry standard comparisons and scoring</li>
+        <li><strong>Export Capabilities</strong> - Flexible data export and API integration options</li>
+      </ul>
+    </section>
+
+    <section class="section" id="performance-metrics">
+      <h2>Performance Analytics & Insights</h2>
+      <p>
+        Comprehensive tracking and analysis of form performance, conversion rates, and revenue attribution provide continuous optimization opportunities and demonstrate clear ROI from the automation investment.
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-number automation">96%</span>
+          <div class="stat-label">Process Automation Rate</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">8.2 min</span>
+          <div class="stat-label">Avg Response Time</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number revenue">$1,800K</span>
+          <div class="stat-label">Total Revenue Impact</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number conversion">450%</span>
+          <div class="stat-label">ROI on Automation</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Key Performance Insights</h3>
+        <ul>
+          <li><strong>Peak Submission Times</strong> - Highest form activity during match days and marketing campaigns</li>
+          <li><strong>Mobile Dominance</strong> - 73% of submissions come from mobile devices, driving mobile-first design</li>
+          <li><strong>Geographic Patterns</strong> - Houston metro area generates 68% of interest, with strong suburban growth</li>
+          <li><strong>Seasonal Trends</strong> - Interest peaks during pre-season and playoff periods with 40% higher submission rates</li>
+          <li><strong>Campaign Attribution</strong> - Email campaigns drive 35% of submissions, social media 28%, direct website 22%</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="optimization">
+      <h2>Continuous Optimization & A/B Testing</h2>
+      <p>
+        Regular form optimization through A/B testing, user experience analysis, and conversion rate optimization ensures maximum performance and evolving best practices implementation.
+      </p>
+
+      <h3>Optimization Strategies</h3>
+      <ul>
+        <li><strong>Form Length Testing</strong> - Optimized field count reducing abandonment by 35%</li>
+        <li><strong>CTA Button Optimization</strong> - Color and text testing improving click-through rates</li>
+        <li><strong>Progress Indicators</strong> - Multi-step forms with completion tracking increasing submission rates</li>
+        <li><strong>Mobile UX Enhancement</strong> - Touch-optimized interfaces and simplified input methods</li>
+        <li><strong>Load Time Optimization</strong> - Form loading speed improvements reducing bounce rates</li>
+      </ul>
+    </section>
+
+    <section class="section" id="visuals">
+      <h2>Form Examples & Automation Workflows</h2>
+      
+      <div class="carousel-container">
+        <!-- Arrow Navigation -->
+        <button class="carousel-arrow prev" onclick="changeSlide(-1)" aria-label="Previous slide">‹</button>
+        <button class="carousel-arrow next" onclick="changeSlide(1)" aria-label="Next slide">›</button>
+        
+        <div class="carousel-slide active">
+          <img src="images/forms1.png" alt="Ticket Interest Form Design">
+          <div class="caption">Figure 1: Ticket Interest Form - Mobile-optimized design with conditional logic</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/forms2.png" alt="Zapier Automation Workflow">
+          <div class="caption">Figure 2: Zapier Automation Workflow - Complete process from submission to opportunity</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/forms3.png" alt="Salesforce Integration Dashboard">
+          <div class="caption">Figure 3: Salesforce Integration - Automated opportunity creation and tracking</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/forms4.png" alt="Performance Analytics Dashboard">
+          <div class="caption">Figure 4: Performance Analytics - Conversion tracking and ROI measurement</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/forms5.png" alt="Manager Notification System">
+          <div class="caption">Figure 5: Manager Notification System - Real-time alerts and lead assignment</div>
+        </div>
+      </div>
+      
+      <p style="font-style: italic; color: var(--subtext); margin-top: 1rem;">*Examples show actual form designs and workflows with sensitive data anonymized for privacy protection.</p>
+      
+      <!-- Zoom Modal -->
+      <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+        <span class="zoom-close" onclick="closeZoom()">&times;</span>
+        <img id="zoomImage" src="" alt="Zoomed Image" />
+      </div>
+    </section>
+
+    <section class="buttons">
+      <a href="/" class="button">← Back to Home</a>
+    </section>
+  </main>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".carousel-slide");
+
+    function changeSlide(direction) {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+
+    // Zoom functionality
+    const zoomModal = document.getElementById("zoomModal");
+    const zoomImage = document.getElementById("zoomImage");
+
+    document.querySelectorAll(".carousel-slide img").forEach(img => {
+      img.addEventListener("click", function (e) {
+        zoomImage.src = this.src;
+        zoomImage.alt = this.alt;
+        zoomModal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        e.stopPropagation();
+      });
+    });
+
+    function closeZoom() {
+      zoomModal.style.display = "none";
+      zoomImage.src = "";
+      document.body.style.overflow = "auto";
+    }
+
+    // Keyboard navigation
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closeZoom();
+      } else if (e.key === "ArrowLeft") {
+        changeSlide(-1);
+      } else if (e.key === "ArrowRight") {
+        changeSlide(1);
+      }
+    });
+  </script>
+
+</body>
+</html>
