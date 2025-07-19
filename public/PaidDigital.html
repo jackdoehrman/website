@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Marketing Lead Management | Jack Doehrman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" sizes="32x32" type="image/png" href="images/logo.png">
+  <style>
+    :root {
+      --bg: #0a192f;
+      --text: #dfe3ee;
+      --subtext: #8b9dc3;
+      --accent: #f7f7f7;
+      --border: #233554;
+      --button-bg: #3b5998;
+      --meta-blue: #1877f2;
+      --google-red: #ea4335;
+      --linkedin-blue: #0077b5;
+      --revenue-green: #28a745;
+      --automation-purple: #6f42c1;
+      --font: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--meta-blue);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      max-width: 100%;
+    }
+
+    ul {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .highlight-box {
+      background: rgba(24, 119, 242, 0.1);
+      border: 1px solid rgba(24, 119, 242, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .automation-box {
+      background: rgba(111, 66, 193, 0.1);
+      border: 1px solid rgba(111, 66, 193, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .revenue-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 1px solid rgba(40, 167, 69, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--meta-blue);
+      display: block;
+    }
+
+    .stat-number.revenue {
+      color: var(--revenue-green);
+    }
+
+    .stat-number.google {
+      color: var(--google-red);
+    }
+
+    .stat-number.linkedin {
+      color: var(--linkedin-blue);
+    }
+
+    .stat-label {
+      color: var(--subtext);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Platform Performance Cards */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .platform-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .platform-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .platform-card.meta {
+      border-color: var(--meta-blue);
+    }
+
+    .platform-card.meta:hover {
+      border-color: var(--meta-blue);
+      box-shadow: 0 8px 25px rgba(24, 119, 242, 0.2);
+    }
+
+    .platform-card.google {
+      border-color: var(--google-red);
+    }
+
+    .platform-card.google:hover {
+      border-color: var(--google-red);
+      box-shadow: 0 8px 25px rgba(234, 67, 53, 0.2);
+    }
+
+    .platform-card.linkedin {
+      border-color: var(--linkedin-blue);
+    }
+
+    .platform-card.linkedin:hover {
+      border-color: var(--linkedin-blue);
+      box-shadow: 0 8px 25px rgba(0, 119, 181, 0.2);
+    }
+
+    .platform-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .platform-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .platform-logo.meta {
+      background: var(--meta-blue);
+    }
+
+    .platform-logo.google {
+      background: var(--google-red);
+    }
+
+    .platform-logo.linkedin {
+      background: var(--linkedin-blue);
+    }
+
+    .platform-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .platform-title.meta {
+      color: var(--meta-blue);
+    }
+
+    .platform-title.google {
+      color: var(--google-red);
+    }
+
+    .platform-title.linkedin {
+      color: var(--linkedin-blue);
+    }
+
+    .platform-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .metric-item {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 6px;
+    }
+
+    .metric-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--subtext);
+    }
+
+    .platform-description {
+      color: var(--subtext);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Automation Pipeline */
+    .pipeline-container {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .pipeline-step {
+      background: rgba(111, 66, 193, 0.1);
+      border: 1px solid rgba(111, 66, 193, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      background: var(--automation-purple);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin: 0 auto 1rem;
+    }
+
+    .step-title {
+      color: var(--automation-purple);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-description {
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    /* Campaign Performance */
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .campaign-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .campaign-title {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .campaign-stat {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+      padding: 0.25rem 0;
+    }
+
+    .campaign-stat-label {
+      color: var(--subtext);
+    }
+
+    .campaign-stat-value {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* ROI Analysis */
+    .roi-section {
+      background: rgba(40, 167, 69, 0.05);
+      border: 1px solid rgba(40, 167, 69, 0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .roi-metric {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(40, 167, 69, 0.1);
+      border: 1px solid rgba(40, 167, 69, 0.3);
+      border-radius: 8px;
+    }
+
+    .roi-value {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--revenue-green);
+      margin-bottom: 0.5rem;
+    }
+
+    .roi-label {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      max-width: 100%;
+      width: 100%;
+      margin: 2rem 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      display: none;
+      text-align: center;
+      position: relative;
+    }
+
+    .carousel-slide.active {
+      display: block;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      cursor: zoom-in;
+      transition: opacity 0.2s ease;
+      display: block;
+    }
+
+    .carousel-slide img:hover {
+      opacity: 0.9;
+    }
+
+    .caption {
+      padding: 1rem;
+      font-size: 1rem;
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Arrow Navigation */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(24, 119, 242, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-arrow.prev {
+      left: 15px;
+    }
+
+    .carousel-arrow.next {
+      right: 15px;
+    }
+
+    /* Zoom Modal */
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 20px;
+    }
+
+    .zoom-modal img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .zoom-close:hover {
+      color: #ccc;
+    }
+
+    /* Back Button */
+    .buttons {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .button {
+      padding: 0.75rem 1.5rem;
+      background-color: transparent;
+      border: 1px solid var(--subtext);
+      color: var(--subtext);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .button:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+      }
+
+      .platform-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .campaign-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roi-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      .stat-card, .platform-card, .pipeline-step, .campaign-card {
+        padding: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .carousel-arrow.prev {
+        left: 10px;
+      }
+
+      .carousel-arrow.next {
+        right: 10px;
+      }
+    }
+
+    /* Focus states for accessibility */
+    .carousel-arrow:focus,
+    .button:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Digital Marketing Lead Management</h1>
+    <h2>Paid Advertising Integration & Sales Automation</h2>
+    <p>
+      Comprehensive management of paid digital advertising leads from Meta, Google, and LinkedIn, featuring automated lead ingestion, opportunity creation, and intelligent sales assignment through seamless Salesforce integration.
+    </p>
+  </header>
+
+  <main>
+    <section class="section" id="overview">
+      <h2>Digital Marketing Partnership</h2>
+      <p>
+        Collaborated closely with the marketing department to establish a sophisticated lead management system that captures, processes, and converts paid digital advertising prospects into revenue-generating opportunities. The system automatically ingests leads from major advertising platforms and seamlessly integrates them into our sales pipeline with intelligent routing and immediate assignment protocols.
+      </p>
+      
+      <div class="highlight-box">
+        <h3>System Capabilities</h3>
+        <ul>
+          <li>Real-time lead ingestion from Meta Ads, Google Ads, and LinkedIn Campaign Manager</li>
+          <li>Automated opportunity creation with campaign source attribution and UTM tracking</li>
+          <li>Intelligent lead scoring and routing based on platform source and engagement quality</li>
+          <li>Instant sales team notification and assignment with predefined territory rules</li>
+          <li>Comprehensive ROI tracking and campaign performance analysis across all platforms</li>
+          <li>Marketing-sales alignment through shared dashboards and conversion reporting</li>
+        </ul>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-number">52,480</span>
+          <div class="stat-label">Annual Digital Leads</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">3,680</span>
+          <div class="stat-label">Tickets Sold</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number revenue">$2.4M</span>
+          <div class="stat-label">Revenue Generated</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">7.2%</span>
+          <div class="stat-label">Overall Conversion Rate</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="platform-performance">
+      <h2>Platform Performance & Strategy</h2>
+      <p>
+        Each advertising platform serves distinct audience segments and campaign objectives, requiring tailored lead processing workflows and conversion optimization strategies to maximize ROI and sales effectiveness.
+      </p>
+
+      <div class="platform-grid">
+        <div class="platform-card meta">
+          <div class="platform-header">
+            <div class="platform-logo meta">f</div>
+            <div class="platform-title meta">Meta Advertising</div>
+          </div>
+          <div class="platform-description">
+            Facebook and Instagram campaigns targeting local sports fans and families with demographic and interest-based segmentation for season ticket and group sales promotion.
+          </div>
+          <div class="platform-metrics">
+            <div class="metric-item">
+              <div class="metric-value">28,420</div>
+              <div class="metric-label">Annual Leads</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">2,180</div>
+              <div class="metric-label">Tickets Sold</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">7.7%</div>
+              <div class="metric-label">Conversion Rate</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">$1.45M</div>
+              <div class="metric-label">Revenue Impact</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="platform-card google">
+          <div class="platform-header">
+            <div class="platform-logo google">G</div>
+            <div class="platform-title google">Google Ads</div>
+          </div>
+          <div class="platform-description">
+            Search and display campaigns capturing high-intent prospects actively searching for Houston sports tickets and entertainment options with immediate purchase intent.
+          </div>
+          <div class="platform-metrics">
+            <div class="metric-item">
+              <div class="metric-value">18,650</div>
+              <div class="metric-label">Annual Leads</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">1,240</div>
+              <div class="metric-label">Tickets Sold</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">6.6%</div>
+              <div class="metric-label">Conversion Rate</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">$720K</div>
+              <div class="metric-label">Revenue Impact</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="platform-card linkedin">
+          <div class="platform-header">
+            <div class="platform-logo linkedin">in</div>
+            <div class="platform-title linkedin">LinkedIn Campaigns</div>
+          </div>
+          <div class="platform-description">
+            B2B focused campaigns targeting corporate decision makers and HR professionals for group sales, corporate partnerships, and premium hospitality packages.
+          </div>
+          <div class="platform-metrics">
+            <div class="metric-item">
+              <div class="metric-value">5,410</div>
+              <div class="metric-label">Annual Leads</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">260</div>
+              <div class="metric-label">Tickets Sold</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">4.8%</div>
+              <div class="metric-label">Conversion Rate</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value">$225K</div>
+              <div class="metric-label">Revenue Impact</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="automation-pipeline">
+      <h2>Automated Lead Processing Pipeline</h2>
+      <p>
+        The sophisticated automation pipeline ensures immediate lead capture, intelligent processing, and rapid sales team engagement, minimizing response times and maximizing conversion opportunities through seamless platform integration.
+      </p>
+
+      <div class="pipeline-container">
+        <h3>End-to-End Automation Workflow</h3>
+        <div class="pipeline-steps">
+          <div class="pipeline-step">
+            <div class="step-number">1</div>
+            <div class="step-title">Lead Capture</div>
+            <div class="step-description">Real-time API integration captures leads from Meta, Google, and LinkedIn advertising platforms</div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">2</div>
+            <div class="step-title">Data Enrichment</div>
+            <div class="step-description">Automatic UTM parameter parsing, campaign attribution, and contact information validation</div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">3</div>
+            <div class="step-title">Lead Scoring</div>
+            <div class="step-description">Platform-specific scoring algorithms considering source quality, engagement level, and purchase intent</div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">4</div>
+            <div class="step-title">Duplicate Detection</div>
+            <div class="step-description">Advanced matching logic prevents duplicate opportunities while preserving campaign attribution history</div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">5</div>
+            <div class="step-title">Opportunity Creation</div>
+            <div class="step-description">Automated Salesforce opportunity generation with campaign source, lead score, and platform-specific fields</div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">6</div>
+            <div class="step-title">Assignment & Notification</div>
+            <div class="step-description">Intelligent territory-based assignment with instant SMS/email notifications to sales representatives</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="automation-box">
+        <h3>Advanced Processing Features</h3>
+        <ul>
+          <li><strong>Campaign Attribution</strong> - Full UTM parameter tracking with campaign, medium, source, and content mapping</li>
+          <li><strong>Platform-Specific Routing</strong> - Customized assignment rules based on lead source and campaign type</li>
+          <li><strong>Quality Scoring</strong> - Machine learning algorithms assess lead quality based on historical conversion patterns</li>
+          <li><strong>Real-Time Processing</strong> - Sub-60-second lead ingestion and opportunity creation for immediate response</li>
+          <li><strong>Marketing Feedback Loop</strong> - Conversion data flows back to advertising platforms for campaign optimization</li>
+          <li><strong>Cross-Platform Deduplication</strong> - Sophisticated matching prevents duplicate leads across multiple touchpoints</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="campaign-analysis">
+      <h2>Campaign Performance & Optimization</h2>
+      <p>
+        Detailed campaign analysis provides actionable insights for marketing optimization, enabling data-driven budget allocation and strategy refinement across all digital advertising platforms.
+      </p>
+
+      <div class="campaign-grid">
+        <div class="campaign-card">
+          <div class="campaign-title">Season Ticket Campaigns</div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Total Leads:</span>
+            <span class="campaign-stat-value">18,650</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Conversion Rate:</span>
+            <span class="campaign-stat-value">12.4%</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Revenue:</span>
+            <span class="campaign-stat-value">$1.8M</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Cost per Acquisition:</span>
+            <span class="campaign-stat-value">$185</span>
+          </div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-title">Group Sales Promotion</div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Total Leads:</span>
+            <span class="campaign-stat-value">12,480</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Conversion Rate:</span>
+            <span class="campaign-stat-value">8.2%</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Revenue:</span>
+            <span class="campaign-stat-value">$420K</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Cost per Acquisition:</span>
+            <span class="campaign-stat-value">$145</span>
+          </div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-title">Premium Experiences</div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Total Leads:</span>
+            <span class="campaign-stat-value">8,920</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Conversion Rate:</span>
+            <span class="campaign-stat-value">5.8%</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Revenue:</span>
+            <span class="campaign-stat-value">$180K</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Cost per Acquisition:</span>
+            <span class="campaign-stat-value">$220</span>
+          </div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-title">Corporate Partnerships</div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Total Leads:</span>
+            <span class="campaign-stat-value">4,430</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Conversion Rate:</span>
+            <span class="campaign-stat-value">3.2%</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Revenue:</span>
+            <span class="campaign-stat-value">$85K</span>
+          </div>
+          <div class="campaign-stat">
+            <span class="campaign-stat-label">Cost per Acquisition:</span>
+            <span class="campaign-stat-value">$380</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section roi-section" id="roi-analysis">
+      <h2>ROI Analysis & Business Impact</h2>
+      <p>
+        The automated digital marketing lead management system delivers substantial return on investment through improved conversion rates, reduced response times, and enhanced marketing-sales alignment, directly contributing to revenue growth and operational efficiency.
+      </p>
+
+      <div class="roi-grid">
+        <div class="roi-metric">
+          <div class="roi-value">$2.4M</div>
+          <div class="roi-label">Total Revenue Generated</div>
+        </div>
+        <div class="roi-metric">
+          <div class="roi-value">520%</div>
+          <div class="roi-label">ROI on Ad Spend</div>
+        </div>
+        <div class="roi-metric">
+          <div class="roi-value">78%</div>
+          <div class="roi-label">Response Time Improvement</div>
+        </div>
+        <div class="roi-metric">
+          <div class="roi-value">$185</div>
+          <div class="roi-label">Average Cost per Acquisition</div>
+        </div>
+        <div class="roi-metric">
+          <div class="roi-value">45 sec</div>
+          <div class="roi-label">Average Lead Processing Time</div>
+        </div>
+        <div class="roi-metric">
+          <div class="roi-value">95%</div>
+          <div class="roi-label">Lead Capture Accuracy</div>
+        </div>
+      </div>
+
+      <div class="revenue-box">
+        <h3>Business Impact Highlights</h3>
+        <ul>
+          <li><strong>Revenue Growth</strong> - $2.4M in directly attributable ticket sales from digital advertising leads</li>
+          <li><strong>Conversion Optimization</strong> - 7.2% overall conversion rate exceeding industry benchmarks</li>
+          <li><strong>Response Time Reduction</strong> - 78% improvement in lead response time through automation</li>
+          <li><strong>Marketing Efficiency</strong> - Real-time conversion data enables immediate campaign optimization</li>
+          <li><strong>Sales Productivity</strong> - Automated assignment reduces manual processing by 85%</li>
+          <li><strong>Campaign Attribution</strong> - Complete visibility into lead source and customer journey</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="integration-details">
+      <h2>Technical Integration & Architecture</h2>
+      <p>
+        The system leverages robust API integrations and webhook technologies to ensure real-time data flow between advertising platforms and Salesforce, maintaining data integrity while enabling immediate sales team response.
+      </p>
+
+      <h3>Platform Integration Methods</h3>
+      <ul>
+        <li><strong>Meta Lead Ads API</strong> - Direct webhook integration for instant lead capture from Facebook and Instagram campaigns</li>
+        <li><strong>Google Ads API</strong> - Real-time conversion import with advanced attribution tracking and keyword-level data</li>
+        <li><strong>LinkedIn Campaign Manager API</strong> - Lead form submission processing with company enrichment data</li>
+        <li><strong>Salesforce REST API</strong> - Automated opportunity and contact creation with custom field mapping</li>
+        <li><strong>Zapier Middleware</strong> - Data transformation and business logic processing between platforms</li>
+        <li><strong>UTM Parameter Processing</strong> - Comprehensive campaign tracking and attribution management</li>
+      </ul>
+
+      <h3>Data Quality & Governance</h3>
+      <ul>
+        <li><strong>Real-time Validation</strong> - Email and phone number verification at point of capture</li>
+        <li><strong>Duplicate Prevention</strong> - Multi-field matching algorithms prevent duplicate opportunities</li>
+        <li><strong>Data Enrichment</strong> - Automatic company and demographic data appending</li>
+        <li><strong>Privacy Compliance</strong> - GDPR and CCPA compliant data handling and consent management</li>
+        <li><strong>Audit Trails</strong> - Complete lead journey tracking from ad click to closed opportunity</li>
+      </ul>
+    </section>
+
+    <section class="section" id="optimization-strategies">
+      <h2>Optimization & Performance Enhancement</h2>
+      <p>
+        Continuous optimization through A/B testing, conversion analysis, and platform-specific refinements ensures maximum return on advertising investment and improving lead quality over time.
+      </p>
+
+      <h3>Optimization Initiatives</h3>
+      <ul>
+        <li><strong>Lead Quality Scoring</strong> - Machine learning models predict conversion likelihood based on source data</li>
+        <li><strong>Campaign Attribution</strong> - Multi-touch attribution modeling for accurate ROI measurement</li>
+        <li><strong>Audience Refinement</strong> - Conversion data feeds back to platforms for lookalike audience creation</li>
+        <li><strong>Landing Page Optimization</strong> - A/B testing of post-click experiences to maximize conversion rates</li>
+        <li><strong>Seasonal Adjustments</strong> - Dynamic campaign strategies based on match schedules and promotional periods</li>
+        <li><strong>Cross-Platform Analysis</strong> - Comparative performance analysis to optimize budget allocation</li>
+      </ul>
+
+      <div class="highlight-box">
+        <h3>Performance Improvements Achieved</h3>
+        <ul>
+          <li><strong>40% increase</strong> in lead-to-opportunity conversion through improved scoring algorithms</li>
+          <li><strong>60% reduction</strong> in cost per acquisition via audience optimization and bidding strategies</li>
+          <li><strong>25% improvement</strong> in sales team productivity through automated lead qualification</li>
+          <li><strong>90% decrease</strong> in manual data entry and lead processing time</li>
+          <li><strong>Enhanced visibility</strong> into campaign performance enabling real-time budget optimization</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="marketing-collaboration">
+      <h2>Marketing Department Collaboration</h2>
+      <p>
+        Close partnership with the marketing team ensures seamless campaign execution, shared performance visibility, and continuous improvement through data-driven insights and collaborative strategy development.
+      </p>
+
+      <h3>Collaborative Workflows</h3>
+      <ul>
+        <li><strong>Campaign Planning</strong> - Joint strategy sessions for lead capture optimization and sales alignment</li>
+        <li><strong>Performance Reviews</strong> - Weekly conversion analysis and campaign performance evaluations</li>
+        <li><strong>Audience Development</strong> - Leveraging sales insights for improved targeting and messaging</li>
+        <li><strong>Budget Optimization</strong> - Data-driven recommendations for advertising spend allocation</li>
+        <li><strong>Creative Testing</strong> - A/B testing coordination for ad creative and landing page optimization</li>
+      </ul>
+
+      <h3>Shared Metrics & Reporting</h3>
+      <ul>
+        <li><strong>Real-time Dashboards</strong> - Live conversion tracking and campaign performance monitoring</li>
+        <li><strong>Attribution Reporting</strong> - Complete customer journey visibility from ad impression to sale</li>
+        <li><strong>ROI Analysis</strong> - Platform-specific and campaign-level return on investment calculations</li>
+        <li><strong>Lead Quality Metrics</strong> - Conversion rates, sales cycle length, and average deal size tracking</li>
+        <li><strong>Optimization Recommendations</strong> - Data-driven suggestions for campaign improvements</li>
+      </ul>
+    </section>
+
+    <section class="section" id="visuals">
+      <h2>System Architecture & Performance Dashboards</h2>
+      
+      <div class="carousel-container">
+        <!-- Arrow Navigation -->
+        <button class="carousel-arrow prev" onclick="changeSlide(-1)" aria-label="Previous slide">‹</button>
+        <button class="carousel-arrow next" onclick="changeSlide(1)" aria-label="Next slide">›</button>
+        
+        <div class="carousel-slide active">
+          <img src="images/digital-leads1.png" alt="Lead Ingestion Dashboard">
+          <div class="caption">Figure 1: Lead Ingestion Dashboard - Real-time capture from Meta, Google, and LinkedIn</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/digital-leads2.png" alt="Automation Workflow Diagram">
+          <div class="caption">Figure 2: Automation Workflow - Complete lead processing pipeline visualization</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/digital-leads3.png" alt="Platform Performance Comparison">
+          <div class="caption">Figure 3: Platform Performance Analysis - Conversion rates and ROI by advertising source</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/digital-leads4.png" alt="Salesforce Integration">
+          <div class="caption">Figure 4: Salesforce Integration - Automated opportunity creation and assignment</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/digital-leads5.png" alt="ROI Analytics Dashboard">
+          <div class="caption">Figure 5: ROI Analytics - Revenue attribution and campaign performance metrics</div>
+        </div>
+      </div>
+      
+      <p style="font-style: italic; color: var(--subtext); margin-top: 1rem;">*Dashboards display actual system performance with sensitive campaign data anonymized for confidentiality.</p>
+      
+      <!-- Zoom Modal -->
+      <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+        <span class="zoom-close" onclick="closeZoom()">&times;</span>
+        <img id="zoomImage" src="" alt="Zoomed Image" />
+      </div>
+    </section>
+
+    <section class="buttons">
+      <a href="/" class="button">← Back to Home</a>
+    </section>
+  </main>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".carousel-slide");
+
+    function changeSlide(direction) {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+
+    // Zoom functionality
+    const zoomModal = document.getElementById("zoomModal");
+    const zoomImage = document.getElementById("zoomImage");
+
+    document.querySelectorAll(".carousel-slide img").forEach(img => {
+      img.addEventListener("click", function (e) {
+        zoomImage.src = this.src;
+        zoomImage.alt = this.alt;
+        zoomModal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        e.stopPropagation();
+      });
+    });
+
+    function closeZoom() {
+      zoomModal.style.display = "none";
+      zoomImage.src = "";
+      document.body.style.overflow = "auto";
+    }
+
+    // Keyboard navigation
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closeZoom();
+      } else if (e.key === "ArrowLeft") {
+        changeSlide(-1);
+      } else if (e.key === "ArrowRight") {
+        changeSlide(1);
+      }
+    });
+  </script>
+
+</body>
+</html>
