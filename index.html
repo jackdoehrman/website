@@ -109,6 +109,7 @@
       background-color: #8b9dc3;
     }
 
+    /* Enhanced Spotify Carousel Styles */
     .spotify-section {
       background: rgba(29, 185, 84, 0.05);
       border: 1px solid rgba(29, 185, 84, 0.2);
@@ -207,6 +208,7 @@
       background: var(--spotify-green);
     }
 
+    /* Content Styles */
     .content-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -292,7 +294,7 @@
       100% { transform: rotate(360deg); }
     }
 
-
+    /* Experience Section Styling */
     .experience-item {
       margin-bottom: 2rem;
       padding: 1.5rem;
@@ -313,15 +315,18 @@
       font-size: 0.9rem;
     }
 
+    /* Smooth scroll for navigation */
     html {
       scroll-behavior: smooth;
     }
 
+    /* Focus states for accessibility */
     button:focus, a:focus {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
+    /* Responsive design improvements */
     @media (max-width: 768px) {
       body {
         padding: 1rem;
@@ -552,7 +557,7 @@
     // Spotify Configuration
     const SPOTIFY_CONFIG = {
       CLIENT_ID: 'cb130966aa6d47b79b68cbc990532b62',
-      REDIRECT_URI: window.location.origin + window.location.pathname,
+      REDIRECT_URI: 'https://jackdoehrman.com/',
       SCOPES: 'user-read-currently-playing user-read-recently-played user-top-read'
     };
 
@@ -635,7 +640,38 @@
         scope: SPOTIFY_CONFIG.SCOPES
       });
 
-      window.location = `https://accounts.spotify.com/authorize?${params}`;
+      const authUrl = `https://accounts.spotify.com/authorize?${params}`;
+      
+      // Open in popup window
+      const popup = window.open(
+        authUrl,
+        'spotify-auth',
+        'width=600,height=700,scrollbars=yes,resizable=yes,toolbar=no,menubar=no,location=no,directories=no,status=no'
+      );
+
+      // Listen for popup to close or send message
+      const checkClosed = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(checkClosed);
+          // Check if we got tokens (user might have completed auth)
+          setTimeout(() => {
+            const { accessToken } = getStoredTokens();
+            if (accessToken) {
+              loadAllSpotifyData();
+            }
+          }, 1000);
+        }
+      }, 1000);
+
+      // Listen for messages from popup (when auth completes)
+      window.addEventListener('message', function(event) {
+        if (event.origin !== window.location.origin) return;
+        
+        if (event.data.type === 'SPOTIFY_AUTH_SUCCESS') {
+          popup.close();
+          loadAllSpotifyData();
+        }
+      }, { once: true });
     }
 
     async function handleAuthCallback() {
@@ -672,12 +708,34 @@
         const data = await response.json();
         storeTokens(data.access_token, data.refresh_token, data.expires_in);
         
-        // Clear URL parameters
-        window.history.replaceState({}, document.title, window.location.pathname);
+        // Check if we're in a popup window
+        if (window.opener && window.opener !== window) {
+          // Send success message to parent window
+          window.opener.postMessage({
+            type: 'SPOTIFY_AUTH_SUCCESS'
+          }, window.location.origin);
+          
+          // Close the popup
+          window.close();
+          return true;
+        } else {
+          // Clear URL parameters for main window
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
         
         return true;
       } catch (error) {
         console.error('Auth callback error:', error);
+        
+        // If in popup, send error message
+        if (window.opener && window.opener !== window) {
+          window.opener.postMessage({
+            type: 'SPOTIFY_AUTH_ERROR',
+            error: error.message
+          }, window.location.origin);
+          window.close();
+        }
+        
         return false;
       }
     }
