@@ -317,8 +317,8 @@
     .resume-button, .auth-button {
       display: inline-block;
       padding: 1rem 2rem;
-      background: var(--accent-secondary);
-      color: var(--bg-primary);
+      background: var(--primary-blue);
+      color: var(--secondary-blue);
       text-decoration: none;
       border-radius: 12px;
       font-weight: 600;
@@ -1366,7 +1366,7 @@
       const container = document.getElementById('slide-top-artists');
       
       try {
-        const data = await spotifyApiCall('/me/top/artists?limit=5&time_range=short_term');
+        const data = await spotifyApiCall('/me/top/artists?limit=6&time_range=short_term');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
@@ -1412,7 +1412,7 @@
       const container = document.getElementById('slide-recently-played');
       
       try {
-        const data = await spotifyApiCall('/me/player/recently-played?limit=5');
+        const data = await spotifyApiCall('/me/player/recently-played?limit=6');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
