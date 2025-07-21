@@ -316,17 +316,17 @@
 
     .resume-button, .auth-button {
       display: inline-block;
-      padding: 1rem 2rem;
-      background: var(--primary-blue);
-      color: var(--secondary-blue);
+      padding: 0.8rem 1.8rem;
+      background: linear-gradient(135deg, #3b5998, #8b9dc3);
+      color: var(--text-primary);
       text-decoration: none;
-      border-radius: 12px;
+      border-radius: 10px;
       font-weight: 600;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
       border: none;
       cursor: pointer;
       font-size: 1rem;
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 15px var(--shadow-dark);
       position: relative;
       overflow: hidden;
     }
@@ -338,13 +338,14 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       transition: left 0.6s ease;
     }
 
     .resume-button:hover, .auth-button:hover {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(223, 227, 238, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px var(--shadow-medium);
+      background: linear-gradient(135deg, #8b9dc3, #3b5998);
     }
 
     .resume-button:hover::before, .auth-button:hover::before {
@@ -688,13 +689,122 @@
       animation: float-gentle 8s ease-in-out infinite;
     }
 
+    /* Social Links Styling */
+    .social-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      color: var(--text-secondary);
+      backdrop-filter: blur(20px);
+    }
+
+    .social-link:hover {
+      transform: translateY(-4px);
+      background: var(--bg-secondary);
+      border-color: var(--accent-secondary);
+      color: var(--text-primary);
+      box-shadow: 0 8px 25px var(--shadow-smooth);
+    }
+
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon.linkedin {
+      background: #0077b5;
+      color: white;
+    }
+
+    .social-icon.github {
+      background: #333;
+      color: white;
+    }
+
+    .social-icon.email {
+      background: var(--accent-secondary);
+      color: var(--bg-primary);
+    }
+
+    .social-icon.instagram {
+      background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+      color: white;
+    }
+
+    .social-link:hover .social-icon {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .social-link span {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .instagram-fallback {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-primary);
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      margin-top: 1rem;
+    }
+
+    .instagram-fallback h3 {
+      color: var(--accent-secondary);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .instagram-fallback p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .instagram-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .instagram-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(240, 148, 51, 0.4);
+    }
+
     /* Staggered animation delays for smoother loading */
     section:nth-child(1) { animation-delay: 0.1s; }
     section:nth-child(2) { animation-delay: 0.2s; }
     section:nth-child(3) { animation-delay: 0.3s; }
     section:nth-child(4) { animation-delay: 0.4s; }
     section:nth-child(5) { animation-delay: 0.5s; }
-    section:nth-child(6) { animation-delay: 0.6s; }project-card:hover {
+    section:nth-child(6) { animation-delay: 0.6s; }
+    section:nth-child(7) { animation-delay: 0.7s; }project-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 12px 40px var(--shadow-medium);
       border-color: var(--accent-secondary);
@@ -1236,22 +1346,33 @@
     </section>
 
     <section id="social" class="floating-card-dark">
-      <h2>Instagram</h2>
-      <div
-        class="embedsocial-hashtag"
-        data-ref="d5f7c4665fe69ac0eb6d4e61d7c2a23ff4ea50d4"
-      >
-        <a
-          class="feed-powered-by-es es-widget-branding"
-          href="https://embedsocial.com/social-media-aggregator/"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Instagram widget"
-        >
-          <img
-            src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp"
-            alt="EmbedSocial"
-          />
+      <h2>Connect With Me</h2>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/jack-doehrman/" target="_blank" rel="noopener noreferrer" class="social-link">
+          <div class="social-icon linkedin">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </div>
+          <span>LinkedIn</span>
+        </a>
+        
+        <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" class="social-link">
+          <div class="social-icon instagram">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </div>
+          <span>Instagram</span>
+        </a>
+        
+        <a href="mailto:jack.doehrman@example.com" class="social-link">
+          <div class="social-icon email">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636C.732 21.003 0 20.271 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.749L12 10.545l9.615-6.724h.749c.904 0 1.636.732 1.636 1.636z"/>
+            </svg>
+          </div>
+          <span>Email</span>
         </a>
       </div>
     </section>
@@ -1365,7 +1486,7 @@
       const container = document.getElementById('slide-top-artists');
       
       try {
-        const data = await spotifyApiCall('/me/top/artists?limit=6&time_range=short_term');
+        const data = await spotifyApiCall('/me/top/artists?limit=5&time_range=short_term');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
@@ -1411,7 +1532,7 @@
       const container = document.getElementById('slide-recently-played');
       
       try {
-        const data = await spotifyApiCall('/me/player/recently-played?limit=6');
+        const data = await spotifyApiCall('/me/player/recently-played?limit=5');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
