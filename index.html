@@ -14,6 +14,10 @@
       --tertiary-blue: #dfe3ee;
       --light-gray: #f7f7f7;
       --pure-white: #ffffff;
+      --olive: #292F21;
+      --brown: #534132;
+      --gray: #797A75;
+      --green: #9CA07E;
       
       /* Smooth Dark Mode Palette */
       --bg-primary: #1a1d23;
@@ -42,8 +46,10 @@
     }
 
     body {
-      background: radial-gradient(ellipse at top, var(--bg-primary) 0%, var(--bg-neutral) 100%);
-      color: var(--text-primary);
+      /*background: radial-gradient(ellipse at top, var(--bg-primary) 0%, var(--bg-neutral) 100%);*/
+      background: radial-gradient(ellipse at top, var(--olive) 0%, var(--olive) 100%);
+      /*color: var(--text-primary);*/
+      color: var(--green);
       font-family: var(--font);
       line-height: 1.7;
       padding: 2rem;
@@ -52,7 +58,8 @@
     }
 
     a {
-      color: var(--accent-primary);
+      /*color: var(--accent-primary);*/
+      color: var(--gray);
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -63,7 +70,8 @@
     }
 
     h1, h2, h3 {
-      color: var(--text-primary);
+      /*color: var(--text-primary);*/
+      color: var(--gray);
       margin-bottom: 1.2rem;
       font-weight: 600;
       letter-spacing: -0.025em;
@@ -73,7 +81,8 @@
       max-width: 800px;
       margin: 0 auto 4rem;
       text-align: left;
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      /*background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);*/
+      background: linear-gradient(135deg, var(--brown) 0%, var(--brown) 100%);
       box-shadow: 0 20px 60px var(--shadow-deep), 0 0 0 1px var(--border-light);
       padding: 3rem;
       border-radius: 24px;
