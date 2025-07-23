@@ -51,6 +51,35 @@
       --spotify-glow: rgba(30, 215, 96, 0.3);
       
       --font: 'Inter', sans-serif;
+    /* Extra small phones */
+    @media (max-width: 375px) {
+      .content-grid {
+        grid-template-columns: repeat(3, 1fr); /* Force 3 columns */
+        gap: 0.6rem;
+        max-width: 95%;
+      }
+      
+      .content-item {
+        padding: 0.6rem;
+        min-height: 95px;
+      }
+      
+      .content-image {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0.4rem;
+      }
+      
+      .content-title {
+        font-size: 0.65rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.1;
+      }
+      
+      .content-subtitle {
+        font-size: 0.55rem;
+        line-height: 1.0;
+      }
     }
 
     * {
@@ -861,19 +890,29 @@
       }
       
       .content-grid {
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 1rem;
         max-width: 90%;
       }
       
       .content-item {
-        padding: 1.2rem;
-        min-height: 150px;
+        padding: 1rem;
+        min-height: 120px;
       }
       
       .content-image {
-        width: 70px;
-        height: 70px;
+        width: 55px;
+        height: 55px;
+        margin-bottom: 0.5rem;
+      }
+      
+      .content-title {
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+      }
+      
+      .content-subtitle {
+        font-size: 0.65rem;
       }
       
       .carousel-controls {
@@ -925,27 +964,31 @@
       }
       
       .content-grid {
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-        gap: 1rem;
-        max-width: 95%;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.8rem;
+        max-width: 90%;
       }
       
       .content-item {
-        padding: 1rem;
-        min-height: 130px;
+        padding: 0.8rem;
+        min-height: 110px;
       }
       
       .content-image {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 0.5rem;
       }
       
       .content-title {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        margin-bottom: 0.3rem;
+        line-height: 1.2;
       }
       
       .content-subtitle {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
+        line-height: 1.1;
       }
       
       .carousel-controls {
