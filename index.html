@@ -74,37 +74,13 @@
       color: var(--text-primary);
       font-family: var(--font);
       line-height: 1.7;
-      padding: 0;
-      padding-top: 80px; /* Space for fixed header */
+      padding: 2rem;
       min-height: 100vh;
       overflow-x: hidden;
       /* Performance improvements */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       will-change: scroll-position;
-    }
-
-    /* Header Bar */
-    .header-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border-subtle);
-      box-shadow: 0 2px 20px var(--shadow-medium);
-      backdrop-filter: blur(20px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 2rem;
-    }
-
-    /* Adjust main content spacing */
-    main {
-      padding: 2rem;
     }
 
     a {
@@ -833,45 +809,7 @@
       outline-offset: 2px;
     }
 
-    /* Responsive header adjustments */
-    @media (max-width: 768px) {
-      body {
-        padding-top: 70px;
-      }
-
-      .header-bar {
-        padding: 0 1.5rem;
-        height: 50px;
-      }
-
-    .header-bar .logo {
-      height: 25px;
-      max-width: 120px;
-      max-height: 25px;
-      object-fit: contain;
-      transition: all 0.3s ease;
-    }
-
-    .header-bar .logo:hover {
-      transform: scale(1.05);
-    }
-
-      main {
-        padding: 1.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .header-bar .logo {
-        height: 20px;
-        max-width: 100px;
-        max-height: 20px;
-      }
-
-      main {
-        padding: 1rem;
-      }
-    }
+    /* Responsive design improvements - Proportional scaling */
     @media (max-width: 1280px) {
       header, section {
         max-width: 1000px;
@@ -950,6 +888,11 @@
 
     /* Mobile scaling - even smaller but maintains proportions */
     @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+        font-size: 0.85rem; /* Even smaller base font */
+      }
+      
       header, section {
         max-width: 96%;
         padding: 1.5rem;
@@ -968,11 +911,11 @@
         font-size: 1.2rem;
       }
       
-      header nav ul {
+      nav ul {
         gap: 0.8rem;
       }
       
-      header nav ul li a {
+      nav ul li a {
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
       }
@@ -1060,10 +1003,6 @@
   </style>
 </head>
 <body>
-  <div class="header-bar">
-    <img src="public/images/logo.png" alt="Jack Doehrman Logo" class="logo">
-  </div>
-
   <header class="floating-card-dark">
     <h1 class="palette-accent-dark">Jack Doehrman</h1>
     <h2>Data Analyst & Engineer</h2>
