@@ -59,6 +59,16 @@
       box-sizing: border-box;
     }
 
+    /* Performance optimizations */
+    * {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: radial-gradient(ellipse at top, var(--bg-primary) 0%, #0a0e13 100%);
       color: var(--text-primary);
@@ -67,6 +77,10 @@
       padding: 2rem;
       min-height: 100vh;
       overflow-x: hidden;
+      /* Performance improvements */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      will-change: scroll-position;
     }
 
     a {
@@ -101,6 +115,9 @@
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(20px);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     header::before {
@@ -194,11 +211,14 @@
       border-radius: 20px;
       position: relative;
       backdrop-filter: blur(20px);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     section:hover {
-      transform: translateY(-4px);
+      transform: translateY(-4px) translateZ(0);
       box-shadow: 
         0 20px 60px var(--shadow-strong), 
         0 0 0 1px var(--border-medium),
@@ -267,8 +287,14 @@
     }
 
     @keyframes gentle-pulse {
-      0%, 100% { opacity: 0.4; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.05); }
+      0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1) translateZ(0); 
+      }
+      50% { 
+        opacity: 0.6; 
+        transform: scale(1.05) translateZ(0); 
+      }
     }
 
     .project-card {
@@ -277,11 +303,14 @@
       padding: 2.5rem;
       margin-bottom: 2rem;
       border-radius: 18px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 20px var(--shadow-subtle);
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(20px);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     .project-card::before {
@@ -308,7 +337,7 @@
     }
 
     .project-card:hover {
-      transform: translateY(-8px) scale(1.02);
+      transform: translateY(-8px) scale(1.02) translateZ(0);
       box-shadow: 
         0 25px 80px var(--shadow-strong), 
         0 0 0 1px var(--border-medium),
@@ -519,15 +548,18 @@
       padding: 1.5rem;
       border-radius: 16px;
       background: var(--bg-tertiary);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border: 1px solid var(--border-subtle);
       box-shadow: 0 4px 15px var(--shadow-subtle);
       backdrop-filter: blur(20px);
       min-height: 180px; /* Minimum height, but can grow */
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     .content-item:hover {
-      transform: translateY(-8px) scale(1.05);
+      transform: translateY(-8px) scale(1.05) translateZ(0);
       box-shadow: 0 15px 40px var(--shadow-strong);
       border-color: var(--accent-secondary);
       background: var(--bg-quaternary);
@@ -738,6 +770,39 @@
       scroll-behavior: smooth;
     }
 
+    /* Performance optimizations for smooth scrolling */
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
+
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* GPU acceleration for key elements */
+    header,
+    section,
+    .project-card,
+    .content-item,
+    .carousel-wrapper {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000px;
+      perspective: 1000px;
+    }
+
     /* Focus states for accessibility */
     button:focus, a:focus {
       outline: 2px solid var(--accent-secondary);
@@ -797,8 +862,12 @@
 
     /* Additional smooth animations */
     @keyframes float-gentle {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      0%, 100% { 
+        transform: translateY(0px) translateZ(0); 
+      }
+      50% { 
+        transform: translateY(-8px) translateZ(0); 
+      }
     }
 
     .floating {
@@ -1105,7 +1174,7 @@
         }));
 
         container.innerHTML = `
-          <h3>Top Artists (Past Month)</h3>
+          <h3>Top 5 Artists (Past Month)</h3>
           <div class="content-grid">
             ${artists.map(artist => `
               <div class="content-item">
