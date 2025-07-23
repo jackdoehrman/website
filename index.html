@@ -855,34 +855,38 @@
       }
     }
 
-    /* Mobile grid fixes */
+    /* Force mobile grid layout with higher specificity */
     @media (max-width: 768px) {
-      .content-grid {
-        grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns on mobile */
-        gap: 1rem;
-        max-width: 95%;
+      .spotify-section .content-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* Force exactly 2 columns */
+        gap: 1rem !important;
+        max-width: 95% !important;
+        width: 100% !important;
       }
       
-      .content-item {
-        padding: 1rem;
-        min-height: 110px;
+      .spotify-section .content-item {
+        padding: 1rem !important;
+        min-height: 110px !important;
+        width: 100% !important;
+        max-width: none !important;
       }
       
-      .content-image {
-        width: 55px;
-        height: 55px;
-        margin-bottom: 0.6rem;
+      .spotify-section .content-image {
+        width: 55px !important;
+        height: 55px !important;
+        margin-bottom: 0.6rem !important;
       }
       
-      .content-title {
-        font-size: 0.75rem;
-        margin-bottom: 0.3rem;
-        line-height: 1.2;
+      .spotify-section .content-title {
+        font-size: 0.75rem !important;
+        margin-bottom: 0.3rem !important;
+        line-height: 1.2 !important;
       }
       
-      .content-subtitle {
-        font-size: 0.65rem;
-        line-height: 1.1;
+      .spotify-section .content-subtitle {
+        font-size: 0.65rem !important;
+        line-height: 1.1 !important;
       }
     }
     /* Tablet scaling */
@@ -1501,6 +1505,24 @@
       
       // Refresh currently playing every 30 seconds
       setInterval(loadCurrentlyPlaying, 30000);
+    }
+
+    // Add resize listener to reload content on orientation/size change
+    window.addEventListener('resize', debounce(() => {
+      loadTopArtists();
+      loadRecentlyPlayed();
+    }, 500));
+
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
     }
 
     // Start loading Spotify data when page loads
