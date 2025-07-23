@@ -1091,7 +1091,7 @@
         }));
 
         container.innerHTML = `
-          <h3>Top 5 Artists (Past Month)</h3>
+          <h3>Top Artists (Past Month)</h3>
           <div class="content-grid">
             ${artists.map(artist => `
               <div class="content-item">
@@ -1117,7 +1117,7 @@
       const container = document.getElementById('slide-recently-played');
       
       try {
-        const data = await spotifyApiCall('/me/player/recently-played?limit=6');
+        const data = await spotifyApiCall('/me/player/recently-played?limit=9');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
