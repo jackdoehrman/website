@@ -553,7 +553,7 @@
       color: var(--text-primary);
       font-weight: 600;
       margin-bottom: 0.4rem;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -564,7 +564,7 @@
 
     .content-subtitle {
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -1131,7 +1131,7 @@
       const container = document.getElementById('slide-recently-played');
       
       try {
-        const data = await spotifyApiCall('/me/player/recently-played?limit=9');
+        const data = await spotifyApiCall('/me/player/recently-played?limit=6');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
