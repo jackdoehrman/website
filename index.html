@@ -54,31 +54,31 @@
     /* Extra small phones */
     @media (max-width: 375px) {
       .content-grid {
-        grid-template-columns: repeat(3, 1fr); /* Force 3 columns */
-        gap: 0.6rem;
-        max-width: 95%;
+        grid-template-columns: repeat(4, 1fr); /* Force 4 columns now */
+        gap: 0.4rem;
+        max-width: 98%;
       }
       
       .content-item {
-        padding: 0.6rem;
-        min-height: 95px;
+        padding: 0.4rem;
+        min-height: 70px;
       }
       
       .content-image {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 0.4rem;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 0.3rem;
       }
       
       .content-title {
-        font-size: 0.65rem;
-        margin-bottom: 0.2rem;
-        line-height: 1.1;
+        font-size: 0.55rem;
+        margin-bottom: 0.15rem;
+        line-height: 1.0;
       }
       
       .content-subtitle {
-        font-size: 0.55rem;
-        line-height: 1.0;
+        font-size: 0.45rem;
+        line-height: 0.9;
       }
     }
 
@@ -890,29 +890,31 @@
       }
       
       .content-grid {
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+        gap: 0.8rem;
         max-width: 90%;
       }
       
       .content-item {
-        padding: 1rem;
-        min-height: 120px;
+        padding: 0.8rem;
+        min-height: 90px;
       }
       
       .content-image {
-        width: 55px;
-        height: 55px;
-        margin-bottom: 0.5rem;
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0.4rem;
       }
       
       .content-title {
-        font-size: 0.75rem;
-        margin-bottom: 0.3rem;
+        font-size: 0.65rem;
+        margin-bottom: 0.25rem;
+        line-height: 1.1;
       }
       
       .content-subtitle {
-        font-size: 0.65rem;
+        font-size: 0.55rem;
+        line-height: 1.0;
       }
       
       .carousel-controls {
@@ -964,31 +966,31 @@
       }
       
       .content-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 0.8rem;
+        grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+        gap: 0.6rem;
         max-width: 90%;
       }
       
       .content-item {
-        padding: 0.8rem;
-        min-height: 110px;
+        padding: 0.6rem;
+        min-height: 80px;
       }
       
       .content-image {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 0.5rem;
+        width: 35px;
+        height: 35px;
+        margin-bottom: 0.3rem;
       }
       
       .content-title {
-        font-size: 0.7rem;
-        margin-bottom: 0.3rem;
-        line-height: 1.2;
+        font-size: 0.6rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.0;
       }
       
       .content-subtitle {
-        font-size: 0.6rem;
-        line-height: 1.1;
+        font-size: 0.5rem;
+        line-height: 0.9;
       }
       
       .carousel-controls {
@@ -1339,7 +1341,7 @@
         }));
 
         container.innerHTML = `
-          <h3>Top 5 Artists (Past Month)</h3>
+          <h3>Top Artists (Past Month)</h3>
           <div class="content-grid">
             ${artists.map(artist => `
               <div class="content-item">
