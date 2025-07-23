@@ -102,7 +102,7 @@
     }
 
     header {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto 4rem;
       text-align: left;
       background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
@@ -200,7 +200,7 @@
     }
 
     section {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto 3rem;
       animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
@@ -533,9 +533,9 @@
     /* Content Styles */
     .content-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1.5rem;
-      max-width: 650px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
       margin: 0 auto;
       align-items: start; /* Align items to top */
     }
@@ -810,23 +810,35 @@
     }
 
     /* Responsive design improvements */
+    @media (max-width: 1280px) {
+      header, section {
+        max-width: 1000px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      header, section {
+        max-width: 900px;
+      }
+      
+      .content-grid {
+        max-width: 800px;
+      }
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 1rem;
       }
       
-      header {
+      header, section {
+        max-width: 100%;
         padding: 2rem;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
       }
       
       header h1 {
         font-size: 2.5rem;
-      }
-      
-      section {
-        padding: 2rem;
-        margin-bottom: 2rem;
       }
       
       nav ul {
@@ -843,6 +855,7 @@
       .content-grid {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         gap: 1rem;
+        max-width: 100%;
       }
       
       .carousel-controls {
