@@ -855,6 +855,36 @@
       }
     }
 
+    /* Mobile grid fixes */
+    @media (max-width: 768px) {
+      .content-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* Force 2 columns on mobile */
+        gap: 0.8rem;
+        max-width: 90%;
+      }
+      
+      .content-item {
+        padding: 0.8rem;
+        min-height: 90px;
+      }
+      
+      .content-image {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0.4rem;
+      }
+      
+      .content-title {
+        font-size: 0.65rem;
+        margin-bottom: 0.25rem;
+        line-height: 1.1;
+      }
+      
+      .content-subtitle {
+        font-size: 0.55rem;
+        line-height: 1.0;
+      }
+    }
     /* Tablet scaling */
     @media (max-width: 768px) {
       body {
@@ -887,34 +917,6 @@
       nav ul li a {
         padding: 0.6rem 1.2rem;
         font-size: 0.85rem;
-      }
-      
-      .content-grid {
-        grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
-        gap: 0.8rem;
-        max-width: 90%;
-      }
-      
-      .content-item {
-        padding: 0.8rem;
-        min-height: 90px;
-      }
-      
-      .content-image {
-        width: 45px;
-        height: 45px;
-        margin-bottom: 0.4rem;
-      }
-      
-      .content-title {
-        font-size: 0.65rem;
-        margin-bottom: 0.25rem;
-        line-height: 1.1;
-      }
-      
-      .content-subtitle {
-        font-size: 0.55rem;
-        line-height: 1.0;
       }
       
       .carousel-controls {
@@ -1321,7 +1323,11 @@
       const container = document.getElementById('slide-top-artists');
       
       try {
-        const data = await spotifyApiCall('/me/top/artists?limit=6&time_range=short_term');
+        // Determine number of items based on screen size
+        const isMobile = window.innerWidth <= 768;
+        const limit = isMobile ? 4 : 6; // Show fewer items on mobile
+        
+        const data = await spotifyApiCall(`/me/top/artists?limit=${limit}&time_range=short_term`);
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
@@ -1367,7 +1373,11 @@
       const container = document.getElementById('slide-recently-played');
       
       try {
-        const data = await spotifyApiCall('/me/player/recently-played?limit=6');
+        // Determine number of items based on screen size
+        const isMobile = window.innerWidth <= 768;
+        const limit = isMobile ? 4 : 6; // Show fewer items on mobile
+        
+        const data = await spotifyApiCall(`/me/player/recently-played?limit=${limit}`);
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
