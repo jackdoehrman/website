@@ -699,7 +699,155 @@
       font-weight: 500;
     }
 
-    /* Social Links Styling */
+    /* Skills and Certifications Grid Layout */
+    .skills-certs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .skills-column, .certifications-column {
+      background: var(--bg-tertiary);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .skills-column::before, .certifications-column::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--glow-primary);
+    }
+
+    .skills-column:hover, .certifications-column:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px var(--shadow-strong);
+      border-color: var(--accent-secondary);
+      background: var(--bg-quaternary);
+    }
+
+    .skills-column h2, .certifications-column h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      color: var(--text-primary);
+    }
+
+    .skills-column ul, .certifications-column ul {
+      margin: 0;
+    }
+
+    .skills-column ul li, .certifications-column ul li {
+      margin-bottom: 1rem;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+    }
+
+    .skills-column ul li:hover, .certifications-column ul li:hover {
+      background: var(--glow-tertiary);
+      padding-left: 1.8rem;
+    }
+
+    .skills-column ul li::before, .certifications-column ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-secondary);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .skills-column ul li:hover::before, .certifications-column ul li:hover::before {
+      color: var(--accent-tertiary);
+      transform: scale(1.1);
+    }
+
+    .skills-column ul li strong, .certifications-column ul li strong {
+      color: var(--accent-secondary);
+      font-weight: 600;
+    }
+
+    /* Certification Badge Styling */
+    .cert-logo {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .certification-badge {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+      border-radius: 8px;
+    }
+
+    .certification-badge:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Certification Link Styling */
+    .cert-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0.5rem;
+      border-radius: 8px;
+      margin: -0.5rem;
+    }
+
+    .cert-link:hover {
+      background: var(--glow-tertiary);
+      transform: translateX(4px);
+      color: var(--text-primary);
+    }
+
+    .cert-link:hover .certification-badge {
+      transform: scale(1.08);
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.5));
+    }
+
+    .cert-link:hover strong {
+      color: var(--accent-tertiary);
+    }
+
+    /* Responsive certification badge sizing */
+    @media (max-width: 1023px) {
+      .certification-badge {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .certification-badge {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .certification-badge {
+        width: 70px;
+        height: 70px;
+      }
+    }
     .social-links {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -916,6 +1064,15 @@
         gap: 1.3rem;
       }
       
+      /* Skills and Certifications responsive */
+      .skills-certs-grid {
+        gap: 2.5rem;
+      }
+      
+      .skills-column, .certifications-column {
+        padding: 2rem;
+      }
+      
       .content-grid {
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: 1.8rem;
@@ -959,7 +1116,7 @@
       }
     }
 
-    /* Tablet Screen (768px to 1023px) */
+    /* Tablet Screen (768px to 1023px) - Certifications moves below Skills */
     @media (max-width: 1023px) and (min-width: 768px) {
       body {
         padding: 1.8rem;
@@ -992,6 +1149,20 @@
       nav ul li a {
         padding: 0.7rem 1.3rem;
         font-size: 0.9rem;
+      }
+      
+      /* Skills and Certifications stack vertically on tablet */
+      .skills-certs-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .skills-column, .certifications-column {
+        padding: 1.8rem;
+      }
+      
+      .skills-column h2, .certifications-column h2 {
+        font-size: 1.3rem;
       }
       
       .content-grid {
@@ -1123,6 +1294,20 @@
       nav ul li a {
         padding: 0.6rem 1.2rem;
         font-size: 0.85rem;
+      }
+      
+      /* Skills and Certifications stack vertically on mobile */
+      .skills-certs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .skills-column, .certifications-column {
+        padding: 1.5rem;
+      }
+      
+      .skills-column h2, .certifications-column h2 {
+        font-size: 1.2rem;
       }
       
       .content-grid {
@@ -1285,6 +1470,21 @@
       nav ul li a {
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
+      }
+      
+      /* Skills and Certifications stack vertically with compact spacing */
+      .skills-certs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      
+      .skills-column, .certifications-column {
+        padding: 1.2rem;
+      }
+      
+      .skills-column h2, .certifications-column h2 {
+        font-size: 1.1rem;
+        text-align: center;
       }
       
       .content-grid {
@@ -1623,15 +1823,32 @@
       </p>
     </section>
 
-    <section id="skills" class="floating-card-dark">
-      <h2>Skills</h2>
-      <ul>
-        <li><strong>SQL & Databases:</strong> Agilitek, Databricks</li>
-        <li><strong>Data Viz:</strong> Tableau, Power BI, Excel</li>
-        <li><strong>Programming:</strong> Python, R, Jupyter</li>
-        <li><strong>CRM & Marketing:</strong> Salesforce, SFMC</li>
-        <li><strong>Survey & Analysis:</strong> Qualtrics, SurveyMonkey, Intellistack</li>
-      </ul>
+    <section id="skills-certs" class="floating-card-dark">
+      <div class="skills-certs-grid">
+        <div class="skills-column">
+          <h2>Skills</h2>
+          <ul>
+            <li><strong>SQL & Databases:</strong> Agilitek, Databricks</li>
+            <li><strong>Data Viz:</strong> Tableau, Power BI, Excel</li>
+            <li><strong>Programming:</strong> Python, R, Jupyter</li>
+            <li><strong>CRM & Marketing:</strong> Salesforce, SFMC</li>
+            <li><strong>Survey & Analysis:</strong> Qualtrics, SurveyMonkey, Intellistack</li>
+          </ul>
+        </div>
+        <div class="certifications-column">
+          <h2>Certifications</h2>
+          <ul>
+            <li>
+              <a href="https://www.salesforce.com/trailblazer/qzj52duvzr4tyypup7" target="_blank" rel="noopener noreferrer" class="cert-link">
+                <strong>Salesforce Certified Administrator</strong> - Active certification for CRM platform administration and user management
+                <div class="cert-logo">
+                  <img src="public/images/admin.png" alt="Salesforce Certified Administrator" class="certification-badge" />
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section id="experience" class="floating-card-dark">
@@ -1908,7 +2125,7 @@
       const container = document.getElementById('slide-top-artists');
       
       try {
-        const data = await spotifyApiCall('/me/top/artists?limit=4&time_range=short_term');
+        const data = await spotifyApiCall('/me/top/artists?limit=6&time_range=short_term');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
@@ -1960,7 +2177,7 @@
       const container = document.getElementById('slide-recently-played');
       
       try {
-        const data = await spotifyApiCall('/me/player/recently-played?limit=4');
+        const data = await spotifyApiCall('/me/player/recently-played?limit=6');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
