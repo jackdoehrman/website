@@ -437,42 +437,23 @@
           <li>Quantify lost revenue due to current entry bottlenecks and wait times</li>
           <li>Model potential revenue gains from faster entry and increased dwell time</li>
           <li>Calculate staffing cost reductions from automated security systems</li>
-          <li>Evaluate vendor pricing options and develop ROI projections</li>
+          <li>Evaluate wait times/Per Cap metrics and develop ROI projections</li>
           <li>Provide data-driven recommendations for security infrastructure investment</li>
         </ul>
-      </div>
-
-      <div class="stat-grid">
-        <div class="stat-card">
-          <span class="stat-number cost">$280K</span>
-          <div class="stat-label">Annual Lost Revenue</div>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">8.7 min</span>
-          <div class="stat-label">Average Wait Time</div>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number revenue">$450K</span>
-          <div class="stat-label">Projected Annual Savings</div>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">18 months</span>
-          <div class="stat-label">Payback Period</div>
-        </div>
       </div>
     </section>
 
     <section class="section" id="methodology">
       <h2>Analysis Methodology</h2>
       <p>
-        The analysis centered on equating time spent waiting in security lines to measurable lost revenue opportunities. Using ticket scan timestamps, I calculated "Time until Kick-off" for each entry, enabling detailed traffic pattern analysis for each gate.
-      </p>
+        The analysis centered on equating time spent waiting in security lines to measurable lost revenue opportunities.
 
       <h3>Data Processing Approach</h3>
       <ul>
         <li><strong>Timestamp Analysis</strong> - Processed entry scan data to identify peak traffic periods</li>
-        <li><strong>Capacity Modeling</strong> - Used polynomial trendlines to define maximum capacity thresholds</li>
-        <li><strong>Wait Time Calculation</strong> - Identified 5-minute intervals operating above average throughput</li>
+        <li><strong>Throughput Modeling</strong> - Used polynomial trendlines to define maximum throughput thresholds</li>
+        <li><strong>Peak Entry Periods</strong> - Identified 5-minute intervals operating above average throughput</li>
+        <li><strong>Wait Time Calculation</strong> - Used Ticket Scans, Throughput Rates, and Peak Period Lengths to define average wait times</li>
         <li><strong>Revenue Correlation</strong> - Linked entry delays to concession/merchandise spending patterns</li>
         <li><strong>Cost-Benefit Analysis</strong> - Compared upgrade costs against projected revenue gains</li>
       </ul>
@@ -491,7 +472,6 @@
         <li><strong>Hourly staffing schedules and labor costs</strong> - Operational cost analysis</li>
         <li><strong>Security vendor pricing and upgrade options</strong> - Investment cost modeling</li>
         <li><strong>Fan satisfaction surveys</strong> - Experience impact assessment</li>
-        <li><strong>Historical event data</strong> - Seasonal and event-type variations</li>
       </ul>
     </section>
 
@@ -503,82 +483,66 @@
 
       <div class="gate-grid">
         <div class="gate-card">
-          <h4>North Gate</h4>
+          <h4>Northwest Gate</h4>
           <div class="gate-metric">
-            <span class="gate-metric-label">Peak Capacity:</span>
-            <span class="gate-metric-value">420 fans/hour</span>
+            <span class="gate-metric-label">Peak Throughput:</span>
+            <span class="gate-metric-value">13 fans/minute</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Period:</span>
+            <span class="gate-metric-value">T-25 MInutes to T+15 Minutes</span>
           </div>
           <div class="gate-metric">
             <span class="gate-metric-label">Avg Wait Time:</span>
-            <span class="gate-metric-value">12.3 minutes</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Lost Revenue:</span>
-            <span class="gate-metric-value">$95K annually</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Efficiency Score:</span>
-            <span class="gate-metric-value">68%</span>
+            <span class="gate-metric-value">3.8 minutes</span>
           </div>
         </div>
 
         <div class="gate-card">
-          <h4>South Gate</h4>
+          <h4>Northeast Gate</h4>
           <div class="gate-metric">
-            <span class="gate-metric-label">Peak Capacity:</span>
-            <span class="gate-metric-value">380 fans/hour</span>
+            <span class="gate-metric-label">Peak Throughput:</span>
+            <span class="gate-metric-value">6 fans/minute</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Period:</span>
+            <span class="gate-metric-value">T-20 MInutes to T+15 Minutes</span>
           </div>
           <div class="gate-metric">
             <span class="gate-metric-label">Avg Wait Time:</span>
-            <span class="gate-metric-value">9.1 minutes</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Lost Revenue:</span>
-            <span class="gate-metric-value">$72K annually</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Efficiency Score:</span>
-            <span class="gate-metric-value">74%</span>
+            <span class="gate-metric-value">4.4 minutes</span>
           </div>
         </div>
 
         <div class="gate-card">
-          <h4>East Gate</h4>
+          <h4>Southwest Gate</h4>
           <div class="gate-metric">
-            <span class="gate-metric-label">Peak Capacity:</span>
-            <span class="gate-metric-label">350 fans/hour</span>
+            <span class="gate-metric-label">Peak Throughput:</span>
+            <span class="gate-metric-value">7 fans/minute</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Period:</span>
+            <span class="gate-metric-value">T-25 MInutes to T+15 Minutes</span>
           </div>
           <div class="gate-metric">
             <span class="gate-metric-label">Avg Wait Time:</span>
-            <span class="gate-metric-value">6.8 minutes</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Lost Revenue:</span>
-            <span class="gate-metric-value">$58K annually</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Efficiency Score:</span>
-            <span class="gate-metric-value">82%</span>
+            <span class="gate-metric-value">4.0 minutes</span>
           </div>
         </div>
 
         <div class="gate-card">
-          <h4>West Gate</h4>
+          <h4>Southeast Gate</h4>
           <div class="gate-metric">
-            <span class="gate-metric-label">Peak Capacity:</span>
-            <span class="gate-metric-value">395 fans/hour</span>
+            <span class="gate-metric-label">Peak Throughput:</span>
+            <span class="gate-metric-value">7 fans/minute</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Period:</span>
+            <span class="gate-metric-value">T-25 MInutes to T+15 Minutes</span>
           </div>
           <div class="gate-metric">
             <span class="gate-metric-label">Avg Wait Time:</span>
-            <span class="gate-metric-value">7.5 minutes</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Lost Revenue:</span>
-            <span class="gate-metric-value">$55K annually</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Efficiency Score:</span>
-            <span class="gate-metric-value">79%</span>
+            <span class="gate-metric-value">4.1 minutes</span>
           </div>
         </div>
       </div>
@@ -590,56 +554,12 @@
         The cost-benefit analysis demonstrates clear financial advantages for security system upgrades, with multiple revenue streams contributing to rapid payback periods.
       </p>
 
-      <div class="roi-comparison">
-        <div class="scenario-card current">
-          <div class="scenario-title current">Current State</div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Annual Security Costs:</span>
-            <span class="gate-metric-value">$340K</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Lost Revenue (Wait Times):</span>
-            <span class="gate-metric-value">$280K</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Fan Satisfaction Score:</span>
-            <span class="gate-metric-value">72%</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Total Annual Cost:</span>
-            <span class="gate-metric-value">$620K</span>
-          </div>
-        </div>
-
-        <div class="scenario-card improved">
-          <div class="scenario-title improved">Enhanced System</div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Annual Security Costs:</span>
-            <span class="gate-metric-value">$280K</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Additional Revenue:</span>
-            <span class="gate-metric-value">+$190K</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Fan Satisfaction Score:</span>
-            <span class="gate-metric-value">89%</span>
-          </div>
-          <div class="gate-metric">
-            <span class="gate-metric-label">Net Annual Benefit:</span>
-            <span class="gate-metric-value">$450K</span>
-          </div>
-        </div>
-      </div>
-
       <div class="revenue-box">
         <h3>Revenue Enhancement Streams</h3>
         <ul>
-          <li><strong>Increased Concession Sales</strong> - $125K annually from extended dwell time</li>
-          <li><strong>Merchandise Revenue Growth</strong> - $65K annually from pre-event shopping</li>
-          <li><strong>Labor Cost Reduction</strong> - $60K annually from automated screening</li>
+          <li><strong>Increased Concessions and Merchandise Sales</strong> - Additional 10% of gross revenue</li>
+          <li><strong>Labor Cost Reduction</strong> - Can reduce staffing costs by 30%</li>
           <li><strong>Enhanced Fan Experience</strong> - Improved satisfaction leading to retention</li>
-          <li><strong>Premium Experience Upsell</strong> - Opportunities for VIP entry packages</li>
         </ul>
       </div>
     </section>
@@ -647,27 +567,8 @@
     <section class="section" id="recommendations">
       <h2>Strategic Recommendations</h2>
       <p>
-        Based on the comprehensive analysis, the data supports immediate investment in enhanced security systems with a phased implementation approach to maximize ROI and minimize operational disruption.
+        Based on the comprehensive analysis, the data supports an investment in enhanced security systems with a phased implementation approach to maximize ROI and minimize operational disruption.
       </p>
-
-      <h3>Implementation Strategy</h3>
-      <ul>
-        <li><strong>Phase 1</strong> - Upgrade North Gate (highest impact, $95K annual savings)</li>
-        <li><strong>Phase 2</strong> - Implement South and West Gates simultaneously</li>
-        <li><strong>Phase 3</strong> - Complete East Gate upgrade and system integration</li>
-        <li><strong>Monitoring</strong> - Real-time performance tracking and optimization</li>
-      </ul>
-
-      <div class="highlight-box">
-        <h3>Expected Outcomes</h3>
-        <ul>
-          <li><strong>65% reduction</strong> in average wait times across all gates</li>
-          <li><strong>$450K annual benefit</strong> from combined cost savings and revenue growth</li>
-          <li><strong>18-month payback</strong> on initial system investment</li>
-          <li><strong>Improved fan satisfaction</strong> and potential for increased attendance</li>
-          <li><strong>Enhanced operational efficiency</strong> and staff reallocation opportunities</li>
-        </ul>
-      </div>
     </section>
 
     <section class="section" id="visuals">
