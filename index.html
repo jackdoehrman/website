@@ -2131,7 +2131,7 @@
       const container = document.getElementById('slide-top-artists');
       
       try {
-        const data = await spotifyApiCall('/me/top/artists?limit=6&time_range=short_term');
+        const data = await spotifyApiCall('/me/top/artists?limit=4&time_range=short_term');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
@@ -2183,7 +2183,7 @@
       const container = document.getElementById('slide-recently-played');
       
       try {
-        const data = await spotifyApiCall('/me/player/recently-played?limit=6');
+        const data = await spotifyApiCall('/me/player/recently-played?limit=4');
         
         if (!data.items || data.items.length === 0) {
           container.innerHTML = `
