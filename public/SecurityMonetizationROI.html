@@ -587,11 +587,12 @@
     }
 
     .zoom-modal img {
-      max-width: 95%;
-      max-height: 95%;
+      max-width: 90%;
+      max-height: 90%;
       object-fit: contain;
       border-radius: 8px;
       box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+      cursor: zoom-out;
     }
 
     .zoom-close {
@@ -922,6 +923,40 @@
           <li><strong>Enhanced Fan Experience</strong> - Improved satisfaction leading to retention</li>
         </ul>
       </div>
+
+      <div class="roi-comparison">
+        <div class="scenario-card current">
+          <div class="scenario-title current">Current System</div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Average Wait Time:</span>
+            <span class="gate-metric-value">4.1 minutes</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Staff Required:</span>
+            <span class="gate-metric-value">12 personnel</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Lost Revenue:</span>
+            <span class="gate-metric-value cost">$45K annually</span>
+          </div>
+        </div>
+
+        <div class="scenario-card improved">
+          <div class="scenario-title improved">Enhanced System</div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Average Wait Time:</span>
+            <span class="gate-metric-value">1.5 minutes</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Staff Required:</span>
+            <span class="gate-metric-value">8 personnel</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Revenue Gain:</span>
+            <span class="gate-metric-value revenue">$78K annually</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="recommendations">
@@ -944,7 +979,7 @@
       
       <div class="carousel-container">
         <div>
-          <img src="images/SecurityROI1.png" alt="Gate Traffic Analysis" onclick="openZoom(this)" />
+          <img src="images/SecurityROI1.png" alt="Gate Traffic Analysis" />
           <div class="caption">Figure 1: Gate Traffic Analysis - Peak capacity and wait time modeling</div>
         </div>
       </div>
@@ -969,6 +1004,17 @@
     // Zoom functionality
     const zoomModal = document.getElementById("zoomModal");
     const zoomImage = document.getElementById("zoomImage");
+    const zoomClose = document.querySelector(".zoom-close");
+
+    // Add click event to all images in carousel containers
+    document.addEventListener("DOMContentLoaded", function() {
+      const images = document.querySelectorAll(".carousel-container img");
+      images.forEach(img => {
+        img.addEventListener("click", function() {
+          openZoom(this);
+        });
+      });
+    });
 
     function openZoom(img) {
       zoomImage.src = img.src;
@@ -983,23 +1029,29 @@
       document.body.style.overflow = "auto";
     }
 
-    // Keyboard navigation
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        closeZoom();
-      }
+    // Close when clicking the X button
+    zoomClose.addEventListener("click", function(e) {
+      e.stopPropagation();
+      closeZoom();
     });
 
-    // Click outside image to close
+    // Close when clicking the modal background (but not the image)
     zoomModal.addEventListener("click", function(e) {
       if (e.target === zoomModal) {
         closeZoom();
       }
     });
 
-    // Prevent image click from closing modal
+    // Allow clicking on the image itself to close
     zoomImage.addEventListener("click", function(e) {
-      e.stopPropagation();
+      closeZoom();
+    });
+
+    // Keyboard navigation
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closeZoom();
+      }
     });
   </script>
 
