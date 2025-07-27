@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Optimization | Jack Doehrman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" sizes="32x32" type="image/png" href="/public/images/logo.png">
+  <style>
+    :root {
+      /* Your Provided Palette with Color Theory Applications */
+      --primary-blue: #3b5998;      /* Primary actions, headers, trust elements */
+      --secondary-blue: #4A9EFF;    /* Interactive elements, hover states, accents */
+      --tertiary-blue: #dfe3ee;     /* Subtle backgrounds, borders, soft highlights */
+      --light-gray: #f7f7f7;        /* Light backgrounds, cards in light mode */
+      --pure-white: #ffffff;        /* Text on dark backgrounds, pure highlights */
+      
+      /* Dark Mode Palette with Color Theory Optimization */
+      --bg-primary: #0f1419;         /* Darkest - main background (darker for better contrast) */
+      --bg-secondary: #1a2028;       /* Secondary surfaces - cards, sections */
+      --bg-tertiary: #232b36;        /* Elevated surfaces - interactive elements */
+      --bg-quaternary: #2d3742;      /* Highest elevation - hover states */
+      
+      /* Accent Colors Using Your Palette */
+      --accent-primary: var(--primary-blue);      /* Primary CTAs, important links */
+      --accent-secondary: var(--secondary-blue);  /* Secondary actions, interactive states */
+      --accent-tertiary: var(--tertiary-blue);    /* Subtle accents, muted elements */
+      
+      /* Text Hierarchy with Optimal Contrast */
+      --text-primary: var(--pure-white);          /* Highest contrast for main text */
+      --text-secondary: #e8eaed;                  /* Secondary text, slightly dimmed */
+      --text-muted: var(--secondary-blue);        /* Muted text, metadata */
+      --text-accent: var(--tertiary-blue);        /* Accent text, special highlights */
+      
+      /* Border & Shadow System */
+      --border-subtle: rgba(223, 227, 238, 0.1);   /* Subtle borders using tertiary blue */
+      --border-medium: rgba(223, 227, 238, 0.2);   /* Medium borders */
+      --border-strong: rgba(139, 157, 195, 0.3);   /* Strong borders using secondary blue */
+      
+      --shadow-subtle: rgba(15, 20, 25, 0.4);      /* Subtle shadows */
+      --shadow-medium: rgba(15, 20, 25, 0.6);      /* Medium shadows */
+      --shadow-strong: rgba(15, 20, 25, 0.8);      /* Strong shadows */
+      
+      /* Special Effects */
+      --glow-primary: rgba(59, 89, 152, 0.3);      /* Primary blue glow */
+      --glow-secondary: rgba(139, 157, 195, 0.2);  /* Secondary blue glow */
+      --glow-tertiary: rgba(223, 227, 238, 0.1);   /* Tertiary blue glow */
+      
+      /* Project-specific colors */
+      --security-blue: var(--accent-secondary);
+      --revenue-green: #28a745;
+      --warning-red: #dc3545;
+      
+      --font: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Performance optimizations */
+    * {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(ellipse at top, var(--bg-primary) 0%, #0a0e13 100%);
+      color: var(--text-primary);
+      font-family: var(--font);
+      line-height: 1.7;
+      padding: 2rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+      /* Performance improvements */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      will-change: scroll-position;
+    }
+
+    a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    a:hover {
+      color: var(--accent-tertiary);
+      transform: translateY(-1px);
+    }
+
+    h1, h2, h3 {
+      color: var(--text-primary);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    header {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      text-align: left;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      box-shadow: 
+        0 20px 60px var(--shadow-strong), 
+        0 0 0 1px var(--border-subtle),
+        0 0 40px var(--glow-primary);
+      padding: 3rem;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+      box-shadow: 0 0 20px var(--glow-secondary);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--glow-tertiary) 0%, transparent 70%);
+      opacity: 0.4;
+      animation: gentle-pulse 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: var(--pure-white);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
+    }
+
+    header h2 {
+      color: var(--accent-secondary);
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      box-shadow: 
+        0 10px 40px var(--shadow-medium), 
+        0 0 0 1px var(--border-subtle);
+      padding: 2.5rem;
+      border-radius: 20px;
+      position: relative;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    section:hover {
+      transform: translateY(-4px) translateZ(0);
+      box-shadow: 
+        0 20px 60px var(--shadow-strong), 
+        0 0 0 1px var(--border-medium),
+        0 0 30px var(--glow-secondary);
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--glow-primary);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1) translateZ(0); 
+      }
+      50% { 
+        opacity: 0.6; 
+        transform: scale(1.05) translateZ(0); 
+      }
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 1rem 0;
+    }
+
+    ul li {
+      margin-bottom: 1rem;
+      padding: 0.75rem 0;
+      padding-left: 1.8rem;
+      position: relative;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+    }
+
+    ul li:hover {
+      background: var(--glow-tertiary);
+      padding-left: 2.2rem;
+    }
+
+    ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-secondary);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    ul li:hover::before {
+      color: var(--accent-tertiary);
+      transform: scale(1.2);
+    }
+
+    ul li strong {
+      color: var(--accent-secondary);
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--text-primary);
+      margin-top: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--accent-secondary);
+      margin-top: 1.2rem;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(74, 158, 255, 0.1) 0%, rgba(74, 158, 255, 0.05) 100%);
+      border: 1px solid var(--border-medium);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .highlight-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--glow-primary);
+    }
+
+    .highlight-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px var(--shadow-strong);
+      border-color: var(--accent-secondary);
+    }
+
+    .revenue-box {
+      background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+      border: 1px solid rgba(40, 167, 69, 0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .revenue-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #28a745, #20c997);
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+    }
+
+    .revenue-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px var(--shadow-strong);
+      border-color: #28a745;
+    }
+
+    /* Gate Analysis Cards - 2x2 Grid */
+    .gate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gate-card {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      position: relative;
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .gate-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--glow-primary);
+    }
+
+    .gate-card:hover {
+      transform: translateY(-8px) translateZ(0);
+      box-shadow: 0 20px 60px var(--shadow-strong);
+      border-color: var(--accent-secondary);
+      background: linear-gradient(135deg, var(--bg-quaternary) 0%, var(--bg-tertiary) 100%);
+    }
+
+    .gate-card h4 {
+      color: var(--accent-secondary);
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .gate-metric {
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .gate-metric:last-child {
+      border-bottom: none;
+    }
+
+    .gate-metric:hover {
+      background: var(--glow-tertiary);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem -1rem;
+    }
+
+    .gate-metric-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .gate-metric-value {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROI Analysis */
+    .roi-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .scenario-card {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .scenario-card.current {
+      border-color: rgba(220, 53, 69, 0.3);
+      background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, var(--bg-tertiary) 100%);
+    }
+
+    .scenario-card.improved {
+      border-color: rgba(40, 167, 69, 0.3);
+      background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, var(--bg-tertiary) 100%);
+    }
+
+    .scenario-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px var(--shadow-strong);
+    }
+
+    .scenario-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .scenario-title.current {
+      color: var(--warning-red);
+    }
+
+    .scenario-title.improved {
+      color: var(--revenue-green);
+    }
+
+    /* Stats Grid */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--glow-primary);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px var(--shadow-strong);
+      border-color: var(--accent-secondary);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--accent-secondary);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-number.revenue {
+      color: var(--revenue-green);
+    }
+
+    .stat-number.cost {
+      color: var(--warning-red);
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Image and visualization styles */
+    .carousel-container {
+      position: relative;
+      max-width: 100%;
+      width: 100%;
+      margin: 2rem 0;
+      border-radius: 18px;
+      box-shadow: 0 10px 40px var(--shadow-medium);
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(20px);
+    }
+
+    .carousel-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .caption {
+      padding: 1.5rem;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* Zoom Modal */
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 20px;
+      backdrop-filter: blur(20px);
+      box-sizing: border-box;
+    }
+
+    .zoom-modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+      cursor: zoom-out;
+    }
+
+    .zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--text-primary);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+      transition: all 0.3s ease;
+    }
+
+    .zoom-close:hover {
+      color: var(--accent-secondary);
+      transform: scale(1.1);
+    }
+
+    /* Back Button */
+    .buttons {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .button {
+      padding: 0.8rem 1.8rem;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--pure-white);
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px var(--shadow-medium);
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px var(--shadow-strong);
+      background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+      color: var(--bg-primary);
+    }
+
+    .button:hover::before {
+      left: 100%;
+    }
+
+    /* Focus states for accessibility */
+    .button:focus {
+      outline: 2px solid var(--accent-secondary);
+      outline-offset: 2px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1023px) {
+      .gate-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        max-width: 400px;
+      }
+
+      .roi-comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem;
+      }
+
+      header, section {
+        padding: 2rem;
+        margin-bottom: 2.5rem;
+      }
+
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header h2 {
+        font-size: 1.3rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .stat-card, .gate-card, .scenario-card {
+        padding: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 479px) {
+      body {
+        padding: 1rem;
+      }
+
+      header, section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        text-align: center;
+      }
+
+      header h2 {
+        font-size: 1.1rem;
+        text-align: center;
+      }
+
+      header p {
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Staggered animation delays for smoother loading */
+    section:nth-child(1) { animation-delay: 0.1s; }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.3s; }
+    section:nth-child(4) { animation-delay: 0.4s; }
+    section:nth-child(5) { animation-delay: 0.5s; }
+    section:nth-child(6) { animation-delay: 0.6s; }
+    section:nth-child(7) { animation-delay: 0.7s; }
+    section:nth-child(8) { animation-delay: 0.8s; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Security Entry ROI & Optimization</h1>
+    <h2>Revenue Impact Analysis & Cost-Benefit Modeling</h2>
+    <p>
+      A comprehensive analysis evaluating the return on investment for enhanced security systems by quantifying time savings, staffing reductions, and revenue impact from improved fan entry experiences at Shell Energy Stadium.
+    </p>
+  </header>
+
+  <main>
+    <section id="overview">
+      <h2>Project Overview</h2>
+      <p>
+        This strategic analysis evaluated the potential revenue gains and operational efficiencies achievable through upgrading security screening systems to enable faster fan entry times. The project focused on monetizing the relationship between reduced wait times and increased merchandise/concession sales to build a comprehensive ROI case for system upgrades.
+      </p>
+      
+      <div class="highlight-box">
+        <h3>Analysis Objectives</h3>
+        <ul>
+          <li><strong>Quantify lost revenue</strong> due to current entry bottlenecks and wait times</li>
+          <li><strong>Model potential revenue gains</strong> from faster entry and increased dwell time</li>
+          <li><strong>Calculate staffing cost reductions</strong> from automated security systems</li>
+          <li><strong>Evaluate wait times/Per Cap metrics</strong> and develop ROI projections</li>
+          <li><strong>Provide data-driven recommendations</strong> for security infrastructure investment</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="methodology">
+      <h2>Analysis Methodology</h2>
+      <p>
+        The analysis centered on equating time spent waiting in security lines to measurable lost revenue opportunities.
+      </p>
+
+      <h3>Data Processing Approach</h3>
+      <ul>
+        <li><strong>Timestamp Analysis</strong> - Processed entry scan data to identify peak traffic periods</li>
+        <li><strong>Throughput Modeling</strong> - Used polynomial trendlines to define maximum throughput thresholds</li>
+        <li><strong>Peak Entry Periods</strong> - Identified 5-minute intervals operating above average throughput</li>
+        <li><strong>Wait Time Calculation</strong> - Used Ticket Scans, Throughput Rates, and Peak Period Lengths to define average wait times</li>
+        <li><strong>Revenue Correlation</strong> - Linked entry delays to concession/merchandise spending patterns</li>
+        <li><strong>Cost-Benefit Analysis</strong> - Compared upgrade costs against projected revenue gains</li>
+      </ul>
+    </section>
+
+    <section id="data-sources">
+      <h2>Data Sources & Integration</h2>
+      <p>
+        The analysis integrated multiple data streams to create a comprehensive view of security operations and revenue impact across all event types.
+      </p>
+
+      <h3>Primary Data Sources</h3>
+      <ul>
+        <li><strong>Event attendance and gate entry timestamps</strong> - Real-time throughput analysis</li>
+        <li><strong>Net revenue for merchandise and concession sales</strong> - Revenue correlation modeling</li>
+        <li><strong>Hourly staffing schedules and labor costs</strong> - Operational cost analysis</li>
+        <li><strong>Security vendor pricing and upgrade options</strong> - Investment cost modeling</li>
+        <li><strong>Fan satisfaction surveys</strong> - Experience impact assessment</li>
+      </ul>
+    </section>
+
+    <section id="gate-analysis">
+      <h2>Gate Performance Analysis</h2>
+      <p>
+        Individual gate analysis revealed significant variations in throughput efficiency and wait times, identifying specific bottlenecks and optimization opportunities.
+      </p>
+
+      <div class="gate-grid">
+        <div class="gate-card">
+          <h4>Northwest Gate</h4>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Throughput:</span>
+            <span class="gate-metric-value">13 fans/minute</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Period:</span>
+            <span class="gate-metric-value">T-25 to T+15</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Avg Wait Time:</span>
+            <span class="gate-metric-value">3.8 minutes</span>
+          </div>
+        </div>
+
+        <div class="gate-card">
+          <h4>Northeast Gate</h4>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Throughput:</span>
+            <span class="gate-metric-value">6 fans/minute</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Period:</span>
+            <span class="gate-metric-value">T-20 to T+15</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Avg Wait Time:</span>
+            <span class="gate-metric-value">4.4 minutes</span>
+          </div>
+        </div>
+
+        <div class="gate-card">
+          <h4>Southwest Gate</h4>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Throughput:</span>
+            <span class="gate-metric-value">7 fans/minute</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Period:</span>
+            <span class="gate-metric-value">T-25 to T+15</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Avg Wait Time:</span>
+            <span class="gate-metric-value">4.0 minutes</span>
+          </div>
+        </div>
+
+        <div class="gate-card">
+          <h4>Southeast Gate</h4>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Throughput:</span>
+            <span class="gate-metric-value">7 fans/minute</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Peak Period:</span>
+            <span class="gate-metric-value">T-25 to T+15</span>
+          </div>
+          <div class="gate-metric">
+            <span class="gate-metric-label">Avg Wait Time:</span>
+            <span class="gate-metric-value">4.1 minutes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roi-analysis">
+      <h2>ROI Analysis & Projections</h2>
+      <p>
+        The cost-benefit analysis demonstrates clear financial advantages for security system upgrades, with multiple revenue streams contributing to rapid payback periods.
+      </p>
+
+      <div class="revenue-box">
+        <h3>Revenue Enhancement Streams</h3>
+        <ul>
+          <li><strong>Increased Concessions and Merchandise Sales</strong> - Additional 10% of gross revenue</li>
+          <li><strong>Labor Cost Reduction</strong> - Can reduce staffing costs by 30%</li>
+          <li><strong>Enhanced Fan Experience</strong> - Improved satisfaction leading to retention</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="recommendations">
+      <h2>Strategic Recommendations</h2>
+      <p>
+        Based on the comprehensive analysis, the data supports an investment in enhanced security systems with a phased implementation approach to maximize ROI and minimize operational disruption.
+      </p>
+
+      <ul>
+        <li><strong>Implementation Strategy</strong> - Phased approach, pilot programs, training</li>
+        <li><strong>Industry Best Practices</strong> - Benchmarking, integration, compliance</li>
+        <li><strong>Risk Mitigation</strong> - Contingency planning, backup protocols</li>
+        <li><strong>Success Metrics</strong> - KPIs, satisfaction tracking, benchmarks</li>
+        <li><strong>Technology Considerations</strong> - Integration, security, maintenance</li>
+      </ul>
+    </section>
+
+    <section id="visuals">
+      <h2>Visualizations</h2>
+      
+      <div class="carousel-container">
+        <div>
+          <img src="images/SecurityROI1.png" alt="Gate Traffic Analysis" />
+          <div class="caption">Figure 1: Gate Traffic Analysis - Peak capacity and wait time modeling</div>
+        </div>
+      </div>
+      
+      <p style="font-style: italic; color: var(--text-muted); margin-top: 1.5rem; text-align: center;">
+        *Analysis based on 2024-2025 ticket scan data and match statements
+      </p>
+    </section>
+
+    <div class="buttons">
+      <a href="/" class="button">← Back to Home</a>
+    </div>
+  </main>
+
+  <script>
+    // Page loaded - no additional JavaScript needed
+    console.log("Security ROI Analysis page loaded successfully");
+  </script>
+
+</body>
+</html>
