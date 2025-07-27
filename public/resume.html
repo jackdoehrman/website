@@ -1,75 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>  
-    <meta charset="UTF-8" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-    <title>Resume | Jack Doehrman</title>  
-    <link rel="stylesheet" href="/styles/style.css" />  
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />  
-    <link rel="icon" sizes="32x32" type="image/png" href="images/logo.png">
-    <style>    
-      body {
-        background-color: #0a192f;
-        color: #ccd6f6;
-        font-family: 'Inter', sans-serif;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" sizes="32x32" type="image/png" href="images/logo.png">
+  <title>Resume | Jack Doehrman</title>
+  <style>
+    :root {
+      /* Your Provided Palette with Color Theory Applications */
+      --primary-blue: #3b5998;      /* Primary actions, headers, trust elements */
+      --secondary-blue: #4A9EFF;    /* Interactive elements, hover states, accents */
+      --tertiary-blue: #dfe3ee;     /* Subtle backgrounds, borders, soft highlights */
+      --light-gray: #f7f7f7;        /* Light backgrounds, cards in light mode */
+      --pure-white: #ffffff;        /* Text on dark backgrounds, pure highlights */
       
-      .resume-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 900px;
-      }
+      /* Dark Mode Palette with Color Theory Optimization */
+      --bg-primary: #0f1419;         /* Darkest - main background (darker for better contrast) */
+      --bg-secondary: #1a2028;       /* Secondary surfaces - cards, sections */
+      --bg-tertiary: #232b36;        /* Elevated surfaces - interactive elements */
+      --bg-quaternary: #2d3742;      /* Highest elevation - hover states */
       
-      h1 {
-        color: #dfe3ee;
-        margin-bottom: 2rem;
-        text-align: center;
-      }
+      /* Accent Colors Using Your Palette */
+      --accent-primary: var(--primary-blue);      /* Primary CTAs, important links */
+      --accent-secondary: var(--secondary-blue);  /* Secondary actions, interactive states */
+      --accent-tertiary: var(--tertiary-blue);    /* Subtle accents, muted elements */
       
-      iframe {
-        border: 1px solid #233554;
-        border-radius: 8px;
-        width: 100%;
-        height: 100vh;
-      }
+      /* Text Hierarchy with Optimal Contrast */
+      --text-primary: var(--pure-white);          /* Highest contrast for main text */
+      --text-secondary: #e8eaed;                  /* Secondary text, slightly dimmed */
+      --text-muted: var(--secondary-blue);        /* Muted text, metadata */
+      --text-accent: var(--tertiary-blue);        /* Accent text, special highlights */
       
-      .buttons {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1rem;
+      /* Border & Shadow System */
+      --border-subtle: rgba(223, 227, 238, 0.1);   /* Subtle borders using tertiary blue */
+      --border-medium: rgba(223, 227, 238, 0.2);   /* Medium borders */
+      --border-strong: rgba(139, 157, 195, 0.3);   /* Strong borders using secondary blue */
+      
+      --shadow-subtle: rgba(15, 20, 25, 0.4);      /* Subtle shadows */
+      --shadow-medium: rgba(15, 20, 25, 0.6);      /* Medium shadows */
+      --shadow-strong: rgba(15, 20, 25, 0.8);      /* Strong shadows */
+      
+      /* Special Effects */
+      --glow-primary: rgba(59, 89, 152, 0.3);      /* Primary blue glow */
+      --glow-secondary: rgba(139, 157, 195, 0.2);  /* Secondary blue glow */
+      --glow-tertiary: rgba(223, 227, 238, 0.1);   /* Tertiary blue glow */
+      
+      --font: 'Inter', sans-serif;
     }
-      
-      .button {
-        padding: 0.75rem 1.5rem;
-        background-color: transparent;
-        border: 1px solid #8b9dc3;
-        color: #8b9dc3;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: 0.3s ease;
-      }
-      
-      .button:hover {
-        background-color: #f7f7f7;
-        color: #0a192f;
-      }
 
-    </style>
-  </head>
-  <body> 
-  <div class="resume-wrapper">
-    <h1>My Resume</h1>
-    <iframe src="Jack_Doehrman_Resume.pdf" type="application/pdf"></iframe>
-  </div>
-     </br>
-    <section class="buttons">
-      <a class="button" href="/">← Back to Home</a>
-    </section>
-  </body>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Performance optimizations */
+    * {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(ellipse at top, var(--bg-primary) 0%, #0a0e13 100%);
+      color: var(--text-primary);
+      font-family: var(--font);
+      line-height: 1.7;
+      padding: 2rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+      /* Performance improvements */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      will-change: scroll-position;
+    }
+
+    a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    a:hover {
+      color: var(--accent-tertiary);
+      transform: translateY(-1px);
+    }
+
+    h1, h2, h3 {
+      color: var(--text-primary);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    header {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      box-shadow: 
+        0 20px 60px var(--shadow-strong), 
+        0 0 0 1px var(--border-subtle),
+        0 0 40px var(--glow-primary);
+      padding: 3rem;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+      box-shadow: 0 0 20px var(--glow-secondary);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--glow-tertiary) 0%, transparent 70%);
+      opacity: 0.4;
+      animation: gentle-pulse 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: var(--pure-white);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
+    }
+
+    header p {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0;
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1) translateZ(0); 
+      }
+      50% { 
+        opacity: 0.6; 
+        transform: scale(1.05) translateZ(0); 
+      }
+    }
+
+    .resume-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      box-shadow: 
+        0 20px 60px var(--shadow-strong), 
+        0 0 0 1px var(--border-subtle),
+        0 0 40px var(--glow-secondary);
+      border-radius: 24px;
+      padding: 3rem;
+      position: relative;
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .resume-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--glow-primary);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .resume-iframe {
+      width: 100%;
+      height: 80vh;
+      min-height: 600px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      background: var(--bg-primary);
+      box-shadow: inset 0 4px 12px var(--shadow-subtle);
+    }
+
+    .resume-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .resume-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.8rem;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--pure-white);
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px var(--shadow-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resume-button.secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-medium);
+    }
+
+    .resume-button.secondary:hover {
+      background: var(--bg-quaternary);
+      color: var(--text-primary);
+      border-color: var(--accent-secondary);
+    }
+
+    .resume-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .resume-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px var(--shadow-strong);
+      background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+    }
+
+    .resume-button:hover::before {
+      left: 100%;
+    }
+
+    .resume-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .info-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px var(--shadow-strong);
+      border-color: var(--accent-secondary);
+      background: var(--bg-quaternary);
+    }
+
+    .info-card h3 {
+      color: var(--accent-secondary);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .info-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Error state styling */
+    .error-message {
+      background: linear-gradient(135deg, rgba(220, 53, 69, 0.1), rgba(220, 53, 69, 0.05));
+      border: 1px solid rgba(220, 53, 69, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      color: #ff6b6b;
+      margin-bottom: 2rem;
+    }
+
+    .error-message h3 {
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+    }
+
+    /* Loading state */
+    .loading-message {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+    }
+
+    .loading-spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid var(--border-subtle);
+      border-top: 4px solid var(--accent-secondary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 0 20px var(--glow-secondary);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem;
+      }
+      
+      header, .resume-container {
+        padding: 2rem;
+      }
+      
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .resume-iframe {
+        height: 70vh;
+        min-height: 500px;
+      }
+      
+      .resume-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .info-card {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+      
+      header, .resume-container {
+        padding: 1.5rem;
+      }
+      
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .resume-iframe {
+        height: 60vh;
+        min-height: 400px;
+      }
+      
+      .resume-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* High DPI optimizations */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .resume-button {
+        min-height: 44px;
+      }
+      
+      .resume-button:hover,
+      .info-card:hover {
+        transform: none;
+      }
+    }
+
+    /* Focus states for accessibility */
+    .resume-button:focus {
+      outline: 2px solid var(--accent-secondary);
+      outline-offset: 2px;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      
+      header, .resume-container {
+        box-shadow: none;
+        background: white;
+      }
+      
+      .resume-actions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Jack Doehrman</h1>
+    <p>Business Intelligence & Data Analytics Professional - Resume</p>
+  </header>
+
+  <main>
+    <div class="resume-container">
+
+
+      <div id="resume-viewer">
+        <div class="loading-message">
+          <div class="loading-spinner"></div>
+          <p>Loading resume...</p>
+        </div>
+      </div>
+
+      <div class="resume-actions">
+        <a href="Jack_Doehrman_Resume.pdf" download="Jack_Doehrman_Resume.pdf" class="resume-button">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+          </svg>
+          Download PDF
+        </a>
+        
+        <a href="/" class="resume-button secondary">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Function to load the resume PDF
+    function loadResume() {
+      const viewer = document.getElementById('resume-viewer');
+      
+      try {
+        // Check if PDF is available
+        fetch('Jack_Doehrman_Resume.pdf', { method: 'HEAD' })
+          .then(response => {
+            if (response.ok) {
+              // PDF exists, create iframe
+              viewer.innerHTML = `
+                <iframe 
+                  src="Jack_Doehrman_Resume.pdf" 
+                  class="resume-iframe" 
+                  title="Jack Doehrman Resume"
+                  onload="handleIframeLoad()"
+                  onerror="handleIframeError()">
+                </iframe>
+              `;
+            } else {
+              throw new Error('PDF not found');
+            }
+          })
+          .catch(error => {
+            console.error('Error loading resume:', error);
+            showError();
+          });
+      } catch (error) {
+        console.error('Error checking resume availability:', error);
+        showError();
+      }
+    }
+
+    function handleIframeLoad() {
+      console.log('Resume loaded successfully');
+    }
+
+    function handleIframeError() {
+      console.error('Error loading resume iframe');
+      showError();
+    }
+
+    function showError() {
+      const viewer = document.getElementById('resume-viewer');
+      viewer.innerHTML = `
+        <div class="error-message">
+          <h3>
+            <svg class="icon" viewBox="0 0 24 24" style="fill: #ff6b6b;">
+              <path d="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z"/>
+            </svg>
+            Resume Temporarily Unavailable
+          </h3>
+          <p>The PDF resume could not be loaded at this time. Please try the download button below or contact me directly.</p>
+        </div>
+      `;
+    }
+
+    // Load resume when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add a small delay to show loading state
+      setTimeout(loadResume, 500);
+    });
+
+    // Handle errors gracefully
+    window.addEventListener('error', (event) => {
+      console.error('Global error:', event.error);
+    });
+
+    // Handle unhandled promise rejections
+    window.addEventListener('unhandledrejection', (event) => {
+      console.error('Unhandled promise rejection:', event.reason);
+      event.preventDefault();
+    });
+  </script>
+</body>
 </html>
