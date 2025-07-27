@@ -526,6 +526,12 @@
       width: 100%;
       height: auto;
       display: block;
+      cursor: zoom-in;
+      transition: opacity 0.2s ease;
+    }
+
+    .carousel-slide img:hover {
+      opacity: 0.9;
     }
 
     .caption {
@@ -572,6 +578,52 @@
 
     .carousel-arrow.next {
       right: 15px;
+    }
+
+    /* Zoom Modal */
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 20px;
+      backdrop-filter: blur(20px);
+      box-sizing: border-box;
+    }
+
+    .zoom-modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+      cursor: zoom-out;
+    }
+
+    .zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--text-primary);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+      transition: all 0.3s ease;
+    }
+
+    .zoom-close:hover {
+      color: var(--accent-secondary);
+      transform: scale(1.1);
     }
 
     /* Back Button */
@@ -945,6 +997,12 @@
       <p style="font-style: italic; color: var(--text-muted); margin-top: 1.5rem; text-align: center;">
         *Dashboard examples use anonymized sample data to protect member privacy.
       </p>
+      
+      <!-- Zoom Modal -->
+      <div id="zoomModal" class="zoom-modal">
+        <span class="zoom-close" onclick="closeZoom()">&times;</span>
+        <img id="zoomImage" src="" alt="Zoomed Image" />
+      </div>
     </section>
 
     <div class="buttons">
@@ -962,9 +1020,57 @@
       slides[currentSlide].classList.add("active");
     }
 
-    // Keyboard navigation for carousel
+    // Zoom functionality
+    const zoomModal = document.getElementById("zoomModal");
+    const zoomImage = document.getElementById("zoomImage");
+    const zoomClose = document.querySelector(".zoom-close");
+
+    // Add click event to all carousel images
+    document.addEventListener("DOMContentLoaded", function() {
+      const images = document.querySelectorAll(".carousel-slide img");
+      images.forEach(img => {
+        img.addEventListener("click", function() {
+          openZoom(this);
+        });
+      });
+    });
+
+    function openZoom(img) {
+      zoomImage.src = img.src;
+      zoomImage.alt = img.alt;
+      zoomModal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeZoom() {
+      zoomModal.style.display = "none";
+      zoomImage.src = "";
+      document.body.style.overflow = "auto";
+    }
+
+    // Close when clicking the X button
+    zoomClose.addEventListener("click", function(e) {
+      e.stopPropagation();
+      closeZoom();
+    });
+
+    // Close when clicking the modal background
+    zoomModal.addEventListener("click", function(e) {
+      if (e.target === zoomModal) {
+        closeZoom();
+      }
+    });
+
+    // Close when clicking the zoomed image itself
+    zoomImage.addEventListener("click", function(e) {
+      closeZoom();
+    });
+
+    // Keyboard navigation for carousel and zoom
     document.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowLeft") {
+      if (e.key === "Escape") {
+        closeZoom();
+      } else if (e.key === "ArrowLeft") {
         changeSlide(-1);
       } else if (e.key === "ArrowRight") {
         changeSlide(1);
