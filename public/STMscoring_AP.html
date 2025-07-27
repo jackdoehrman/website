@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>STM Scoring System | Jack Doehrman</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="icon" sizes="32x32" type="image/png" href="/public/images/logo.png">
+<style>
+:root {
+/* Your Provided Palette with Color Theory Applications */
+--primary-blue: #3b5998;      /* Primary actions, headers, trust elements */
+--secondary-blue: #4A9EFF;    /* Interactive elements, hover states, accents */
+--tertiary-blue: #dfe3ee;     /* Subtle backgrounds, borders, soft highlights */
+--light-gray: #f7f7f7;        /* Light backgrounds, cards in light mode */
+--pure-white: #ffffff;        /* Text on dark backgrounds, pure highlights */
+
+/* Dark Mode Palette with Color Theory Optimization */
+--bg-primary: #0f1419;         /* Darkest - main background (darker for better contrast) */
+--bg-secondary: #1a2028;       /* Secondary surfaces - cards, sections */
+--bg-tertiary: #232b36;        /* Elevated surfaces - interactive elements */
+--bg-quaternary: #2d3742;      /* Highest elevation - hover states */
+
+/* Accent Colors Using Your Palette */
+--accent-primary: var(--primary-blue);      /* Primary CTAs, important links */
+--accent-secondary: var(--secondary-blue);  /* Secondary actions, interactive states */
+--accent-tertiary: var(--tertiary-blue);    /* Subtle accents, muted elements */
+
+/* Text Hierarchy with Optimal Contrast */
+--text-primary: var(--pure-white);          /* Highest contrast for main text */
+--text-secondary: #e8eaed;                  /* Secondary text, slightly dimmed */
+--text-muted: var(--secondary-blue);        /* Muted text, metadata */
+--text-accent: var(--tertiary-blue);        /* Accent text, special highlights */
+
+/* Border & Shadow System */
+--border-subtle: rgba(223, 227, 238, 0.1);   /* Subtle borders using tertiary blue */
+--border-medium: rgba(223, 227, 238, 0.2);   /* Medium borders */
+--border-strong: rgba(139, 157, 195, 0.3);   /* Strong borders using secondary blue */
+
+--shadow-subtle: rgba(15, 20, 25, 0.4);      /* Subtle shadows */
+--shadow-medium: rgba(15, 20, 25, 0.6);      /* Medium shadows */
+--shadow-strong: rgba(15, 20, 25, 0.8);      /* Strong shadows */
+
+/* Special Effects */
+--glow-primary: rgba(59, 89, 152, 0.3);      /* Primary blue glow */
+--glow-secondary: rgba(139, 157, 195, 0.2);  /* Secondary blue glow */
+--glow-tertiary: rgba(223, 227, 238, 0.1);   /* Tertiary blue glow */
+
+/* Project-specific colors - Changed from orange to blue */
+--accent-highlight: var(--secondary-blue);   /* Changed from orange to secondary blue */
+--success-green: #28a745;
+--warning-yellow: #ffc107;
+
+--font: 'Inter', sans-serif;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* Performance optimizations */
+* {
+-webkit-transform: translateZ(0);
+transform: translateZ(0);
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+background: radial-gradient(ellipse at top, var(--bg-primary) 0%, #0a0e13 100%);
+color: var(--text-primary);
+font-family: var(--font);
+line-height: 1.7;
+padding: 2rem;
+min-height: 100vh;
+overflow-x: hidden;
+/* Performance improvements */
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+will-change: scroll-position;
+}
+
+a {
+color: var(--accent-secondary);
+text-decoration: none;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover {
+color: var(--accent-tertiary);
+transform: translateY(-1px);
+}
+
+h1, h2, h3 {
+color: var(--text-primary);
+margin-bottom: 1.2rem;
+font-weight: 600;
+letter-spacing: -0.025em;
+}
+
+header {
+max-width: 1200px;
+margin: 0 auto 4rem;
+text-align: left;
+background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+box-shadow: 
+0 20px 60px var(--shadow-strong), 
+0 0 0 1px var(--border-subtle),
+0 0 40px var(--glow-primary);
+padding: 3rem;
+border-radius: 24px;
+position: relative;
+overflow: hidden;
+backdrop-filter: blur(20px);
+/* Performance optimization */
+will-change: transform;
+transform: translateZ(0);
+}
+
+header::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 4px;
+background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+box-shadow: 0 0 20px var(--glow-secondary);
+}
+
+header::after {
+content: '';
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: radial-gradient(circle, var(--glow-tertiary) 0%, transparent 70%);
+opacity: 0.4;
+animation: gentle-pulse 8s ease-in-out infinite;
+pointer-events: none;
+}
+
+header h1 {
+font-size: 3rem;
+color: var(--pure-white);
+margin-bottom: 0.8rem;
+font-weight: 700;
+position: relative;
+z-index: 2;
+}
+
+header h2 {
+color: var(--accent-secondary);
+font-size: 1.5rem;
+font-weight: 500;
+margin-bottom: 1.5rem;
+position: relative;
+z-index: 2;
+}
+
+header p {
+color: var(--text-secondary);
+font-size: 1.1rem;
+max-width: 800px;
+position: relative;
+z-index: 2;
+}
+
+section {
+max-width: 1200px;
+margin: 0 auto 3rem;
+animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+box-shadow: 
+0 10px 40px var(--shadow-medium), 
+0 0 0 1px var(--border-subtle);
+padding: 2.5rem;
+border-radius: 20px;
+position: relative;
+backdrop-filter: blur(20px);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Performance optimization */
+will-change: transform;
+transform: translateZ(0);
+}
+
+section:hover {
+transform: translateY(-4px) translateZ(0);
+box-shadow: 
+0 20px 60px var(--shadow-strong), 
+0 0 0 1px var(--border-medium),
+0 0 30px var(--glow-secondary);
+}
+
+section::before {
+content: '';
+position: absolute;
+top: 0;
+left: 20px;
+width: 60px;
+height: 3px;
+background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+border-radius: 2px;
+box-shadow: 0 0 10px var(--glow-primary);
+}
+
+@keyframes slideInUp {
+from {
+opacity: 0;
+transform: translateY(40px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes gentle-pulse {
+0%, 100% { 
+opacity: 0.4; 
+transform: scale(1) translateZ(0); 
+}
+50% { 
+opacity: 0.6; 
+transform: scale(1.05) translateZ(0); 
+}
+}
+
+p {
+margin-bottom: 1rem;
+color: var(--text-secondary);
+}
+
+ul {
+list-style: none;
+padding-left: 0;
+margin: 1rem 0;
+}
+
+ul li {
+margin-bottom: 1rem;
+padding: 0.75rem 0;
+padding-left: 1.8rem;
+position: relative;
+transition: all 0.3s ease;
+border-radius: 8px;
+}
+
+ul li:hover {
+background: var(--glow-tertiary);
+padding-left: 2.2rem;
+}
+
+ul li::before {
+content: '▸';
+position: absolute;
+left: 0;
+color: var(--accent-secondary);
+font-weight: bold;
+transition: all 0.3s ease;
+}
+
+ul li:hover::before {
+color: var(--accent-tertiary);
+transform: scale(1.2);
+}
+
+ul li strong {
+color: var(--accent-secondary);
+font-weight: 600;
+}
+
+h2 {
+font-size: 1.8rem;
+color: var(--text-primary);
+margin-top: 1.5rem;
+}
+
+h3 {
+font-size: 1.4rem;
+color: var(--accent-highlight); /* Changed from orange to blue */
+margin-top: 1.2rem;
+}
+
+.highlight-box {
+background: linear-gradient(135deg, rgba(74, 158, 255, 0.1) 0%, rgba(74, 158, 255, 0.05) 100%); /* Changed from orange to blue */
+border: 1px solid rgba(74, 158, 255, 0.3); /* Changed from orange to blue */
+border-radius: 16px;
+padding: 2rem;
+margin: 2rem 0;
+position: relative;
+backdrop-filter: blur(20px);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.highlight-box::before {
+content: '';
+position: absolute;
+top: 0;
+left: 15px;
+width: 50px;
+height: 3px;
+background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); /* Changed from orange to blue */
+border-radius: 2px;
+box-shadow: 0 0 8px var(--glow-primary); /* Changed from orange to blue */
+}
+
+.highlight-box:hover {
+transform: translateY(-4px);
+box-shadow: 0 15px 40px var(--shadow-strong);
+border-color: var(--accent-secondary); /* Changed from orange to blue */
+}
+
+.success-box {
+background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+border: 1px solid rgba(40, 167, 69, 0.3);
+border-radius: 16px;
+padding: 2rem;
+margin: 2rem 0;
+position: relative;
+backdrop-filter: blur(20px);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.success-box::before {
+content: '';
+position: absolute;
+top: 0;
+left: 15px;
+width: 50px;
+height: 3px;
+background: linear-gradient(90deg, #28a745, #20c997);
+border-radius: 2px;
+box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+}
+
+.success-box:hover {
+transform: translateY(-4px);
+box-shadow: 0 15px 40px var(--shadow-strong);
+border-color: #28a745;
+}
+
+/* Tier Cards */
+.tier-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 2rem;
+margin: 2rem 0;
+}
+
+.tier-card {
+background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+border: 1px solid var(--border-subtle);
+border-radius: 18px;
+padding: 2rem;
+text-align: center;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+backdrop-filter: blur(20px);
+position: relative;
+/* Performance optimization */
+will-change: transform;
+transform: translateZ(0);
+}
+
+.tier-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 15px;
+width: 50px;
+height: 3px;
+background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); /* Changed from orange to blue */
+border-radius: 2px;
+box-shadow: 0 0 8px var(--glow-primary); /* Changed from orange to blue */
+}
+
+.tier-card:hover {
+transform: translateY(-8px) translateZ(0);
+box-shadow: 0 20px 60px var(--shadow-strong);
+border-color: var(--accent-secondary); /* Changed from orange to blue */
+background: linear-gradient(135deg, var(--bg-quaternary) 0%, var(--bg-tertiary) 100%);
+}
+
+.tier-card h4 {
+color: var(--accent-highlight); /* Changed from orange to blue */
+font-size: 1.3rem;
+margin-bottom: 1rem;
+font-weight: 600;
+}
+
+.tier-target {
+font-size: 2rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 1rem 0;
+}
+
+.tier-description {
+color: var(--text-muted);
+font-size: 0.9rem;
+}
+
+/* Points System */
+.points-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 1.5rem;
+margin: 2rem 0;
+}
+
+.points-item {
+background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+border: 1px solid var(--border-subtle);
+border-radius: 12px;
+padding: 1.5rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+backdrop-filter: blur(20px);
+}
+
+.points-item:hover {
+transform: translateY(-4px);
+box-shadow: 0 15px 40px var(--shadow-strong);
+border-color: var(--accent-secondary);
+background: linear-gradient(135deg, var(--bg-quaternary) 0%, var(--bg-tertiary) 100%);
+}
+
+.points-activity {
+flex: 1;
+}
+
+.points-activity strong {
+color: var(--text-primary);
+font-weight: 600;
+}
+
+.points-value {
+font-size: 1.2rem;
+font-weight: 600;
+color: var(--accent-highlight); /* Changed from orange to blue */
+}
+
+/* Stats Grid */
+.stat-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 2rem;
+margin: 2rem 0;
+}
+
+.stat-card {
+background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+border: 1px solid var(--border-subtle);
+border-radius: 16px;
+padding: 2rem;
+text-align: center;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+backdrop-filter: blur(20px);
+position: relative;
+}
+
+.stat-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 15px;
+width: 40px;
+height: 3px;
+background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+border-radius: 2px;
+box-shadow: 0 0 8px var(--glow-primary);
+}
+
+.stat-card:hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 60px var(--shadow-strong);
+border-color: var(--accent-secondary);
+}
+
+.stat-number {
+font-size: 2.5rem;
+font-weight: 600;
+color: var(--accent-highlight); /* Changed from orange to blue */
+display: block;
+margin-bottom: 0.5rem;
+}
+
+.stat-label {
+color: var(--text-muted);
+font-size: 0.9rem;
+margin-top: 0.5rem;
+}
+
+/* Carousel Styles */
+.carousel-container {
+position: relative;
+max-width: 100%;
+width: 100%;
+margin: 2rem 0;
+border-radius: 18px;
+box-shadow: 0 10px 40px var(--shadow-medium);
+background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+overflow: hidden;
+border: 1px solid var(--border-subtle);
+backdrop-filter: blur(20px);
+}
+
+.carousel-slide {
+display: none;
+text-align: center;
+position: relative;
+}
+
+.carousel-slide.active {
+display: block;
+}
+
+.carousel-slide img {
+width: 100%;
+height: auto;
+display: block;
+cursor: zoom-in;
+transition: opacity 0.2s ease;
+}
+
+.carousel-slide img:hover {
+opacity: 0.9;
+}
+
+.caption {
+padding: 1.5rem;
+font-size: 1rem;
+color: var(--text-secondary);
+background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+text-align: center;
+font-style: italic;
+}
+
+/* Arrow Navigation */
+.carousel-arrow {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background: var(--bg-secondary);
+border: 1px solid var(--border-medium);
+color: var(--text-primary);
+width: 50px;
+height: 50px;
+border-radius: 50%;
+cursor: pointer;
+font-size: 1.5rem;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+z-index: 10;
+box-shadow: 0 8px 25px var(--shadow-medium);
+backdrop-filter: blur(20px);
+}
+
+.carousel-arrow:hover {
+background: var(--accent-secondary); /* Changed from orange to blue */
+color: var(--bg-primary);
+transform: translateY(-50%) scale(1.15);
+box-shadow: 0 15px 40px var(--shadow-strong);
+}
+
+.carousel-arrow.prev {
+left: 15px;
+}
+
+.carousel-arrow.next {
+right: 15px;
+}
+
+/* Zoom Modal */
+.zoom-modal {
+display: none;
+position: fixed;
+z-index: 9999;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background-color: rgba(0, 0, 0, 0.95);
+justify-content: center;
+align-items: center;
+cursor: zoom-out;
+padding: 20px;
+backdrop-filter: blur(20px);
+box-sizing: border-box;
+}
+
+.zoom-modal img {
+max-width: 90vw;
+max-height: 90vh;
+width: auto;
+height: auto;
+object-fit: contain;
+border-radius: 8px;
+box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+cursor: zoom-out;
+}
+
+.zoom-close {
+position: absolute;
+top: 20px;
+right: 30px;
+color: var(--text-primary);
+font-size: 40px;
+font-weight: bold;
+cursor: pointer;
+z-index: 10000;
+transition: all 0.3s ease;
+}
+
+.zoom-close:hover {
+color: var(--accent-secondary);
+transform: scale(1.1);
+}
+
+/* Back Button */
+.buttons {
+margin-top: 3rem;
+display: flex;
+gap: 1rem;
+justify-content: center;
+}
+
+.button {
+padding: 0.8rem 1.8rem;
+background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+color: var(--pure-white);
+text-decoration: none;
+border-radius: 12px;
+font-weight: 600;
+transition: all 0.3s ease;
+border: none;
+cursor: pointer;
+font-size: 1rem;
+box-shadow: 0 4px 15px var(--shadow-medium);
+position: relative;
+overflow: hidden;
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+transition: left 0.6s ease;
+}
+
+.button:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 25px var(--shadow-strong);
+background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+color: var(--bg-primary);
+}
+
+.button:hover::before {
+left: 100%;
+}
+
+/* Focus states for accessibility */
+.carousel-arrow:focus,
+.button:focus {
+outline: 2px solid var(--accent-secondary);
+outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 1023px) {
+.tier-grid {
+grid-template-columns: 1fr;
+}
+
+.points-grid {
+grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 768px) {
+body {
+padding: 1.5rem;
+}
+
+header, section {
+padding: 2rem;
+margin-bottom: 2.5rem;
+}
+
+header h1 {
+font-size: 2.2rem;
+}
+
+header h2 {
+font-size: 1.3rem;
+}
+
+h2 {
+font-size: 1.5rem;
+}
+
+h3 {
+font-size: 1.2rem;
+}
+
+.stat-grid {
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 1.5rem;
+}
+
+.stat-card, .tier-card {
+padding: 1.5rem;
+}
+
+.stat-number {
+font-size: 2rem;
+}
+
+.carousel-arrow {
+width: 40px;
+height: 40px;
+font-size: 1.2rem;
+}
+
+.carousel-arrow.prev {
+left: 10px;
+}
+
+.carousel-arrow.next {
+right: 10px;
+}
+}
+
+@media (max-width: 479px) {
+body {
+padding: 1rem;
+}
+
+header, section {
+padding: 1.5rem;
+margin-bottom: 2rem;
+}
+
+header h1 {
+font-size: 1.8rem;
+text-align: center;
+}
+
+header h2 {
+font-size: 1.1rem;
+text-align: center;
+}
+
+header p {
+text-align: center;
+}
+
+h2 {
+font-size: 1.3rem;
+text-align: center;
+}
+
+h3 {
+font-size: 1.1rem;
+}
+
+.stat-grid {
+grid-template-columns: 1fr;
+}
+
+.button {
+padding: 0.7rem 1.5rem;
+font-size: 0.9rem;
+}
+}
+
+/* Staggered animation delays for smoother loading */
+section:nth-child(1) { animation-delay: 0.1s; }
+section:nth-child(2) { animation-delay: 0.2s; }
+section:nth-child(3) { animation-delay: 0.3s; }
+section:nth-child(4) { animation-delay: 0.4s; }
+section:nth-child(5) { animation-delay: 0.5s; }
+section:nth-child(6) { animation-delay: 0.6s; }
+section:nth-child(7) { animation-delay: 0.7s; }
+section:nth-child(8) { animation-delay: 0.8s; }
+</style>
+</head>
+<body>
+
+<header>
+	<h1>Season Ticket Member Scoring System</h1>
+	<h2>Predictive Analytics for Member Retention</h2>
+	<p>
+		A comprehensive scoring and predictive modeling system designed to identify season ticket members at risk of non-renewal, enabling proactive engagement strategies to improve retention rates.
+	</p>
+</header>
+
+<main>
+	<section id="overview">
+		<h2>System Overview</h2>
+		<p>
+			The STM Scoring System transforms member engagement data into actionable insights through a points-based scoring model. By tracking interactions between members and the organization, we can predict renewal likelihood and identify at-risk accounts before they churn.
+		</p>
+		<h3>Core Objectives</h3>
+			<ul>
+				<li><strong>Predict season ticket member renewal likelihood</strong> with 85%+ accuracy</li>
+				<li><strong>Identify at-risk members weeks before renewal launch</strong> and months before end of renewal period</li>
+				<li><strong>Enable targeted retention campaigns</strong> and personalized outreach</li>
+				<li><strong>Optimize member services team efficiency</strong> and resource allocation</li>
+				<li><strong>Increase overall renewal rates</strong> through data-driven interventions</li>
+			</ul>
+	</section>
+
+	<section id="methodology">
+		<h2>Scoring Methodology</h2>
+		<p>
+			The scoring system is built on extensive analysis of historical member behavior, identifying key correlation patterns between engagement activities and renewal decisions. Members are segmented into three tiers based on tenure, each with customized scoring targets.
+		</p>
+		<h3>Member Tier Classifications</h3>
+		<div class="tier-grid">
+			<div class="tier-card">
+				<h4>Newcomers</h4>
+				<div class="tier-target">180 Points</div>
+					<div class="tier-description">First-year members historically attended 15+ games to achieve 80% renewal rate</div>
+			</div>
+			<div class="tier-card">
+				<h4>Established</h4>
+				<div class="tier-target">160 Points</div>
+				<div class="tier-description">2-4 year members historically attended 12+ games to achieve 80% renewal rate</div>
+			</div>
+			<div class="tier-card">
+				<h4>Veterans</h4>
+				<div class="tier-target">120 Points</div>
+				<div class="tier-description">5+ year members had 80%+ renewal regardless of historical attendance patterns</div>
+			</div>
+		</div>
+
+		<div class="highlight-box">
+			<h3>Points Allocation System</h3>
+			<p>Points are awarded based on the perceived value and impact of each interaction on member satisfaction and renewal likelihood:</p>
+
+			<div class="points-grid">
+				<div class="points-item">
+					<div class="points-activity">
+						<strong>Game Attendance</strong><br>
+						<span style="color: var(--text-muted);">Attending regular season matches</span>
+					</div>
+					<div class="points-value">10 pts</div>
+				</div>
+				<div class="points-item">
+					<div class="points-activity">
+						<strong>Fan Experience Events</strong><br>
+						<span style="color: var(--text-muted);">Gameday premium experiences</span>
+					</div>
+					<div class="points-value">5 pts</div>
+				</div>
+				<div class="points-item">
+					<div class="points-activity">
+						<strong>Member Events</strong><br>
+						<span style="color: var(--text-muted);">Non-gameday exclusive events</span>
+					</div>
+					<div class="points-value">5 pts</div>
+				</div>
+				<div class="points-item">
+					<div class="points-activity">
+						<strong>Seat Upgrades</strong><br>
+						<span style="color: var(--text-muted);">Complimentary upgrade for lucky fans</span>
+					</div>
+					<div class="points-value">3 pts</div>
+				</div>
+				<div class="points-item">
+					<div class="points-activity">
+						<strong>In-Person Touchpoint</strong><br>
+						<span style="color: var(--text-muted);">Face-to-face with service rep</span>
+					</div>
+					<div class="points-value">3 pts</div>
+				</div>
+				<div class="points-item">
+					<div class="points-activity">
+						<strong>Remote Touchpoint</strong><br>
+						<span style="color: var(--text-muted);">Phone/email interaction</span>
+					</div>
+					<div class="points-value">1 pt</div>
+				</div>
+			</div>
+	</section>
+
+<section id="predictive-model">
+<h2>Predictive Analytics</h2>
+<p>
+The scoring system within CRM incorporates a sophisticated predictive model that analyzes current point accumulation, historical patterns, and temporal factors to forecast renewal likelihood throughout the season.
+</p>
+
+<h3>Model Components</h3>
+<ul>
+<li><strong>Current Score Progress</strong> - Real-time point accumulation vs. tier targets</li>
+<li><strong>Seasonal Timeline</strong> - Days since last renewal and time until next renewal period</li>
+<li><strong>Engagement Velocity</strong> - Rate of point accumulation</li>
+</ul>
+
+<div class="success-box">
+<h3>Predictive Outputs</h3>
+<ul>
+<li><strong>"On Pace"</strong> - Members tracking toward renewal target based on current engagement</li>
+<li><strong>"At Risk"</strong> - Members falling behind expected engagement patterns</li>
+<li><strong>Intervention Recommendations</strong> - Suggested actions to improve renewal likelihood</li>
+</ul>
+</div>
+</section>
+
+<section id="implementation">
+<h2>Technical Implementation</h2>
+<p>
+The system utilizes integrated ticketing data and is built within existing CRM infrastructure to provide real-time scoring updates for service representatives.
+</p>
+
+<h3>Technology Stack</h3>
+<ul>
+<li><strong>Data Sources</strong> - Salesforce CRM, ticketing system APIs, attendance tracking</li>
+<li><strong>Processing Engine</strong> - Automated ETL pipelines with real-time data ingestion</li>
+<li><strong>Analytics Platform</strong> - Custom scoring algorithms</li>
+<li><strong>Visualization</strong> - Interactive dashboards and service rep interfaces</li>
+</ul>
+</section>
+
+<section id="impact">
+<h2>Business Impact & Results</h2>
+<p>
+The STM Scoring System has transformed how the organization approaches member retention, shifting from reactive to proactive engagement strategies with measurable results.
+</p>
+</section>
+
+<section id="visuals">
+<h2>System Dashboards & Analytics</h2>
+
+<div class="carousel-container">
+<!-- Arrow Navigation -->
+<button class="carousel-arrow prev" onclick="changeSlide(-1)" aria-label="Previous slide">‹</button>
+<button class="carousel-arrow next" onclick="changeSlide(1)" aria-label="Next slide">›</button>
+
+<div class="carousel-slide active">
+<img src="images/STMScore1.png" alt="Member Overview Dashboard">
+<div class="caption">Figure 1: Member Overview Dashboard - Real-time scoring and renewal predictions</div>
+</div>
+<div class="carousel-slide">
+<img src="images/STMScore2.png" alt="Score Pacing Analytics">
+<div class="caption">Figure 2: Score Pacing Analytics - Progress tracking against tier targets</div>
+</div>
+<div class="carousel-slide">
+<img src="images/STMScore3.png" alt="Service Rep Interface">
+<div class="caption">Figure 3: Service Representative Interface - Member touchpoint tracking</div>
+</div>
+<div class="carousel-slide">
+<img src="images/STMScore4.png" alt="Portfolio Management">
+<div class="caption">Figure 4: Portfolio Management - At-risk member identification and prioritization</div>
+</div>
+</div>
+
+<p style="font-style: italic; color: var(--text-muted); margin-top: 1.5rem; text-align: center;">
+*Dashboard examples use anonymized sample data to protect member privacy.
+</p>
+
+<!-- Zoom Modal -->
+<div id="zoomModal" class="zoom-modal">
+<span class="zoom-close" onclick="closeZoom()">&times;</span>
+<img id="zoomImage" src="" alt="Zoomed Image" />
+</div>
+</section>
+
+<div class="buttons">
+<a href="/public/allProjects.html" class="button">← Back to All Projects</a>
+</div>
+</main>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".carousel-slide");
+
+function changeSlide(direction) {
+slides[currentSlide].classList.remove("active");
+currentSlide = (currentSlide + direction + slides.length) % slides.length;
+slides[currentSlide].classList.add("active");
+}
+
+// Zoom functionality
+const zoomModal = document.getElementById("zoomModal");
+const zoomImage = document.getElementById("zoomImage");
+const zoomClose = document.querySelector(".zoom-close");
+
+// Add click event to all carousel images
+document.addEventListener("DOMContentLoaded", function() {
+const images = document.querySelectorAll(".carousel-slide img");
+images.forEach(img => {
+img.addEventListener("click", function() {
+openZoom(this);
+});
+});
+});
+
+function openZoom(img) {
+zoomImage.src = img.src;
+zoomImage.alt = img.alt;
+zoomModal.style.display = "flex";
+document.body.style.overflow = "hidden";
+}
+
+function closeZoom() {
+zoomModal.style.display = "none";
+zoomImage.src = "";
+document.body.style.overflow = "auto";
+}
+
+// Close when clicking the X button
+zoomClose.addEventListener("click", function(e) {
+e.stopPropagation();
+closeZoom();
+});
+
+// Close when clicking the modal background
+zoomModal.addEventListener("click", function(e) {
+if (e.target === zoomModal) {
+closeZoom();
+}
+});
+
+// Close when clicking the zoomed image itself
+zoomImage.addEventListener("click", function(e) {
+closeZoom();
+});
+
+// Keyboard navigation for carousel and zoom
+document.addEventListener("keydown", function (e) {
+if (e.key === "Escape") {
+closeZoom();
+} else if (e.key === "ArrowLeft") {
+changeSlide(-1);
+} else if (e.key === "ArrowRight") {
+changeSlide(1);
+}
+});
+
+// Auto-advance carousel
+let carouselInterval = setInterval(() => {
+changeSlide(1);
+}, 8000);
+
+// Pause auto-advance when hovering over carousel
+const carouselContainer = document.querySelector('.carousel-container');
+if (carouselContainer) {
+carouselContainer.addEventListener('mouseenter', () => {
+clearInterval(carouselInterval);
+});
+
+carouselContainer.addEventListener('mouseleave', () => {
+carouselInterval = setInterval(() => {
+changeSlide(1);
+}, 8000);
+});
+}
+</script>
+
+</body>
+</html>
