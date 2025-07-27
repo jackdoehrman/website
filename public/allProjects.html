@@ -3,48 +3,472 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Projects | Jack Doehrman</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="icon" sizes="32x32" type="image/png" href="public/images/logo.png">
+  <title>All Projects | Jack Doehrman</title>
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
+    :root {
+      /* Your Provided Palette with Color Theory Applications */
+      --primary-blue: #3b5998;      /* Primary actions, headers, trust elements */
+      --secondary-blue: #4A9EFF;    /* Interactive elements, hover states, accents */
+      --tertiary-blue: #dfe3ee;     /* Subtle backgrounds, borders, soft highlights */
+      --light-gray: #f7f7f7;        /* Light backgrounds, cards in light mode */
+      --pure-white: #ffffff;        /* Text on dark backgrounds, pure highlights */
+      
+      /* Dark Mode Palette with Color Theory Optimization */
+      --bg-primary: #0f1419;         /* Darkest - main background (darker for better contrast) */
+      --bg-secondary: #1a2028;       /* Secondary surfaces - cards, sections */
+      --bg-tertiary: #232b36;        /* Elevated surfaces - interactive elements */
+      --bg-quaternary: #2d3742;      /* Highest elevation - hover states */
+      
+      /* Accent Colors Using Your Palette */
+      --accent-primary: var(--primary-blue);      /* Primary CTAs, important links */
+      --accent-secondary: var(--secondary-blue);  /* Secondary actions, interactive states */
+      --accent-tertiary: var(--tertiary-blue);    /* Subtle accents, muted elements */
+      
+      /* Text Hierarchy with Optimal Contrast */
+      --text-primary: var(--pure-white);          /* Highest contrast for main text */
+      --text-secondary: #e8eaed;                  /* Secondary text, slightly dimmed */
+      --text-muted: var(--secondary-blue);        /* Muted text, metadata */
+      --text-accent: var(--tertiary-blue);        /* Accent text, special highlights */
+      
+      /* Border & Shadow System */
+      --border-subtle: rgba(223, 227, 238, 0.1);   /* Subtle borders using tertiary blue */
+      --border-medium: rgba(223, 227, 238, 0.2);   /* Medium borders */
+      --border-strong: rgba(139, 157, 195, 0.3);   /* Strong borders using secondary blue */
+      
+      --shadow-subtle: rgba(15, 20, 25, 0.4);      /* Subtle shadows */
+      --shadow-medium: rgba(15, 20, 25, 0.6);      /* Medium shadows */
+      --shadow-strong: rgba(15, 20, 25, 0.8);      /* Strong shadows */
+      
+      /* Special Effects */
+      --glow-primary: rgba(59, 89, 152, 0.3);      /* Primary blue glow */
+      --glow-secondary: rgba(139, 157, 195, 0.2);  /* Secondary blue glow */
+      --glow-tertiary: rgba(223, 227, 238, 0.1);   /* Tertiary blue glow */
+      
+      --font: 'Inter', sans-serif;
+    }
+
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Performance optimizations */
+    * {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(ellipse at top, var(--bg-primary) 0%, #0a0e13 100%);
+      color: var(--text-primary);
+      font-family: var(--font);
+      line-height: 1.7;
       padding: 2rem;
-      color: #f7f7f7;
+      min-height: 100vh;
+      overflow-x: hidden;
+      /* Performance improvements */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      will-change: scroll-position;
     }
+
+    a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    a:hover {
+      color: var(--accent-tertiary);
+      transform: translateY(-1px);
+    }
+
     h1, h2, h3 {
-      margin-top: 1.5rem;
+      color: var(--text-primary);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
     }
-    p {
-      line-height: 1.6;
+
+    header {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      box-shadow: 
+        0 20px 60px var(--shadow-strong), 
+        0 0 0 1px var(--border-subtle),
+        0 0 40px var(--glow-primary);
+      padding: 3rem;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+      box-shadow: 0 0 20px var(--glow-secondary);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--glow-tertiary) 0%, transparent 70%);
+      opacity: 0.4;
+      animation: gentle-pulse 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: var(--pure-white);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
+    }
+
+    header h2 {
+      color: var(--accent-secondary);
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 2;
       max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
-        .buttons {
-      margin-top: 2rem;
+
+    @keyframes gentle-pulse {
+      0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1) translateZ(0); 
+      }
+      50% { 
+        opacity: 0.6; 
+        transform: scale(1.05) translateZ(0); 
+      }
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-subtle);
+      padding: 2.5rem;
+      border-radius: 20px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 32px var(--shadow-subtle);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+      opacity: 0;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 15px var(--glow-secondary);
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--glow-secondary), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02) translateZ(0);
+      box-shadow: 
+        0 25px 80px var(--shadow-strong), 
+        0 0 0 1px var(--border-medium),
+        0 0 40px var(--glow-primary);
+      border-color: var(--accent-secondary);
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover::after {
+      left: 100%;
+    }
+
+    .project-card a {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      height: 100%;
+    }
+
+    .project-card h3 {
+      color: var(--accent-tertiary);
+      margin-bottom: 1.2rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
+      transition: color 0.3s ease;
+    }
+
+    .project-card:hover h3 {
+      color: var(--accent-secondary);
+    }
+
+    .project-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Staggered animation delays for smoother loading */
+    .project-card:nth-child(1) { animation-delay: 0.1s; }
+    .project-card:nth-child(2) { animation-delay: 0.2s; }
+    .project-card:nth-child(3) { animation-delay: 0.3s; }
+    .project-card:nth-child(4) { animation-delay: 0.4s; }
+    .project-card:nth-child(5) { animation-delay: 0.5s; }
+    .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .buttons {
       display: flex;
-      gap: 1rem;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 3rem;
     }
 
     .button {
-      padding: 0.75rem 1.5rem;
-      background-color: transparent;
-      border: 1px solid #8b9dc3;
-      color: #8b9dc3;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.8rem;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
       text-decoration: none;
-      border-radius: 4px;
-      transition: 0.3s ease;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid var(--border-medium);
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px var(--shadow-medium);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.6s ease;
     }
 
     .button:hover {
-      background-color: #f7f7f7;
-      color: #0a192f;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px var(--shadow-strong);
+      background: var(--bg-quaternary);
+      border-color: var(--accent-secondary);
+      color: var(--text-primary);
+    }
+
+    .button:hover::before {
+      left: 100%;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem;
+      }
+      
+      header {
+        padding: 2rem;
+        margin-bottom: 3rem;
+      }
+      
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      header h2 {
+        font-size: 1.2rem;
+      }
+      
+      #projects {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+      
+      .project-card {
+        padding: 2rem;
+      }
+      
+      .project-card h3 {
+        font-size: 1.3rem;
+      }
+      
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .button {
+        width: 200px;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+      
+      header {
+        padding: 1.5rem;
+      }
+      
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      header h2 {
+        font-size: 1.1rem;
+      }
+      
+      .project-card {
+        padding: 1.5rem;
+      }
+      
+      .project-card h3 {
+        font-size: 1.2rem;
+      }
+      
+      .button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        width: 180px;
+      }
+    }
+
+    /* High DPI optimizations */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .button {
+        min-height: 44px;
+      }
+      
+      .project-card:hover,
+      .button:hover {
+        transform: none;
+      }
+    }
+
+    /* Focus states for accessibility */
+    .button:focus, .project-card a:focus {
+      outline: 2px solid var(--accent-secondary);
+      outline-offset: 2px;
+    }
+
+    /* GPU acceleration for key elements */
+    header,
+    .project-card,
+    .button {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000px;
+      perspective: 1000px;
+    }
+
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>All Projects</h1>
     <h2>A variety of projects I have worked on thus far in my career.</h2>
@@ -61,6 +485,7 @@
           </p>
         </a>
       </div>
+      
       <div class="project-card">
         <a href="/public/SecurityMonetizationROI.html">
           <h3>Security ROI & Optimization</h3>
@@ -70,6 +495,8 @@
           </p>
         </a>
       </div>
+      
+      <!-- Future projects ready to be uncommented -->
       <!--
       <div class="project-card">
         <a href="/public/PostMatchSurvey.html">
@@ -82,57 +509,54 @@
           </p>
         </a>
       </div>
+      
       <div class="project-card">
         <a href="/public/SalesforceAdmin.html">
-          <h3>Post-Match Survey</h3>
+          <h3>Salesforce Administration</h3>
           <p>
-            Designed a Post-Match Survey sent out to Dynamo, Dash, and Shell Energy Stadium event attendees. 
-            Developed a SQL query to automate the Data Extension pulls for each email send. 
-            Built a PowerBI dashboard to give a complete analysis of survey data.
-            Automated Salesforce opportunity and case creation for attendees interested in additional tickets and those requesting contact about their experience. 
+            Comprehensive Salesforce CRM administration and optimization for ticketing and sponsorship operations.
+            Custom workflow development and user training programs.
           </p>
         </a>
       </div>
+      
       <div class="project-card">
         <a href="/public/FormsAndLeads.html">
-          <h3>Post-Match Survey</h3>
+          <h3>Forms & Lead Management</h3>
           <p>
-            Designed a Post-Match Survey sent out to Dynamo, Dash, and Shell Energy Stadium event attendees. 
-            Developed a SQL query to automate the Data Extension pulls for each email send. 
-            Built a PowerBI dashboard to give a complete analysis of survey data.
-            Automated Salesforce opportunity and case creation for attendees interested in additional tickets and those requesting contact about their experience. 
+            Streamlined lead capture and management systems with automated workflows and improved conversion tracking.
           </p>
         </a>
       </div>
+      
       <div class="project-card">
         <a href="/public/PaidDigital.html">
-          <h3>Post-Match Survey</h3>
+          <h3>Paid Digital Analytics</h3>
           <p>
-            Designed a Post-Match Survey sent out to Dynamo, Dash, and Shell Energy Stadium event attendees. 
-            Developed a SQL query to automate the Data Extension pulls for each email send. 
-            Built a PowerBI dashboard to give a complete analysis of survey data.
-            Automated Salesforce opportunity and case creation for attendees interested in additional tickets and those requesting contact about their experience. 
+            Performance analysis and optimization of digital advertising campaigns with ROI tracking and audience insights.
           </p>
         </a>
       </div>
+      
       <div class="project-card">
         <a href="/public/InternMentorship.html">
-          <h3>Post-Match Survey</h3>
+          <h3>Intern Mentorship Program</h3>
           <p>
-            Designed a Post-Match Survey sent out to Dynamo, Dash, and Shell Energy Stadium event attendees. 
-            Developed a SQL query to automate the Data Extension pulls for each email send. 
-            Built a PowerBI dashboard to give a complete analysis of survey data.
-            Automated Salesforce opportunity and case creation for attendees interested in additional tickets and those requesting contact about their experience. 
+            Developed and led mentorship initiatives for data analytics interns, creating training programs and career development pathways.
           </p>
         </a>
       </div>
       -->
     </section>
-  </br>
+
     <section class="buttons">
-      <a href="/" class="button">← Back to Home</a>
+      <a href="/" class="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+        </svg>
+        Back to Home
+      </a>
     </section>
   </main>
-
 </body>
 </html>
