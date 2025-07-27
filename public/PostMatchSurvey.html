@@ -3,18 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Post-Match Survey | Jack Doehrman</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Post-Match Survey Analytics | Jack Doehrman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="icon" sizes="32x32" type="image/png" href="images/logo.png">
   <style>
     :root {
-      --bg: #0a192f;
-      --text: #dfe3ee;
-      --subtext: #8b9dc3;
-      --accent: #f7f7f7;
-      --border: #233554;
-      --button-bg: #3b5998;
-      --dynamo-orange: #8ab7e9;
+      /* Your Provided Palette with Color Theory Applications */
+      --primary-blue: #3b5998;      /* Primary actions, headers, trust elements */
+      --secondary-blue: #4A9EFF;    /* Interactive elements, hover states, accents */
+      --tertiary-blue: #dfe3ee;     /* Subtle backgrounds, borders, soft highlights */
+      --light-gray: #f7f7f7;        /* Light backgrounds, cards in light mode */
+      --pure-white: #ffffff;        /* Text on dark backgrounds, pure highlights */
+      
+      /* Dark Mode Palette with Color Theory Optimization */
+      --bg-primary: #0f1419;         /* Darkest - main background (darker for better contrast) */
+      --bg-secondary: #1a2028;       /* Secondary surfaces - cards, sections */
+      --bg-tertiary: #232b36;        /* Elevated surfaces - interactive elements */
+      --bg-quaternary: #2d3742;      /* Highest elevation - hover states */
+      
+      /* Accent Colors Using Your Palette */
+      --accent-primary: var(--primary-blue);      /* Primary CTAs, important links */
+      --accent-secondary: var(--secondary-blue);  /* Secondary actions, interactive states */
+      --accent-tertiary: var(--tertiary-blue);    /* Subtle accents, muted elements */
+      
+      /* Text Hierarchy with Optimal Contrast */
+      --text-primary: var(--pure-white);          /* Highest contrast for main text */
+      --text-secondary: #e8eaed;                  /* Secondary text, slightly dimmed */
+      --text-muted: var(--secondary-blue);        /* Muted text, metadata */
+      --text-accent: var(--tertiary-blue);        /* Accent text, special highlights */
+      
+      /* Border & Shadow System */
+      --border-subtle: rgba(223, 227, 238, 0.1);   /* Subtle borders using tertiary blue */
+      --border-medium: rgba(223, 227, 238, 0.2);   /* Medium borders */
+      --border-strong: rgba(139, 157, 195, 0.3);   /* Strong borders using secondary blue */
+      
+      --shadow-subtle: rgba(15, 20, 25, 0.4);      /* Subtle shadows */
+      --shadow-medium: rgba(15, 20, 25, 0.6);      /* Medium shadows */
+      --shadow-strong: rgba(15, 20, 25, 0.8);      /* Strong shadows */
+      
+      /* Special Effects */
+      --glow-primary: rgba(59, 89, 152, 0.3);      /* Primary blue glow */
+      --glow-secondary: rgba(139, 157, 195, 0.2);  /* Secondary blue glow */
+      --glow-tertiary: rgba(223, 227, 238, 0.1);   /* Tertiary blue glow */
+      
+      /* Project-specific colors - Updated to blue theme */
+      --accent-highlight: var(--secondary-blue);   /* Main highlight color */
+      --success-green: #28a745;
+      --warning-yellow: #ffc107;
+      --dynamo-orange: #ff6600;
+      
       --font: 'Inter', sans-serif;
     }
 
@@ -24,108 +61,353 @@
       box-sizing: border-box;
     }
 
+    /* Performance optimizations */
+    * {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      background: radial-gradient(ellipse at top, var(--bg-primary) 0%, #0a0e13 100%);
+      color: var(--text-primary);
       font-family: var(--font);
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
       padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      min-height: 100vh;
+      overflow-x: hidden;
+      /* Performance improvements */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      will-change: scroll-position;
+    }
+
+    a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    a:hover {
+      color: var(--accent-tertiary);
+      transform: translateY(-1px);
     }
 
     h1, h2, h3 {
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--text);
+      color: var(--text-primary);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 0;
+    header {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      text-align: left;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      box-shadow: 
+        0 20px 60px var(--shadow-strong), 
+        0 0 0 1px var(--border-subtle),
+        0 0 40px var(--glow-primary);
+      padding: 3rem;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
     }
 
-    h2 {
-      font-size: 1.8rem;
-      color: var(--accent);
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+      box-shadow: 0 0 20px var(--glow-secondary);
     }
 
-    h3 {
-      font-size: 1.4rem;
-      color: var(--dynamo-orange);
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--glow-tertiary) 0%, transparent 70%);
+      opacity: 0.4;
+      animation: gentle-pulse 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: var(--pure-white);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
+    }
+
+    header h2 {
+      color: var(--accent-secondary);
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      box-shadow: 
+        0 10px 40px var(--shadow-medium), 
+        0 0 0 1px var(--border-subtle);
+      padding: 2.5rem;
+      border-radius: 20px;
+      position: relative;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Performance optimization */
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    section:hover {
+      transform: translateY(-4px) translateZ(0);
+      box-shadow: 
+        0 20px 60px var(--shadow-strong), 
+        0 0 0 1px var(--border-medium),
+        0 0 30px var(--glow-secondary);
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--glow-primary);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1) translateZ(0); 
+      }
+      50% { 
+        opacity: 0.6; 
+        transform: scale(1.05) translateZ(0); 
+      }
     }
 
     p {
       margin-bottom: 1rem;
-      max-width: 100%;
+      color: var(--text-secondary);
     }
 
     ul {
+      list-style: none;
+      padding-left: 0;
       margin: 1rem 0;
-      padding-left: 2rem;
     }
 
-    li {
-      margin-bottom: 0.5rem;
+    ul li {
+      margin-bottom: 1rem;
+      padding: 0.75rem 0;
+      padding-left: 1.8rem;
+      position: relative;
+      transition: all 0.3s ease;
+      border-radius: 8px;
     }
 
-    .section {
-      margin-bottom: 3rem;
+    ul li:hover {
+      background: var(--glow-tertiary);
+      padding-left: 2.2rem;
+    }
+
+    ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-secondary);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    ul li:hover::before {
+      color: var(--accent-tertiary);
+      transform: scale(1.2);
+    }
+
+    ul li strong {
+      color: var(--accent-secondary);
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--text-primary);
+      margin-top: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--accent-highlight);
+      margin-top: 1.2rem;
     }
 
     .highlight-box {
-      background: rgba(255, 102, 0, 0.1);
-      border: 1px solid rgba(255, 102, 0, 0.3);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
+      background: linear-gradient(135deg, rgba(74, 158, 255, 0.1) 0%, rgba(74, 158, 255, 0.05) 100%);
+      border: 1px solid rgba(74, 158, 255, 0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    .highlight-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--glow-primary);
+    }
+
+    .highlight-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px var(--shadow-strong);
+      border-color: var(--accent-secondary);
+    }
+
+    /* Stats Grid */
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
+      gap: 2rem;
       margin: 2rem 0;
     }
 
     .stat-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
       text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--glow-primary);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px var(--shadow-strong);
+      border-color: var(--accent-secondary);
     }
 
     .stat-number {
       font-size: 2.5rem;
       font-weight: 600;
-      color: var(--dynamo-orange);
+      color: var(--accent-highlight);
       display: block;
+      margin-bottom: 0.5rem;
     }
 
     .stat-label {
-      color: var(--subtext);
+      color: var(--text-muted);
       font-size: 0.9rem;
       margin-top: 0.5rem;
     }
 
-    /* PowerBI Container */
+    /* PowerBI Section */
     .powerbi-section {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2.5rem;
       margin: 3rem 0;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
+      position: relative;
+      backdrop-filter: blur(20px);
+      animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .powerbi-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--glow-primary);
     }
 
     .powerbi-container {
       width: 100%;
       height: 600px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      border: 1px solid var(--border-medium);
+      border-radius: 16px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.95);
-      margin-top: 1rem;
+      background: var(--bg-quaternary);
+      margin-top: 2rem;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .powerbi-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px var(--shadow-strong);
+      border-color: var(--accent-secondary);
     }
 
     .powerbi-container iframe {
@@ -140,127 +422,111 @@
       align-items: center;
       justify-content: center;
       height: 100%;
-      color: var(--subtext);
+      color: var(--text-muted);
       text-align: center;
       padding: 2rem;
     }
 
     .powerbi-placeholder h3 {
-      color: var(--dynamo-orange);
+      color: var(--accent-highlight);
       margin-bottom: 1rem;
+      font-size: 1.8rem;
     }
 
-    /* Carousel Styles */
-    .carousel-container {
-      position: relative;
-      max-width: 100%;
-      width: 100%;
+    /* Technology Stack */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
       margin: 2rem 0;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      background: rgba(255, 255, 255, 0.02);
-      overflow: hidden;
     }
 
-    .carousel-slide {
-      display: none;
-      text-align: center;
+    .tech-card {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
       position: relative;
     }
 
-    .carousel-slide.active {
-      display: block;
-    }
-
-    .carousel-slide img {
-      width: 100%;
-      height: auto;
-      cursor: zoom-in;
-      transition: opacity 0.2s ease;
-      display: block;
-    }
-
-    .carousel-slide img:hover {
-      opacity: 0.9;
-    }
-
-    .caption {
-      padding: 1rem;
-      font-size: 1rem;
-      color: var(--text);
-      background: rgba(0, 0, 0, 0.3);
-    }
-
-    /* Arrow Navigation */
-    .carousel-arrow {
+    .tech-card::before {
+      content: '';
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      border: none;
+      top: 0;
+      left: 15px;
       width: 50px;
-      height: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--success-green), #20c997);
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+    }
+
+    .tech-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px var(--shadow-strong);
+      border-color: var(--success-green);
+    }
+
+    .tech-title {
+      color: var(--success-green);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tech-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--success-green), #20c997);
       border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
-
-    .carousel-arrow:hover {
-      background: rgba(255, 102, 0, 0.8);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .carousel-arrow.prev {
-      left: 15px;
-    }
-
-    .carousel-arrow.next {
-      right: 15px;
-    }
-
-    /* Zoom Modal */
-    .zoom-modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.9);
-      justify-content: center;
-      align-items: center;
-      cursor: zoom-out;
-      padding: 20px;
-    }
-
-    .zoom-modal img {
-      max-width: 95%;
-      max-height: 95%;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .zoom-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: white;
-      font-size: 40px;
+      color: var(--pure-white);
+      font-size: 14px;
       font-weight: bold;
-      cursor: pointer;
-      z-index: 10000;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
     }
 
-    .zoom-close:hover {
-      color: #ccc;
+    .tech-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Impact Box */
+    .impact-box {
+      background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+      border: 1px solid rgba(40, 167, 69, 0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .impact-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #28a745, #20c997);
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+    }
+
+    .impact-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px var(--shadow-strong);
+      border-color: #28a745;
     }
 
     /* Back Button */
@@ -268,51 +534,96 @@
       margin-top: 3rem;
       display: flex;
       gap: 1rem;
+      justify-content: center;
     }
 
     .button {
-      padding: 0.75rem 1.5rem;
-      background-color: transparent;
-      border: 1px solid var(--subtext);
-      color: var(--subtext);
+      padding: 0.8rem 1.8rem;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--pure-white);
       text-decoration: none;
-      border-radius: 6px;
-      font-weight: 500;
+      border-radius: 12px;
+      font-weight: 600;
       transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px var(--shadow-medium);
+      position: relative;
+      overflow: hidden;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
     }
 
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
     .button:hover {
-      background-color: var(--accent);
-      color: var(--bg);
-      border-color: var(--accent);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px var(--shadow-strong);
+      background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+      color: var(--bg-primary);
+    }
+
+    .button:hover::before {
+      left: 100%;
+    }
+
+    /* Focus states for accessibility */
+    .button:focus {
+      outline: 2px solid var(--accent-secondary);
+      outline-offset: 2px;
     }
 
     /* Responsive Design */
+    @media (max-width: 1023px) {
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
       body {
-        padding: 1rem;
-        max-width: 100%;
+        padding: 1.5rem;
       }
 
-      h1 {
-        font-size: 2rem;
+      header, section {
+        padding: 2rem;
+        margin-bottom: 2.5rem;
+      }
+
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header h2 {
+        font-size: 1.3rem;
       }
 
       h2 {
         font-size: 1.5rem;
       }
 
-      .stat-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
+      h3 {
+        font-size: 1.2rem;
       }
 
-      .stat-card {
-        padding: 1rem;
+      .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .stat-card, .tech-card {
+        padding: 1.5rem;
       }
 
       .stat-number {
@@ -324,30 +635,60 @@
       }
 
       .powerbi-section {
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 479px) {
+      body {
         padding: 1rem;
       }
 
-      .carousel-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+      header, section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
       }
 
-      .carousel-arrow.prev {
-        left: 10px;
+      header h1 {
+        font-size: 1.8rem;
+        text-align: center;
       }
 
-      .carousel-arrow.next {
-        right: 10px;
+      header h2 {
+        font-size: 1.1rem;
+        text-align: center;
+      }
+
+      header p {
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
       }
     }
 
-    /* Focus states for accessibility */
-    .carousel-arrow:focus,
-    .button:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
+    /* Staggered animation delays for smoother loading */
+    section:nth-child(1) { animation-delay: 0.1s; }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.3s; }
+    section:nth-child(4) { animation-delay: 0.4s; }
+    section:nth-child(5) { animation-delay: 0.5s; }
+    section:nth-child(6) { animation-delay: 0.6s; }
   </style>
 </head>
 <body>
@@ -356,12 +697,12 @@
     <h1>Post-Match Survey Analytics</h1>
     <h2>Fan Experience Data Collection & Analysis</h2>
     <p>
-      A survey system set deployed to capture feedback from attendees at Houston Dynamo FC, Houston Dash, and Shell Energy Stadium events, providing actionable insights to enhance the fan experience.
+      A comprehensive survey system deployed to capture feedback from attendees at Houston Dynamo FC, Houston Dash, and Shell Energy Stadium events, providing actionable insights to enhance the fan experience through data-driven decision making.
     </p>
   </header>
 
   <main>
-    <section class="section" id="overview">
+    <section id="overview">
       <h2>Project Overview</h2>
       <p>
         The Post-Match Survey project was developed to systematically collect and analyze feedback from event attendees across all Shell Energy Stadium events. This initiative provides real-time insights into fan satisfaction, operational efficiency, and areas for improvement.
@@ -370,18 +711,19 @@
       <div class="highlight-box">
         <h3>Key Objectives</h3>
         <ul>
-          <li>Measure overall fan satisfaction and Net Promoter Score (NPS)</li>
-          <li>Identify operational pain points and service gaps</li>
-          <li>Track performance trends across different event types</li>
-          <li>Enable data-driven decision making for fan experience improvements</li>
+          <li><strong>Measure overall fan satisfaction and Net Promoter Score (NPS)</strong> across all event types</li>
+          <li><strong>Identify operational pain points and service gaps</strong> in real-time</li>
+          <li><strong>Track performance trends across different event types</strong> and seasonal variations</li>
+          <li><strong>Enable data-driven decision making</strong> for fan experience improvements and strategic investments</li>
+          <li><strong>Benchmark performance against industry standards</strong> and competitor experiences</li>
         </ul>
       </div>
     </section>
 
-    <section class="section" id="implementation">
+    <section id="implementation">
       <h2>Implementation & Data Collection</h2>
       <p>
-        The list of attendees is automatically created and the survey is sent to attendees within 24-48 hours after each event, ensuring high response rates while the experience is still fresh in attendees' minds.
+        The survey system automatically generates attendee lists and deploys surveys within 24-48 hours after each event, ensuring high response rates while the experience remains fresh in attendees' minds. The automated distribution system integrates seamlessly with existing ticketing and CRM platforms.
       </p>
       
       <div class="stat-grid">
@@ -401,76 +743,120 @@
 
       <h3>Survey Components</h3>
       <ul>
-        <li><strong>Net Promoter Scores</strong> - Likelihood to recommend to friends/family for Overall Attendance, Food & Beverage, and Team Store</li>
-        <li><strong>Operational Areas Satisfaction</strong> - Parking, concessions, security, cleanliness, etc. on a 5-point satisfaction scale</li>
-        <li><strong>Open-Ended Feedback</strong> - Qualitative insights and suggestions</li>
-        <li><strong>Demographics</strong> - Attendance frequency, seating section, group size, ticket price type group</li>
+        <li><strong>Net Promoter Scores</strong> - Likelihood to recommend to friends/family for Overall Attendance, Food & Beverage, and Team Store experiences</li>
+        <li><strong>Operational Areas Satisfaction</strong> - Parking, concessions, security, cleanliness, staff friendliness on a 5-point satisfaction scale</li>
+        <li><strong>Open-Ended Feedback</strong> - Qualitative insights, suggestions for improvement, and specific incident reporting</li>
+        <li><strong>Demographics & Segmentation</strong> - Attendance frequency, seating section, group size, ticket price tier, and visitor classification</li>
       </ul>
     </section>
 
-    <section class="section" id="analysis">
+    <section id="analysis">
       <h2>Data Analysis & Insights</h2>
       <p>
-        Survey responses are processed in real-time, with automated dashboards providing immediate visibility into fan sentiment and operational performance.
+        Survey responses are processed in real-time through automated analytics pipelines, providing immediate visibility into fan sentiment and operational performance. Advanced text analytics and sentiment analysis extract actionable insights from open-ended feedback, while statistical trending identifies patterns across events and seasons.
+      </p>
+
+      <div class="impact-box">
+        <h3>Key Analytics Capabilities</h3>
+        <ul>
+          <li><strong>Real-time Dashboard Monitoring</strong> - Live updates of satisfaction scores and NPS trending</li>
+          <li><strong>Sentiment Analysis</strong> - Automated processing of open-ended feedback with sentiment scoring</li>
+          <li><strong>Operational Alerting</strong> - Immediate notifications when satisfaction scores drop below thresholds</li>
+          <li><strong>Comparative Analysis</strong> - Event-to-event comparisons and seasonal trending analysis</li>
+          <li><strong>Segmentation Insights</strong> - Performance analysis by demographics, seating areas, and event types</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="methodology">
+      <h2>Technical Implementation</h2>
+      <p>
+        The survey system integrates with multiple data sources and platforms to ensure comprehensive data collection and seamless analysis workflows. The architecture supports scalable data processing and real-time analytics across all organizational touchpoints.
+      </p>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <div class="tech-title">
+            Survey Platform
+          </div>
+          <div class="tech-description">
+            SurveyMonkey Enterprise for survey design, distribution, and initial data collection with advanced logic and branching capabilities.
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-title">
+            Data Integration
+          </div>
+          <div class="tech-description">
+            Automated APIs connecting CRM systems, Salesforce Marketing Cloud, and ticketing platforms for seamless data flow.
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-title">
+            Analytics Platform
+          </div>
+          <div class="tech-description">
+            PowerBI dashboards for real-time reporting, trend analysis, and executive-level performance monitoring.
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-title">
+            AI Analytics
+          </div>
+          <div class="tech-description">
+            Natural language processing for sentiment analysis and automated categorization of open-ended feedback responses.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact">
+      <h2>Business Impact & Results</h2>
+      <p>
+        The Post-Match Survey project has become a cornerstone of the organization's fan experience strategy, directly influencing operational decisions, investment priorities, and strategic planning initiatives. The systematic collection and analysis of fan feedback has enabled evidence-based improvements across all aspects of the stadium experience.
       </p>
     </section>
 
-    <!-- PowerBI Dashboard Section 
-    <section class="section powerbi-section" id="dashboard">
+    <!-- PowerBI Dashboard Section
+    <section class="powerbi-section" id="dashboard">
       <h2>Interactive Dashboard</h2>
       <p>
-        Explore the live Post-Match Survey analytics dashboard below. This PowerBI report provides real-time insights into fan satisfaction metrics, operational performance, and trend analysis across all Shell Energy Stadium events.
+        The live Post-Match Survey analytics dashboard provides comprehensive insights into fan satisfaction metrics, operational performance trends, and comparative analysis across all Shell Energy Stadium events. Real-time data visualization enables immediate response to fan feedback and proactive issue resolution.
       </p>
       
-      <div class="powerbi-container">-->
-        <!-- Replace the src URL with your actual PowerBI embed URL 
+      <div class="powerbi-container">
         <iframe 
           src="YOUR_POWERBI_EMBED_URL_HERE"
           frameborder="0" 
           allowFullScreen="true"
           title="Post-Match Survey Analytics Dashboard">
         </iframe>
-        -->
-        <!-- Placeholder content - remove when you add the actual PowerBI URL 
+        
         <div class="powerbi-placeholder">
           <h3>📊 PowerBI Dashboard</h3>
-          <p>This section will display the interactive Post-Match Survey analytics dashboard.</p>
-          <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--subtext);">
-            To embed your PowerBI report:<br>
-            1. Publish your report to PowerBI Service<br>
-            2. Get the embed URL from the "Embed" option<br>
-            3. Replace "YOUR_POWERBI_EMBED_URL_HERE" with your actual URL
+          <p>This interactive dashboard displays real-time post-match survey analytics including:</p>
+          <div style="margin-top: 1.5rem; text-align: left; max-width: 600px;">
+            <ul style="list-style: none; padding: 0;">
+              <li style="margin: 0.5rem 0; color: var(--text-secondary);">• Fan satisfaction trends and NPS scores</li>
+              <li style="margin: 0.5rem 0; color: var(--text-secondary);">• Operational performance metrics by area</li>
+              <li style="margin: 0.5rem 0; color: var(--text-secondary);">• Event-to-event comparative analysis</li>
+              <li style="margin: 0.5rem 0; color: var(--text-secondary);">• Demographic segmentation insights</li>
+              <li style="margin: 0.5rem 0; color: var(--text-secondary);">• Sentiment analysis of open feedback</li>
+            </ul>
+          </div>
+          <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+            Dashboard integration ready for PowerBI embed URL
           </p>
         </div>
       </div>
-    </section>-->
-
-    <section class="section" id="methodology">
-      <h2>Technical Implementation</h2>
-      <p>
-        The survey system integrates with multiple data sources and platforms to ensure comprehensive data collection and seamless analysis workflows.
-      </p>
-
-      <h3>Technology Stack</h3>
-      <ul>
-        <li><strong>Survey Platform</strong> - SurveyMonkey for survey design and distribution</li>
-        <li><strong>Data Integration</strong> - Automated APIs connecting to CRM, Salesforce Marketing Cloud, and ticketing systems</li>
-        <li><strong>Analytics Platform</strong> - PowerBI for real-time dashboarding and reporting</li>
-        <li><strong>Data Warehouse</strong> - Centralized storage for historical trend analysis</li>
-        <li><strong>Automation</strong> - Triggered email lists based on attendance data</li>
-      </ul>
     </section>
-
-    <section class="section" id="impact">
-      <h2>Business Impact & Results</h2>
-      <p>
-        The Post-Match Survey project has become a cornerstone of the organization's fan experience strategy, directly influencing operational decisions and investment priorities.
-      </p>
-    </section>
-
-    <section class="buttons">
+-->
+    <div class="buttons">
       <a href="/public/allProjects.html" class="button">← Back to All Projects</a>
-    </section>
+    </div>
   </main>
 
   <script>
@@ -478,6 +864,7 @@
     const slides = document.querySelectorAll(".carousel-slide");
 
     function changeSlide(direction) {
+      if (slides.length === 0) return;
       slides[currentSlide].classList.remove("active");
       currentSlide = (currentSlide + direction + slides.length) % slides.length;
       slides[currentSlide].classList.add("active");
@@ -487,32 +874,34 @@
     const zoomModal = document.getElementById("zoomModal");
     const zoomImage = document.getElementById("zoomImage");
 
-    document.querySelectorAll(".carousel-slide img").forEach(img => {
-      img.addEventListener("click", function (e) {
-        zoomImage.src = this.src;
-        zoomImage.alt = this.alt;
-        zoomModal.style.display = "flex";
-        document.body.style.overflow = "hidden";
-        e.stopPropagation();
+    if (zoomModal && zoomImage) {
+      document.querySelectorAll(".carousel-slide img").forEach(img => {
+        img.addEventListener("click", function (e) {
+          zoomImage.src = this.src;
+          zoomImage.alt = this.alt;
+          zoomModal.style.display = "flex";
+          document.body.style.overflow = "hidden";
+          e.stopPropagation();
+        });
       });
-    });
 
-    function closeZoom() {
-      zoomModal.style.display = "none";
-      zoomImage.src = "";
-      document.body.style.overflow = "auto";
-    }
-
-    // Keyboard navigation
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        closeZoom();
-      } else if (e.key === "ArrowLeft") {
-        changeSlide(-1);
-      } else if (e.key === "ArrowRight") {
-        changeSlide(1);
+      function closeZoom() {
+        zoomModal.style.display = "none";
+        zoomImage.src = "";
+        document.body.style.overflow = "auto";
       }
-    });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeZoom();
+        } else if (e.key === "ArrowLeft") {
+          changeSlide(-1);
+        } else if (e.key === "ArrowRight") {
+          changeSlide(1);
+        }
+      });
+    }
   </script>
 
 </body>
