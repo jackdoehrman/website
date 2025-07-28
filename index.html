@@ -1871,6 +1871,17 @@ body {
         min-width: 20px;
         min-height: 20px;
       }
+
+      .section-spacer {
+  height: 3rem; /* Additional space between sections */
+  width: 100%;
+  /* Optional: Add subtle visual indicator (remove if you want invisible) */
+  background: transparent;
+  /* Ensures proper spacing in all browsers */
+  display: block;
+  margin: 0;
+  padding: 0;
+}
       
       /* Remove hover effects on touch devices */
       .project-card:hover,
@@ -1922,7 +1933,7 @@ body {
     <img src="/public/images/logo2.png" alt="Jack Doehrman Logo" class="sticky-header-logo" />
   </a>
 </div>
-<div></div>
+<div class="section-spacer"></div>
   <header class="floating-card-dark">
     <h1 class="palette-accent-dark">Jack Doehrman</h1>
     <h2>Data Analyst & Engineer</h2>
