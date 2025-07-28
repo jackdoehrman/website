@@ -171,6 +171,112 @@
       z-index: 2;
     }
 
+    /* Sticky Header Bar */
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 20px var(--shadow-medium);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sticky-header::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+  box-shadow: 0 0 10px var(--glow-secondary);
+}
+
+.sticky-header-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.sticky-header-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.sticky-header-logo {
+  height: 36px;
+  width: auto;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.sticky-header-link:hover .sticky-header-logo {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+/* Update body padding to account for sticky header */
+body {
+  /* ... your existing body styles ... */
+  padding-top: 80px; /* Add this line to your existing body padding */
+}
+
+/* Responsive adjustments for sticky header */
+@media (max-width: 768px) {
+  .sticky-header {
+    height: 50px;
+  }
+
+  .sticky-header-logo {
+    height: 30px;
+  }
+
+  .sticky-header-link {
+    padding: 6px;
+  }
+
+  body {
+    /* Update your existing mobile padding */
+    padding-top: 70px; /* Adjust this in your mobile media query */
+  }
+}
+
+@media (max-width: 479px) {
+  .sticky-header {
+    height: 45px;
+  }
+
+  .sticky-header-logo {
+    height: 26px;
+  }
+
+  .sticky-header-link {
+    padding: 4px;
+  }
+
+  body {
+    /* Update your existing mobile padding */
+    padding-top: 65px; /* Adjust this in your mobile media query */
+  }
+}
+
+/* Focus state for accessibility */
+.sticky-header-link:focus {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
     section {
       max-width: 1200px;
       margin: 0 auto 3rem;
