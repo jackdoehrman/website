@@ -615,10 +615,10 @@
       border: 1px solid rgba(255, 102, 0, 0.3);
     }
 
-    /* Mentorship Activities */
+    /* Mentorship Activities - Updated to 2x2 Grid */
     .mentorship-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap: 2rem;
       margin: 2rem 0;
     }
@@ -847,6 +847,7 @@
         grid-template-columns: 1fr;
       }
 
+      /* Make 2x2 grid stack on tablets */
       .mentorship-grid {
         grid-template-columns: 1fr;
       }
@@ -898,6 +899,11 @@
       .outcome-value {
         font-size: 1.6rem;
       }
+
+      /* Ensure 2x2 grid becomes single column on mobile */
+      .mentorship-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 479px) {
@@ -944,6 +950,11 @@
       .button {
         padding: 0.7rem 1.5rem;
         font-size: 0.9rem;
+      }
+
+      /* Single column on small mobile */
+      .mentorship-grid {
+        grid-template-columns: 1fr;
       }
     }
 
