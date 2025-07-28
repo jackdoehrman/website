@@ -762,6 +762,94 @@
       }
     }
 
+    /* Sticky Header Bar */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      box-shadow: 0 4px 20px var(--shadow-medium);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sticky-header::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+      box-shadow: 0 0 10px var(--glow-secondary);
+    }
+
+    .sticky-header-logo {
+      height: 36px;
+      width: auto;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .sticky-header-logo:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Add top padding to body to account for sticky header */
+    body {
+      background: radial-gradient(ellipse at top, var(--bg-primary) 0%, #0a0e13 100%);
+      color: var(--text-primary);
+      font-family: var(--font);
+      line-height: 1.7;
+      padding: 2rem;
+      padding-top: 80px; /* Account for sticky header */
+      min-height: 100vh;
+      overflow-x: hidden;
+      /* Performance improvements */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      will-change: scroll-position;
+    }
+
+    /* Responsive adjustments for sticky header */
+    @media (max-width: 768px) {
+      .sticky-header {
+        height: 50px;
+      }
+
+      .sticky-header-logo {
+        height: 30px;
+      }
+
+      body {
+        padding: 1.5rem;
+        padding-top: 70px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .sticky-header {
+        height: 45px;
+      }
+
+      .sticky-header-logo {
+        height: 26px;
+      }
+
+      body {
+        padding: 1rem;
+        padding-top: 65px;
+      }
+    }
+
     /* Staggered animation delays for smoother loading */
     section:nth-child(1) { animation-delay: 0.1s; }
     section:nth-child(2) { animation-delay: 0.2s; }
@@ -772,6 +860,10 @@
   </style>
 </head>
 <body>
+  <!-- Sticky Header Bar -->
+  <div class="sticky-header">
+    <img src="images/logo2.png" alt="Jack Doehrman Logo" class="sticky-header-logo" />
+  </div>
 
   <header>
     <h1>Digital Marketing Lead Management</h1>
