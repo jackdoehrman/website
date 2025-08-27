@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Data Warehousing & ETL Systems | Jack Doehrman</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="icon" sizes="32x32" type="image/png" href="/public/images/logo.png">
+<style>
+:root {
+/* Your Provided Palette with Color Theory Applications */
+--primary-blue: #3b5998;      /* Primary actions, headers, trust elements */
+--secondary-blue: #4A9EFF;    /* Interactive elements, hover states, accents */
+--tertiary-blue: #dfe3ee;     /* Subtle backgrounds, borders, soft highlights */
+--light-gray: #f7f7f7;        /* Light backgrounds, cards in light mode */
+--pure-white: #ffffff;        /* Text on dark backgrounds, pure highlights */
+
+/* Dark Mode Palette with Color Theory Optimization */
+--bg-primary: #0f1419;         /* Darkest - main background (darker for better contrast) */
+--bg-secondary: #1a2028;       /* Secondary surfaces - cards, sections */
+--bg-tertiary: #232b36;        /* Elevated surfaces - interactive elements */
+--bg-quaternary: #2d3742;      /* Highest elevation - hover states */
+
+/* Accent Colors Using Your Palette */
+--accent-primary: var(--primary-blue);      /* Primary CTAs, important links */
+--accent-secondary: var(--secondary-blue);  /* Secondary actions, interactive states */
+--accent-tertiary: var(--tertiary-blue);    /* Subtle accents, muted elements */
+
+/* Text Hierarchy with Optimal Contrast */
+--text-primary: var(--pure-white);          /* Highest contrast for main text */
+--text-secondary: #e8eaed;                  /* Secondary text, slightly dimmed */
+--text-muted: var(--secondary-blue);        /* Muted text, metadata */
+--text-accent: var(--tertiary-blue);        /* Accent text, special highlights */
+
+/* Border & Shadow System */
+--border-subtle: rgba(223, 227, 238, 0.1);   /* Subtle borders using tertiary blue */
+--border-medium: rgba(223, 227, 238, 0.2);   /* Medium borders */
+--border-strong: rgba(139, 157, 195, 0.3);   /* Strong borders using secondary blue */
+
+--shadow-subtle: rgba(15, 20, 25, 0.4);      /* Subtle shadows */
+--shadow-medium: rgba(15, 20, 25, 0.6);      /* Medium shadows */
+--shadow-strong: rgba(15, 20, 25, 0.8);      /* Strong shadows */
+
+/* Special Effects */
+--glow-primary: rgba(59, 89, 152, 0.3);      /* Primary blue glow */
+--glow-secondary: rgba(139, 157, 195, 0.2);  /* Secondary blue glow */
+--glow-tertiary: rgba(223, 227, 238, 0.1);   /* Tertiary blue glow */
+
+/* Project-specific colors - Blue theme */
+--accent-highlight: var(--secondary-blue);
+--success-green: #28a745;
+--warning-yellow: #ffc107;
+--data-purple: #6f42c1;
+--pipeline-orange: #fd7e14;
+
+--font: 'Inter', sans-serif;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* Performance optimizations */
+* {
+-webkit-transform: translateZ(0);
+transform: translateZ(0);
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+background: radial-gradient(ellipse at top, var(--bg-primary) 0%, #0a0e13 100%);
+color: var(--text-primary);
+font-family: var(--font);
+line-height: 1.7;
+padding: 2rem;
+min-height: 100vh;
+overflow-x: hidden;
+/* Performance improvements */
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+will-change: scroll-position;
+}
+
+a {
+color: var(--accent-secondary);
+text-decoration: none;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover {
+color: var(--accent-tertiary);
+transform: translateY(-1px);
+}
+
+h1, h2, h3 {
+color: var(--text-primary);
+margin-bottom: 1.2rem;
+font-weight: 600;
+letter-spacing: -0.025em;
+}
+
+header {
+max-width: 1200px;
+margin: 0 auto 4rem;
+text-align: left;
+background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+box-shadow: 
+0 20px 60px var(--shadow-strong), 
+0 0 0 1px var(--border-subtle),
+0 0 40px var(--glow-primary);
+padding: 3rem;
+border-radius: 24px;
+position: relative;
+overflow: hidden;
+backdrop-filter: blur(20px);
+/* Performance optimization */
+will-change: transform;
+transform: translateZ(0);
+}
+
+header::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 4px;
+background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+box-shadow: 0 0 20px var(--glow-secondary);
+}
+
+header::after {
+content: '';
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: radial-gradient(circle, var(--glow-tertiary) 0%, transparent 70%);
+opacity: 0.4;
+animation: gentle-pulse 8s ease-in-out infinite;
+pointer-events: none;
+}
+
+header h1 {
+font-size: 3rem;
+color: var(--pure-white);
+margin-bottom: 0.8rem;
+font-weight: 700;
+position: relative;
+z-index: 2;
+}
+
+header h2 {
+color: var(--accent-secondary);
+font-size: 1.5rem;
+font-weight: 500;
+margin-bottom: 1.5rem;
+position: relative;
+z-index: 2;
+}
+
+header p {
+color: var(--text-secondary);
+font-size: 1.1rem;
+max-width: 800px;
+position: relative;
+z-index: 2;
+}
+
+	/* Sticky Header Bar */
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 20px var(--shadow-medium);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sticky-header::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+  box-shadow: 0 0 10px var(--glow-secondary);
+}
+
+.sticky-header-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.sticky-header-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.sticky-header-logo {
+  height: 36px;
+  width: auto;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.sticky-header-link:hover .sticky-header-logo {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+/* Update body padding to account for sticky header */
+body {
+  /* ... your existing body styles ... */
+  padding-top: 80px; /* Add this line to your existing body padding */
+}
+
+/* Responsive adjustments for sticky header */
+@media (max-width: 768px) {
+  .sticky-header {
+    height: 50px;
+  }
+
+  .sticky-header-logo {
+    height: 30px;
+  }
+
+  .sticky-header-link {
+    padding: 6px;
+  }
+
+  body {
+    /* Update your existing mobile padding */
+    padding-top: 70px; /* Adjust this in your mobile media query */
+  }
+}
+
+@media (max-width: 479px) {
+  .sticky-header {
+    height: 45px;
+  }
+
+  .sticky-header-logo {
+    height: 26px;
+  }
+
+  .sticky-header-link {
+    padding: 4px;
+  }
+
+  body {
+    /* Update your existing mobile padding */
+    padding-top: 65px; /* Adjust this in your mobile media query */
+  }
+}
+
+/* Focus state for accessibility */
+.sticky-header-link:focus {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
+section {
+max-width: 1200px;
+margin: 0 auto 3rem;
+animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+box-shadow: 
+0 10px 40px var(--shadow-medium), 
+0 0 0 1px var(--border-subtle);
+padding: 2.5rem;
+border-radius: 20px;
+position: relative;
+backdrop-filter: blur(20px);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Performance optimization */
+will-change: transform;
+transform: translateZ(0);
+}
+
+section:hover {
+transform: translateY(-4px) translateZ(0);
+box-shadow: 
+0 20px 60px var(--shadow-strong), 
+0 0 0 1px var(--border-medium),
+0 0 30px var(--glow-secondary);
+}
+
+section::before {
+content: '';
+position: absolute;
+top: 0;
+left: 20px;
+width: 60px;
+height: 3px;
+background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+border-radius: 2px;
+box-shadow: 0 0 10px var(--glow-primary);
+}
+
+@keyframes slideInUp {
+from {
+opacity: 0;
+transform: translateY(40px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes gentle-pulse {
+0%, 100% { 
+opacity: 0.4; 
+transform: scale(1) translateZ(0); 
+}
+50% { 
+opacity: 0.6; 
+transform: scale(1.05) translateZ(0); 
+}
+}
+
+p {
+margin-bottom: 1rem;
+color: var(--text-secondary);
+}
+
+ul {
+list-style: none;
+padding-left: 0;
+margin: 1rem 0;
+}
+
+ul li {
+margin-bottom: 1rem;
+padding: 0.75rem 0;
+padding-left: 1.8rem;
+position: relative;
+transition: all 0.3s ease;
+border-radius: 8px;
+}
+
+ul li:hover {
+background: var(--glow-tertiary);
+padding-left: 2.2rem;
+}
+
+ul li::before {
+content: '▸';
+position: absolute;
+left: 0;
+color: var(--accent-secondary);
+font-weight: bold;
+transition: all 0.3s ease;
+}
+
+ul li:hover::before {
+color: var(--accent-tertiary);
+transform: scale(1.2);
+}
+
+ul li strong {
+color: var(--accent-secondary);
+font-weight: 600;
+}
+
+h2 {
+font-size: 1.8rem;
+color: var(--text-primary);
+margin-top: 1.5rem;
+}
+
+h3 {
+font-size: 1.4rem;
+color: var(--accent-highlight);
+margin-top: 1.2rem;
+}
+
+/* Architecture Cards */
+.architecture-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+margin: 2rem 0;
+}
+
+.architecture-card {
+background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+border: 1px solid var(--border-subtle);
+border-radius: 18px;
+padding: 2rem;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+backdrop-filter: blur(20px);
+position: relative;
+will-change: transform;
+transform: translateZ(0);
+}
+
+.architecture-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 15px;
+width: 50px;
+height: 3px;
+background: linear-gradient(90deg, var(--data-purple), var(--pipeline-orange));
+border-radius: 2px;
+box-shadow: 0 0 8px var(--glow-primary);
+}
+
+.architecture-card:hover {
+transform: translateY(-8px) translateZ(0);
+box-shadow: 0 20px 60px var(--shadow-strong);
+border-color: var(--accent-secondary);
+background: linear-gradient(135deg, var(--bg-quaternary) 0%, var(--bg-tertiary) 100%);
+}
+
+.architecture-card h4 {
+color: var(--accent-highlight);
+font-size: 1.3rem;
+margin-bottom: 1rem;
+font-weight: 600;
+}
+
+.tech-stack {
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
+margin-top: 1rem;
+}
+
+.tech-tag {
+background: rgba(74, 158, 255, 0.1);
+border: 1px solid rgba(74, 158, 255, 0.3);
+color: var(--accent-secondary);
+padding: 0.3rem 0.8rem;
+border-radius: 20px;
+font-size: 0.85rem;
+font-weight: 500;
+transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+background: rgba(74, 158, 255, 0.2);
+border-color: var(--accent-secondary);
+transform: translateY(-1px);
+}
+
+/* Pipeline Flow */
+.pipeline-flow {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1.5rem;
+margin: 2rem 0;
+position: relative;
+}
+
+.pipeline-step {
+background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+border: 1px solid var(--border-subtle);
+border-radius: 16px;
+padding: 2rem;
+text-align: center;
+position: relative;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pipeline-step::before {
+content: '';
+position: absolute;
+top: 15px;
+left: 15px;
+width: 40px;
+height: 3px;
+background: linear-gradient(90deg, var(--pipeline-orange), var(--data-purple));
+border-radius: 2px;
+box-shadow: 0 0 8px rgba(253, 126, 20, 0.3);
+}
+
+.pipeline-step:hover {
+transform: translateY(-6px);
+box-shadow: 0 15px 40px var(--shadow-strong);
+border-color: var(--pipeline-orange);
+}
+
+.pipeline-step h4 {
+color: var(--pipeline-orange);
+margin-bottom: 1rem;
+font-size: 1.2rem;
+}
+
+.step-number {
+position: absolute;
+top: -15px;
+right: 20px;
+background: linear-gradient(135deg, var(--pipeline-orange), var(--data-purple));
+color: var(--pure-white);
+width: 30px;
+height: 30px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+font-size: 0.9rem;
+box-shadow: 0 4px 15px rgba(253, 126, 20, 0.4);
+}
+
+/* Volume Stats */
+.volume-stats {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 2rem;
+margin: 2rem 0;
+}
+
+.volume-card {
+background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+border: 1px solid var(--border-subtle);
+border-radius: 16px;
+padding: 2rem;
+text-align: center;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+backdrop-filter: blur(20px);
+position: relative;
+}
+
+.volume-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 15px;
+width: 40px;
+height: 3px;
+background: linear-gradient(90deg, var(--success-green), var(--accent-secondary));
+border-radius: 2px;
+box-shadow: 0 0 8px var(--glow-primary);
+}
+
+.volume-card:hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 60px var(--shadow-strong);
+border-color: var(--success-green);
+}
+
+.volume-number {
+font-size: 2.5rem;
+font-weight: 600;
+color: var(--success-green);
+display: block;
+margin-bottom: 0.5rem;
+}
+
+.volume-label {
+color: var(--text-muted);
+font-size: 0.9rem;
+margin-top: 0.5rem;
+}
+
+/* Implementation Details */
+.implementation-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 2rem;
+margin: 2rem 0;
+}
+
+.implementation-item {
+background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+border: 1px solid var(--border-subtle);
+border-radius: 12px;
+padding: 1.5rem;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+backdrop-filter: blur(20px);
+}
+
+.implementation-item:hover {
+transform: translateY(-4px);
+box-shadow: 0 15px 40px var(--shadow-strong);
+border-color: var(--accent-secondary);
+background: linear-gradient(135deg, var(--bg-quaternary) 0%, var(--bg-tertiary) 100%);
+}
+
+.implementation-item h4 {
+color: var(--accent-secondary);
+margin-bottom: 1rem;
+font-size: 1.2rem;
+}
+
+/* Highlight Boxes */
+.highlight-box {
+background: linear-gradient(135deg, rgba(74, 158, 255, 0.1) 0%, rgba(74, 158, 255, 0.05) 100%);
+border: 1px solid rgba(74, 158, 255, 0.3);
+border-radius: 16px;
+padding: 2rem;
+margin: 2rem 0;
+position: relative;
+backdrop-filter: blur(20px);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.highlight-box::before {
+content: '';
+position: absolute;
+top: 0;
+left: 15px;
+width: 50px;
+height: 3px;
+background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+border-radius: 2px;
+box-shadow: 0 0 8px var(--glow-primary);
+}
+
+.highlight-box:hover {
+transform: translateY(-4px);
+box-shadow: 0 15px 40px var(--shadow-strong);
+border-color: var(--accent-secondary);
+}
+
+.success-box {
+background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+border: 1px solid rgba(40, 167, 69, 0.3);
+border-radius: 16px;
+padding: 2rem;
+margin: 2rem 0;
+position: relative;
+backdrop-filter: blur(20px);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.success-box::before {
+content: '';
+position: absolute;
+top: 0;
+left: 15px;
+width: 50px;
+height: 3px;
+background: linear-gradient(90deg, #28a745, #20c997);
+border-radius: 2px;
+box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+}
+
+.success-box:hover {
+transform: translateY(-4px);
+box-shadow: 0 15px 40px var(--shadow-strong);
+border-color: #28a745;
+}
+
+/* Back Button */
+.buttons {
+margin-top: 3rem;
+display: flex;
+gap: 1rem;
+justify-content: center;
+}
+
+.button {
+padding: 0.8rem 1.8rem;
+background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+color: var(--pure-white);
+text-decoration: none;
+border-radius: 12px;
+font-weight: 600;
+transition: all 0.3s ease;
+border: none;
+cursor: pointer;
+font-size: 1rem;
+box-shadow: 0 4px 15px var(--shadow-medium);
+position: relative;
+overflow: hidden;
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+transition: left 0.6s ease;
+}
+
+.button:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 25px var(--shadow-strong);
+background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+color: var(--bg-primary);
+}
+
+.button:hover::before {
+left: 100%;
+}
+
+/* Focus states for accessibility */
+.button:focus {
+outline: 2px solid var(--accent-secondary);
+outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 1023px) {
+.architecture-grid {
+grid-template-columns: 1fr;
+}
+
+.pipeline-flow {
+grid-template-columns: 1fr;
+}
+
+.implementation-grid {
+grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 768px) {
+body {
+padding: 1.5rem;
+}
+
+header, section {
+padding: 2rem;
+margin-bottom: 2.5rem;
+}
+
+header h1 {
+font-size: 2.2rem;
+}
+
+header h2 {
+font-size: 1.3rem;
+}
+
+h2 {
+font-size: 1.5rem;
+}
+
+h3 {
+font-size: 1.2rem;
+}
+
+.volume-stats {
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 1.5rem;
+}
+
+.architecture-card, .pipeline-step, .volume-card {
+padding: 1.5rem;
+}
+
+.volume-number {
+font-size: 2rem;
+}
+}
+
+@media (max-width: 479px) {
+body {
+padding: 1rem;
+}
+
+header, section {
+padding: 1.5rem;
+margin-bottom: 2rem;
+}
+
+header h1 {
+font-size: 1.8rem;
+text-align: center;
+}
+
+header h2 {
+font-size: 1.1rem;
+text-align: center;
+}
+
+header p {
+text-align: center;
+}
+
+h2 {
+font-size: 1.3rem;
+text-align: center;
+}
+
+h3 {
+font-size: 1.1rem;
+}
+
+.volume-stats {
+grid-template-columns: 1fr;
+}
+
+.button {
+padding: 0.7rem 1.5rem;
+font-size: 0.9rem;
+}
+
+.tech-stack {
+justify-content: center;
+}
+}
+
+/* Staggered animation delays for smoother loading */
+section:nth-child(1) { animation-delay: 0.1s; }
+section:nth-child(2) { animation-delay: 0.2s; }
+section:nth-child(3) { animation-delay: 0.3s; }
+section:nth-child(4) { animation-delay: 0.4s; }
+section:nth-child(5) { animation-delay: 0.5s; }
+section:nth-child(6) { animation-delay: 0.6s; }
+section:nth-child(7) { animation-delay: 0.7s; }
+section:nth-child(8) { animation-delay: 0.8s; }
+</style>
+</head>
+<body>
+  <!-- Sticky Header Bar -->
+<div class="sticky-header">
+  <a href="/" class="sticky-header-link">
+    <img src="images/logo2.png" alt="Jack Doehrman Logo" class="sticky-header-logo" />
+  </a>
+</div>
+<div style="height: 4rem;"></div>
+
+<header>
+	<h1>Data Warehousing & ETL Systems</h1>
+	<h2>Enterprise-Scale Data Infrastructure</h2>
+	<p>
+		Comprehensive data warehousing solutions and ETL pipelines designed to integrate multiple data sources, process high-volume datasets, and enable scalable analytics across sports entertainment organizations.
+	</p>
+</header>
+
+<main>
+	<section id="overview">
+		<h2>System Overview</h2>
+		<p>
+			My data warehousing and ETL expertise spans multiple enterprise implementations, from AWS-based cloud architectures to Databricks lakehouse solutions. These systems are designed to handle massive data volumes while maintaining performance, reliability, and data quality standards.
+		</p>
+		
+		<div class="volume-stats">
+			<div class="volume-card">
+				<span class="volume-number">450M+</span>
+				<div class="volume-label">Records Processed</div>
+			</div>
+			<div class="volume-card">
+				<span class="volume-number">12+</span>
+				<div class="volume-label">Data Sources Integrated</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="architecture">
+		<h2>Data Architecture Solutions</h2>
+		<p>
+			I've designed and implemented enterprise-scale data architectures that support both real-time analytics and batch processing workflows, optimized for performance and scalability.
+		</p>
+
+		<div class="architecture-grid">
+			<div class="architecture-card">
+				<h4>Houston Dynamo FC - AWS Data Warehouse</h4>
+				<p>Enterprise-scale ETL pipelines integrating 12+ major data sources into AWS/Postgres data warehouse with optimized query performance.</p>
+				<div class="tech-stack">
+					<span class="tech-tag">AWS</span>
+					<span class="tech-tag">PostgreSQL</span>
+					<span class="tech-tag">ETL Pipelines</span>
+					<span class="tech-tag">Agilitek</span>
+					<span class="tech-tag">Multi-table Joins</span>
+				</div>
+			</div>
+			<div class="architecture-card">
+				<h4>Pacers Sports - Databricks Lakehouse</h4>
+				<p>Modern lakehouse architecture built on Databricks, transforming multi-source data with Databricks SQL for reliable and scalable access.</p>
+				<div class="tech-stack">
+					<span class="tech-tag">Databricks</span>
+					<span class="tech-tag">Databricks SQL</span>
+					<span class="tech-tag">Data Lakehouse</span>
+					<span class="tech-tag">Legacy Migration</span>
+					<span class="tech-tag">Data Models</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="etl-processes">
+		<h2>ETL Pipeline Development</h2>
+		<p>
+			My ETL processes are built for reliability, scalability, and maintainability. Each pipeline includes comprehensive data validation, error handling, and performance optimization.
+		</p>
+
+		<div class="pipeline-flow">
+			<div class="pipeline-step">
+				<div class="step-number">1</div>
+				<h4>Data Extraction</h4>
+				<p>Multi-source data ingestion from CRM systems, ticketing platforms, digital marketing tools, and external APIs with real-time and batch processing capabilities.</p>
+			</div>
+			<div class="pipeline-step">
+				<div class="step-number">2</div>
+				<h4>Data Transformation</h4>
+				<p>Custom SQL transformations, data cleansing, validation, and standardization across diverse data formats and structures.</p>
+			</div>
+			<div class="pipeline-step">
+				<div class="step-number">3</div>
+				<h4>Data Loading</h4>
+				<p>Optimized loading processes with incremental updates, data quality checks, and performance monitoring for enterprise-scale datasets.</p>
+			</div>
+			<div class="pipeline-step">
+				<div class="step-number">4</div>
+				<h4>Analytics Ready</h4>
+				<p>Clean, validated data available for BI dashboards, reporting systems, and advanced analytics with optimized query performance.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="data-sources">
+		<h2>Data Source Integration</h2>
+		<p>
+			Successfully integrated diverse data sources across multiple domains, ensuring data consistency and enabling comprehensive analytics capabilities.
+		</p>
+
+		<div class="implementation-grid">
+			<div class="implementation-item">
+				<h4>Digital Marketing Platforms</h4>
+				<ul>
+					<li><strong>Meta Advertising</strong> - Campaign performance and lead generation data</li>
+					<li><strong>Google Ads</strong> - Search and display advertising metrics</li>
+					<li><strong>LinkedIn Ads</strong> - B2B marketing and professional engagement data</li>
+					<li><strong>Conversica AI</strong> - Automated outreach and lead nurturing workflows</li>
+				</ul>
+			</div>
+			<div class="implementation-item">
+				<h4>Enterprise Systems</h4>
+				<ul>
+					<li><strong>Salesforce CRM</strong> - Customer relationship and sales pipeline data</li>
+					<li><strong>Ticketing Systems</strong> - Event attendance and purchase behavior</li>
+					<li><strong>E-commerce Platforms</strong> - Online sales and customer transaction data</li>
+					<li><strong>Social Media APIs</strong> - Fan engagement and social performance metrics</li>
+				</ul>
+			</div>
+			<div class="implementation-item">
+				<h4>Operational Data</h4>
+				<ul>
+					<li><strong>Attendance Tracking</strong> - Gameday operations and fan behavior</li>
+					<li><strong>Survey Systems</strong> - Post-match feedback and satisfaction data</li>
+					<li><strong>Sponsorship Platforms</strong> - Partnership performance and KPI tracking</li>
+					<li><strong>Legacy Systems</strong> - Historical data preservation and integration</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section id="data-quality">
+		<h2>Data Quality & Governance</h2>
+		<p>
+			Implemented comprehensive data quality assurance processes to ensure integrity, consistency, and reliability across high-volume datasets.
+		</p>
+
+		<div class="highlight-box">
+			<h3>Quality Assurance Framework</h3>
+			<ul>
+				<li><strong>Automated Validation Rules</strong> - Real-time data quality checks during ingestion</li>
+				<li><strong>Consistency Monitoring</strong> - Cross-system data reconciliation and anomaly detection</li>
+				<li><strong>Data Profiling</strong> - Continuous monitoring of data patterns and distributions</li>
+				<li><strong>Error Handling</strong> - Comprehensive logging and alerting for data pipeline issues</li>
+				<li><strong>Data Lineage</strong> - Complete traceability from source to analytics</li>
+			</ul>
+		</div>
+
+		<div class="success-box">
+			<h3>Performance Optimizations</h3>
+			<ul>
+				<li><strong>Query Optimization</strong> - Custom indexing and view structures for sub-second response times</li>
+				<li><strong>Incremental Processing</strong> - Delta-only updates to minimize processing overhead</li>
+				<li><strong>Partitioning Strategies</strong> - Optimized data partitioning for improved query performance</li>
+				<li><strong>Caching Mechanisms</strong> - Strategic caching for frequently accessed data</li>
+				<li><strong>Resource Management</strong> - Dynamic scaling and resource allocation optimization</li>
+			</ul>
+		</div>
+	</section>
+
+	<section id="business-impact">
+		<h2>Business Impact & Analytics</h2>
+		<p>
+			The data infrastructure directly supports critical business functions, enabling data-driven decision making across multiple departments and stakeholders.
+		</p>
+
+		<div class="implementation-grid">
+			<div class="implementation-item">
+				<h4>Revenue Generation</h4>
+				<p>Data pipelines feeding automated lead gen workflows enabled tracking of 350+ closed deals, contributing <strong>$675K in new revenue</strong> through optimized customer acquisition processes.</p>
+			</div>
+			<div class="implementation-item">
+				<h4>Operational Efficiency</h4>
+				<p>Streamlined data refresh cycles and improved system performance reduced manual data processing time by <strong>80%</strong> while increasing data accuracy.</p>
+			</div>
+			<div class="implementation-item">
+				<h4>Strategic Analytics</h4>
+				<p>Integrated data feeds power executive dashboards for ticket sales, sponsorship KPIs, fan engagement metrics, and gameday operations analytics.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="technical-implementation">
+		<h2>Technical Implementation Details</h2>
+		<p>
+			Each implementation leverages industry best practices for data engineering, focusing on scalability, maintainability, and performance optimization.
+		</p>
+
+		<h3>Houston Dynamo FC Implementation</h3>
+		<div class="highlight-box">
+			<ul>
+				<li><strong>AWS Architecture</strong> - Cloud-native data warehouse with auto-scaling capabilities</li>
+				<li><strong>PostgreSQL Optimization</strong> - Custom schemas, indexes, and query optimization</li>
+				<li><strong>Multi-source Integration</strong> - 12+ disparate systems unified into single analytics platform</li>
+				<li><strong>Real-time Pipelines</strong> - Near real-time data ingestion for operational dashboards</li>
+				<li><strong>Vendor Collaboration</strong> - Partnered with Agilitek and AWS for architecture optimization</li>
+			</ul>
+		</div>
+
+		<h3>Pacers Sports Entertainment Implementation</h3>
+		<div class="success-box">
+			<ul>
+				<li><strong>Databricks Platform</strong> - Modern lakehouse architecture with Spark processing</li>
+				<li><strong>Legacy Migration</strong> - Seamless historical data integration preserving continuity</li>
+				<li><strong>Spark SQL Optimization</strong> - Custom transformations for complex multi-table operations</li>
+				<li><strong>Data Model Design</strong> - Dimensional modeling for analytics and reporting</li>
+				<li><strong>Documentation Standards</strong> - Comprehensive workflow documentation for team handoffs</li>
+			</ul>
+		</div>
+	</section>
+
+	<section id="tools-technologies">
+		<h2>Tools & Technologies</h2>
+		<p>
+			Expertise across modern data stack technologies, from cloud platforms to specialized analytics tools.
+		</p>
+
+		<div class="architecture-grid">
+			<div class="architecture-card">
+				<h4>Cloud Platforms</h4>
+				<div class="tech-stack">
+					<span class="tech-tag">AWS</span>
+					<span class="tech-tag">Databricks</span>
+					<span class="tech-tag">Azure</span>
+				</div>
+			</div>
+			<div class="architecture-card">
+				<h4>Databases & Warehouses</h4>
+				<div class="tech-stack">
+					<span class="tech-tag">PostgreSQL</span>
+					<span class="tech-tag">Snowflake</span>
+					<span class="tech-tag">SQL Server</span>
+				</div>
+			</div>
+			<div class="architecture-card">
+				<h4>ETL & Processing</h4>
+				<div class="tech-stack">
+					<span class="tech-tag">PostgreSQL</span>
+					<span class="tech-tag">Python</span>
+					<span class="tech-tag">Databricks SQL</span>
+					<span class="tech-tag">Agilitek</span>
+				</div>
+			</div>
+			<div class="architecture-card">
+				<h4>Analytics & BI</h4>
+				<div class="tech-stack">
+					<span class="tech-tag">Power BI</span>
+					<span class="tech-tag">Tableau</span>
+					<span class="tech-tag">Salesforce</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="buttons">
+		<a href="/" class="button">← Back to Home</a>
+	</div>
+</main>
+
+</body>
+</html>
