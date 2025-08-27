@@ -653,6 +653,57 @@ body {
       box-shadow: 0 0 10px rgba(0, 112, 210, 0.3);
     }
 
+        /* Volume Stats (copied from ETL page) */
+    .volume-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .volume-card {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .volume-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--salesforce-blue), #0056b3);
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(0, 112, 210, 0.3);
+    }
+
+    .volume-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px var(--shadow-strong);
+      border-color: var(--salesforce-blue);
+    }
+
+    .volume-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--salesforce-blue);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .volume-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
     .flow-container:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 60px var(--shadow-strong);
@@ -890,6 +941,24 @@ body {
       <p>
         As the in-house Salesforce Administrator for Houston Dynamo FC, I manage the complete CRM ecosystem supporting sales and customer service operations. This includes designing organizational hierarchies, implementing complex integrations, and optimizing lead distribution workflows to maximize conversion rates and operational efficiency.
       </p>
+
+       <!-- Metrics Section -->
+      <section id="metrics">
+        <div class="volume-stats">
+          <div class="volume-card">
+            <span class="volume-number">12M+</span>
+            <div class="volume-label">Salesforce Records</div>
+          </div>
+          <div class="volume-card">
+            <span class="volume-number">1.1M+</span>
+            <div class="volume-label">Person Accounts</div>
+          </div>
+          <div class="volume-card">
+            <span class="volume-number">40+</span>
+            <div class="volume-label">CRM Users Supported</div>
+          </div>
+        </div>
+      </section>
       
       <div class="highlight-box">
         <h3>Core Responsibilities</h3>
