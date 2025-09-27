@@ -8,7 +8,7 @@
   <title>Jack Doehrman</title>
   <style>
     :root {
-      /* Your Provided Palette with Color Theory Applications */
+      /* Primary Color Palette */
       --primary-blue: #3b5998;      /* Primary actions, headers, trust elements */
       --secondary-blue: #4A9EFF;    /* Interactive elements, hover states, accents */
       --tertiary-blue: #dfe3ee;     /* Subtle backgrounds, borders, soft highlights */
@@ -21,7 +21,7 @@
       --bg-tertiary: #232b36;        /* Elevated surfaces - interactive elements */
       --bg-quaternary: #2d3742;      /* Highest elevation - hover states */
       
-      /* Accent Colors Using Your Palette */
+      /* Accent Colors Using Palette */
       --accent-primary: var(--primary-blue);      /* Primary CTAs, important links */
       --accent-secondary: var(--secondary-blue);  /* Secondary actions, interactive states */
       --accent-tertiary: var(--tertiary-blue);    /* Subtle accents, muted elements */
@@ -46,7 +46,7 @@
       --glow-secondary: rgba(139, 157, 195, 0.2);  /* Secondary blue glow */
       --glow-tertiary: rgba(223, 227, 238, 0.1);   /* Tertiary blue glow */
       
-      /* Spotify Integration (Complementary to your palette) */
+      /* Spotify Integration (Complementary to palette) */
       --spotify-green: #1ed760;
       --spotify-glow: rgba(30, 215, 96, 0.3);
       
@@ -227,8 +227,8 @@
 
 /* Update body padding to account for sticky header */
 body {
-  /* ... your existing body styles ... */
-  padding-top: 80px; /* Add this line to your existing body padding */
+  
+  padding-top: 80px;
 }
 
 /* Responsive adjustments for sticky header */
@@ -246,8 +246,8 @@ body {
   }
 
   body {
-    /* Update your existing mobile padding */
-    padding-top: 70px; /* Adjust this in your mobile media query */
+    
+    padding-top: 70px;
   }
 }
 
@@ -265,8 +265,7 @@ body {
   }
 
   body {
-    /* Update your existing mobile padding */
-    padding-top: 65px; /* Adjust this in your mobile media query */
+    padding-top: 65px;
   }
 }
 
@@ -865,8 +864,6 @@ body {
       background: var(--glow-tertiary);
       padding-left: 1.8rem;
     }
-
-    /* Remove hover effects for certification items since they have their own link hover */
     .certifications-column ul li:hover {
       background: none;
       padding-left: 1.5rem;
@@ -1875,7 +1872,6 @@ body {
       .section-spacer {
   height: 3rem; /* Additional space between sections */
   width: 100%;
-  /* Optional: Add subtle visual indicator (remove if you want invisible) */
   background: transparent;
   /* Ensures proper spacing in all browsers */
   display: block;
