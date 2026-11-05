@@ -3,105 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Gallery | Executive Portfolio</title>
+    <title>The Final Angle | Leadership Mocks</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;500;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fafafa; color: #111; }
-        h1, h2, .font-outfit { font-family: 'Outfit', sans-serif; }
-        .case-study-card:hover .case-image { transform: scale(1.02); }
-        .case-image { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal { animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes reveal {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .angle-content { display: none; }
+        .angle-content.active { display: block; }
+        body { transition: background-color 0.4s ease; }
+        .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-white text-slate-900">
 
-    <!-- Minimal Navigation -->
-    <nav class="fixed top-0 w-full px-8 py-8 flex justify-between items-baseline z-50 mix-blend-difference text-white">
-        <div class="font-outfit font-bold text-lg tracking-tighter">JACK DOEHRMAN</div>
-        <div class="flex gap-12 text-xs uppercase tracking-widest font-medium">
-            <a href="#" class="hover:opacity-50 transition-opacity">Work</a>
-            <a href="#" class="hover:opacity-50 transition-opacity">Philosophy</a>
-            <a href="#" class="hover:opacity-50 transition-opacity">Contact</a>
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm border-b border-slate-200 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="font-bold text-lg tracking-tight">Visual Stress Test <span class="text-slate-400 font-normal">/ Final Angles</span></div>
+        <div class="flex gap-2 bg-slate-100 p-1 rounded-xl">
+            <button onclick="setAngle('architect')" id="btn-architect" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-white shadow-sm text-slate-900">The Architect</button>
+            <button onclick="setAngle('strategist')" id="btn-strategist" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-slate-500 hover:text-slate-700">The Strategist</button>
         </div>
     </nav>
 
-    <main>
-        <!-- Hero Section: The Statement -->
-        <section class="min-h-screen flex flex-col justify-center px-8 md:px-24">
-            <div class="reveal">
-                <h1 class="text-7xl md:text-9xl font-outfit font-light tracking-tighter leading-[0.9] mb-12">
-                    Designing the <br/>
-                    <span class="font-bold italic">Organizational</span> <br/>
-                    Standard.
-                </h1>
-                <div class="max-w-xl">
-                    <p class="text-xl md:text-2xl text-slate-500 leading-relaxed font-light">
-                        Engineering leadership focused on the intersection of <span class="text-slate-900 font-medium">data-driven insight</span> and <span class="text-slate-900 font-medium">technical stewardship</span>.
+    <main class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
+        
+        <!-- THE ARCHITECT -->
+        <div id="architect" class="angle-content active">
+            <section class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 md:col-span-8 border-l-4 border-slate-900 pl-8 py-12">
+                    <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-4">System_Identity: Leadership</div>
+                    <h1 class="text-6xl font-mono font-bold tracking-tighter leading-none mb-8">
+                        Precision in <br/>
+                        <span class="text-slate-400">Architecture.</span> <br/>
+                        Authority in <span class="underline decoration-2 underline-offset-8">Execution.</span>
+                    </h1>
+                    <p class="text-xl text-slate-600 max-w-lg leading-relaxed font-light">
+                        I treat organizations as systems. By applying engineering rigor to human capital and data pipelines, I build foundations that cannot fail.
                     </p>
                 </div>
-            </div>
-        </section>
-
-        <!-- The Work: The Gallery -->
-        <section class="px-8 md:px-24 pb-32">
-            <div class="flex justify-between items-end mb-20 reveal" style="animation-delay: 0.2s">
-                <h2 class="text-4xl font-outfit font-medium tracking-tight">Selected Impact</h2>
-                <span class="text-sm text-slate-400 uppercase tracking-widest">2023 — 2026</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
-                <!-- Project 1 -->
-                <div class="case-study-card group cursor-pointer reveal" style="animation-delay: 0.3s">
-                    <div class="overflow-hidden bg-slate-200 aspect-[4/5] mb-8">
-                        <div class="case-image w-full h-full bg-slate-300 group-hover:bg-slate-400 transition-colors duration-700 flex items-center justify-center text-slate-400 font-mono text-xs">
-                            [Visual: Data Pipeline Architecture]
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-2xl font-outfit font-medium mb-2">Predictive Insights Engine</h3>
-                            <p class="text-slate-500 font-light leading-relaxed max-w-sm">
-                                Scaling data infrastructure to turn raw telemetry into C-suite strategy.
-                            </p>
-                        </div>
-                        <div class="text-sm font-mono text-slate-400">01</div>
+                <div class="col-span-12 md:col-span-4 bg-slate-100 p-8 border border-slate-200 font-mono text-xs leading-relaxed">
+                    <div class="text-slate-400 mb-4">// CORE_COMPETENCIES</div>
+                    <div class="mb-2">→ Data-to-Insight Bridge</div>
+                    <div class="mb-2">→ Org-Scale Optimization</div>
+                    <div class="mb-2">→ Technical Stewardship</div>
+                    <div class="mb-2">→ C-Suite Translation</div>
+                    <div class="mt-8 pt-8 border-t border-slate-200 text-slate-500">
+                        STATUS: Ready for Scale<br/>
+                        LOC: Distributed / Global
                     </div>
                 </div>
+            </section>
 
-                <!-- Project 2 -->
-                <div class="case-study-card group cursor-pointer reveal" style="animation-delay: 0.4s">
-                    <div class="overflow-hidden bg-slate-200 aspect-[4/5] mb-8">
-                        <div class="case-image w-full h-full bg-slate-300 group-hover:bg-slate-400 transition-colors duration-700 flex items-center justify-center text-slate-400 font-mono text-xs">
-                            [Visual: Org Chart / Bridge]
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-2xl font-outfit font-medium mb-2">The Governance Bridge</h3>
-                            <p class="text-slate-500 font-light leading-relaxed max-w-sm">
-                                Reducing friction between distributed engineering teams and product ownership.
-                            </p>
-                        </div>
-                        <div class="text-sm font-mono text-slate-400">02</div>
-                    </div>
+            <section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-px bg-slate-200 border border-slate-200">
+                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
+                    <div class="font-mono text-xs text-slate-400 mb-6">01 // SYSTEM</div>
+                    <h3 class="text-2xl font-mono font-bold mb-4">The Data Engine</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">Reducing systemic friction in data delivery.</p>
+                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
                 </div>
-            </div>
-        </section>
+                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
+                    <div class="font-mono text-xs text-slate-400 mb-6">02 // HUMAN</div>
+                    <h3 class="text-2xl font-mono font-bold mb-4">The Governance Bridge</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">Architecting the flow between Product and Eng.</p>
+                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
+                </div>
+                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
+                    <div class="font-mono text-xs text-slate-400 mb-6">03 // SCALE</div>
+                    <h3 class="text-2xl font-mono font-bold mb-4">Institutional Growth</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">10x throughput via structural redesign.</p>
+                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
+                </div>
+            </section>
+        </div>
 
-        <!-- Footer / Contact -->
-        <section class="bg-slate-900 text-white py-32 px-8 md:px-24 text-center">
-            <div class="reveal">
-                <p class="text-slate-400 uppercase tracking-widest text-xs mb-8">Availability</p>
-                <h2 class="text-5xl md:text-7xl font-outfit font-light mb-12">Ready for the next <br/><span class="italic font-bold">challenge.</span></h2>
-                <a href="mailto:hello@jackdoehrman.com" class="text-2xl underline underline-offset-8 hover:text-slate-300 transition-colors">Get in touch &rarr;</a>
-            </div>
-        </section>
+        <!-- THE STRATEGIST -->
+        <div id="strategist" class="angle-content">
+            <section class="py-12 relative">
+                <div class="absolute -top-10 -right-10 text-[15rem] font-space font-black text-slate-100 leading-none select-none z-0">LEAD</div>
+                <div class="relative z-10">
+                    <h1 class="text-8xl font-space font-extrabold tracking-tighter leading-[0.9] mb-8">
+                        Turning <span class="text-indigo-600">Complexity</span> <br/>
+                        into <span class="italic">Momentum.</span>
+                    </h1>
+                    <p class="text-2xl text-slate-600 max-w-2xl mb-12 leading-relaxed font-light">
+                        I don't just manage teams; I ignite them. I specialize in high-velocity environments where data provides the map and leadership provides the drive.
+                    </p>
+                    <button class="px-10 py-4 bg-indigo-600 text-white font-bold rounded-full text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200">View the Strategy</button>
+                </div>
+            </section>
+
+            <section class="mt-32 grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="relative p-12 bg-slate-900 text-white rounded-3xl overflow-hidden group cursor-pointer">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -mr-32 -mt-32 group-hover:bg-indigo-500/40 transition-all"></div>
+                    <h3 class="text-4xl font-space font-bold mb-6 relative z-10">The Insight <br/>Accelerator</h3>
+                    <p class="text-slate-400 text-lg mb-10 relative z-10 leading-relaxed">
+                        Transforming stagnant data lakes into real-time decision engines for the executive team.
+                    </p>
+                    <div class="text-indigo-400 font-bold uppercase tracking-widest text-sm relative z-10">Explore Impact &rarr;</div>
+                </div>
+                <div class="relative p-12 bg-white border-2 border-slate-900 rounded-3xl group cursor-pointer">
+                    <h3 class="text-4xl font-space font-bold mb-6 text-slate-900">The Velocity <br/>Framework</h3>
+                    <p class="text-slate-600 text-lg mb-10 leading-relaxed">
+                        Bridging the gap between "possible" and "delivered" by removing organizational blockers.
+                    </p>
+                    <div class="text-slate-900 font-bold uppercase tracking-widest text-sm">Explore Impact &rarr;</div>
+                </div>
+            </section>
+        </div>
+
     </main>
 
+    <script>
+        function setAngle(type) {
+            document.querySelectorAll('.angle-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(type).classList.add('active');
+
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
+                btn.classList.add('text-slate-500');
+            });
+            const activeBtn = document.getElementById('btn-' + type);
+            activeBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
+            activeBtn.classList.remove('text-slate-500');
+
+            const body = document.body;
+            if (type === 'architect') {
+                body.className = 'bg-white text-slate-900';
+            } else if (type === 'strategist') {
+                body.className = 'bg-slate-50 text-slate-900';
+            }
+        }
+    </script>
 </body>
 </html>
