@@ -3,136 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Final Angle | Leadership Mocks</title>
+    <title>Jack Doehrman | Technical Steward & Strategic Lead</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;500;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
     <style>
-        .angle-content { display: none; }
-        .angle-content.active { display: block; }
-        body { transition: background-color 0.4s ease; }
-        .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #0f172a; scroll-behavior: smooth; }
+        .font-outfit { font-family: 'Outfit', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        .blueprint-grid {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .spec-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .spec-card:hover {
+            border-color: #0f172a;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(241,245,249,0.5) 100%);
+        }
+        .section-border {
+            border-top: 1px solid #e2e8f0;
+        }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="antialiased blueprint-grid">
 
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm border-b border-slate-200 z-50 px-6 py-4 flex justify-between items-center">
-        <div class="font-bold text-lg tracking-tight">Visual Stress Test <span class="text-slate-400 font-normal">/ Final Angles</span></div>
-        <div class="flex gap-2 bg-slate-100 p-1 rounded-xl">
-            <button onclick="setAngle('architect')" id="btn-architect" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-white shadow-sm text-slate-900">The Architect</button>
-            <button onclick="setAngle('strategist')" id="btn-strategist" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-slate-500 hover:text-slate-700">The Strategist</button>
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="font-mono text-xs font-bold tracking-tighter text-slate-900 uppercase">
+            JD // Systems_Identity: Leadership
+        </div>
+        <div class="flex gap-8 text-xs uppercase tracking-widest font-bold text-slate-500">
+            <a href="#specs" class="hover:text-slate-900 transition-colors">Core Specs</a>
+            <a href="#work" class="hover:text-slate-900 transition-colors">Technical Specs</a>
+            <a href="#lab" class="hover:text-slate-900 transition-colors">The Lab</a>
         </div>
     </nav>
 
-    <main class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
+    <main class="max-w-6xl mx-auto px-6">
         
-        <!-- THE ARCHITECT -->
-        <div id="architect" class="angle-content active">
-            <section class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 md:col-span-8 border-l-4 border-slate-900 pl-8 py-12">
-                    <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-4">System_Identity: Leadership</div>
-                    <h1 class="text-6xl font-mono font-bold tracking-tighter leading-none mb-8">
-                        Precision in <br/>
-                        <span class="text-slate-400">Architecture.</span> <br/>
-                        Authority in <span class="underline decoration-2 underline-offset-8">Execution.</span>
-                    </h1>
-                    <p class="text-xl text-slate-600 max-w-lg leading-relaxed font-light">
-                        I treat organizations as systems. By applying engineering rigor to human capital and data pipelines, I build foundations that cannot fail.
+        <!-- HERO SECTION -->
+        <section class="min-h-screen flex flex-col justify-center py-20 relative overflow-hidden">
+            <div class="absolute inset-0 hero-gradient -z-10"></div>
+            <div class="border-l-8 border-slate-900 pl-8 md:pl-12">
+                <div class="font-mono text-sm uppercase tracking-widest text-slate-400 mb-6">
+                    Technical Steward & Strategic Lead
+                </div>
+                <h1 class="text-6xl md:text-8xl font-outfit font-extrabold tracking-tighter leading-[0.9] mb-8">
+                    Bridging the gap between <br/>
+                    <span class="text-slate-400">complex data</span> and <br/>
+                    <span class="underline decoration-4 underline-offset-8">actionable insight.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-600 max-w-2xl leading-relaxed font-light">
+                    I architect the systems that turn raw telemetry into institutional advantage. I specialize in scaling technical organizations where the foundation rests on reliability and the output drives executive decision-making.
+                </p>
+                <div class="mt-12 flex gap-4">
+                    <a href="#work" class="px-8 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-all shadow-lg">View Technical Specs</a>
+                    <a href="mailto:your@email.com" class="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg border border-slate-200 hover:bg-slate-50 transition-all">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE SPECIFICATIONS -->
+        <section id="specs" class="py-32 section-border">
+            <div class="flex justify-between items-end mb-16">
+                <div class="max-w-2xl">
+                    <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-2">01 // Capabilities</div>
+                    <h2 class="text-4xl font-outfit font-bold tracking-tight">Core Specifications</h2>
+                    <p class="text-slate-500 mt-4 leading-relaxed">
+                        A synthesis of technical mastery and organizational leadership, focused on creating high-performance environments.
                     </p>
                 </div>
-                <div class="col-span-12 md:col-span-4 bg-slate-100 p-8 border border-slate-200 font-mono text-xs leading-relaxed">
-                    <div class="text-slate-400 mb-4">// CORE_COMPETENCIES</div>
-                    <div class="mb-2">→ Data-to-Insight Bridge</div>
-                    <div class="mb-2">→ Org-Scale Optimization</div>
-                    <div class="mb-2">→ Technical Stewardship</div>
-                    <div class="mb-2">→ C-Suite Translation</div>
-                    <div class="mt-8 pt-8 border-t border-slate-200 text-slate-500">
-                        STATUS: Ready for Scale<br/>
-                        LOC: Distributed / Global
+                <div class="text-right hidden md:block">
+                    <div class="font-mono text-xs text-slate-400">STATUS: Operational</div>
+                    <div class="font-mono text-xs text-slate-400">MODE: Strategic</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-8 border border-slate-200 bg-white spec-card">
+                    <div class="font-mono text-xs font-bold text-slate-400 mb-4">SPEC_01</div>
+                    <h3 class="text-xl font-bold mb-3">Data Infrastructure</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Designing end-to-end ETL pipelines and data warehousing solutions that transform fragmented multi-source telemetry into a unified, scalable analytics platform.
+                    </p>
+                </div>
+                <div class="p-8 border border-slate-200 bg-white spec-card">
+                    <div class="font-mono text-xs font-bold text-slate-400 mb-4">SPEC_02</div>
+                    <h3 class="text-xl font-bold mb-3">Predictive Modeling</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Developing high-accuracy forecast models and risk-scoring systems to quantify churn and prioritize high-value outreach strategies.
+                    </p>
+                </div>
+                <div class="p-8 border border-slate-200 bg-white spec-card">
+                    <div class="font-mono text-xs font-bold text-slate-400 mb-4">SPEC_03</div>
+                    <h3 class="text-xl font-bold mb-3">AI Stewardship</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Enterprise-level governance of AI environments, overseeing model costs, token usage, and the deployment of autonomous agents.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL SPECIFICATIONS (WORK) -->
+        <section id="work" class="py-32 section-border">
+            <div class="flex justify-between items-end mb-16">
+                <div class="max-w-2xl">
+                    <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-2">02 // Implementation</div>
+                    <h2 class="text-4xl font-outfit font-bold tracking-tight">Technical Specifications</h2>
+                    <p class="text-slate-500 mt-4 leading-relaxed">
+                        Case studies in organizational transformation through technical ownership.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Project 1: Data Warehousing -->
+                <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div class="col-span-12 md:col-span-4">
+                        <div class="sticky top-32">
+                            <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_01</div>
+                            <h3 class="text-3xl font-outfit font-bold mb-4">Enterprise Data Warehouse</h3>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">ETL Architecture</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Scalability</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Executive BI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Fragmented data sources across the organization prevented real-time visibility and created friction in lead generation workflows.</p>
+                        </div>
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Architecture</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Designed and maintained robust data warehousing solutions, engineering ETL pipelines that transform multi-source telemetry into a unified, scalable analytics platform.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50 border border-slate-200">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
+                            <p class="text-slate-700 font-medium">Established a single source of truth, enabling automated lead generation and real-time executive dashboards for high-stakes decision-making.</p>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-px bg-slate-200 border border-slate-200">
-                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
-                    <div class="font-mono text-xs text-slate-400 mb-6">01 // SYSTEM</div>
-                    <h3 class="text-2xl font-mono font-bold mb-4">The Data Engine</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">Reducing systemic friction in data delivery.</p>
-                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
+                <!-- Project 2: Churn Model -->
+                <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div class="col-span-12 md:col-span-4">
+                        <div class="sticky top-32">
+                            <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_02</div>
+                            <h3 class="text-3xl font-outfit font-bold mb-4">Churn Prediction Engine</h3>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Predictive ML</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">CRM Integration</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Revenue Retention</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Lack of visibility into non-renewal risk led to reactive retention efforts and unpredictable revenue leakage.</p>
+                        </div>
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Architecture</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Engineered a predictive "At-Risk" scoring system using historical data. Integrated the model directly into the CRM to automate outreach prioritization.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50 border border-slate-200">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
+                            <p class="text-slate-700 font-medium">Shifted the organization from reactive to proactive retention, allowing the team to prioritize high-value, high-risk accounts.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
-                    <div class="font-mono text-xs text-slate-400 mb-6">02 // HUMAN</div>
-                    <h3 class="text-2xl font-mono font-bold mb-4">The Governance Bridge</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">Architecting the flow between Product and Eng.</p>
-                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
-                </div>
-                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
-                    <div class="font-mono text-xs text-slate-400 mb-6">03 // SCALE</div>
-                    <h3 class="text-2xl font-mono font-bold mb-4">Institutional Growth</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">10x throughput via structural redesign.</p>
-                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
-                </div>
-            </section>
-        </div>
 
-        <!-- THE STRATEGIST -->
-        <div id="strategist" class="angle-content">
-            <section class="py-12 relative">
-                <div class="absolute -top-10 -right-10 text-[15rem] font-space font-black text-slate-100 leading-none select-none z-0">LEAD</div>
-                <div class="relative z-10">
-                    <h1 class="text-8xl font-space font-extrabold tracking-tighter leading-[0.9] mb-8">
-                        Turning <span class="text-indigo-600">Complexity</span> <br/>
-                        into <span class="italic">Momentum.</span>
-                    </h1>
-                    <p class="text-2xl text-slate-600 max-w-2xl mb-12 leading-relaxed font-light">
-                        I don't just manage teams; I ignite them. I specialize in high-velocity environments where data provides the map and leadership provides the drive.
-                    </p>
-                    <button class="px-10 py-4 bg-indigo-600 text-white font-bold rounded-full text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200">View the Strategy</button>
+                <!-- Project 3: NPS/Survey -->
+                <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div class="col-span-12 md:col-span-4">
+                        <div class="sticky top-32">
+                            <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_03</div>
+                            <h3 class="text-3xl font-outfit font-bold mb-4">Sentiment Framework</h3>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">NPS Strategy</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Auto-Metadata</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">CX</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Attendee feedback was fragmented and manually processed, resulting in a delayed response to systemic issues.</p>
+                        </div>
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Architecture</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Built an end-to-end post-match survey ecosystem with automatic metadata tracking and a real-time dashboard for NPS and satisfaction metrics.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50 border border-slate-200">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
+                            <p class="text-slate-700 font-medium">Directly influenced service improvements, driving organization NPS from +30 in 2025 to +67 in 2026.</p>
+                        </div>
+                    </div>
                 </div>
-            </section>
 
-            <section class="mt-32 grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="relative p-12 bg-slate-900 text-white rounded-3xl overflow-hidden group cursor-pointer">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -mr-32 -mt-32 group-hover:bg-indigo-500/40 transition-all"></div>
-                    <h3 class="text-4xl font-space font-bold mb-6 relative z-10">The Insight <br/>Accelerator</h3>
-                    <p class="text-slate-400 text-lg mb-10 relative z-10 leading-relaxed">
-                        Transforming stagnant data lakes into real-time decision engines for the executive team.
-                    </p>
-                    <div class="text-indigo-400 font-bold uppercase tracking-widest text-sm relative z-10">Explore Impact &rarr;</div>
+                <!-- Project 4: Revenue Ops -->
+                <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div class="col-span-12 md:col-span-4">
+                        <div class="sticky top-32">
+                            <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_04</div>
+                            <h3 class="text-3xl font-outfit font-bold mb-4">Revenue Ops Automation</h3>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Salesforce</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">AI Agents</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Pipeline Velocity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Manual outreach and fragmented calling systems were creating massive friction in the sales pipeline and reducing rep efficiency.</p>
+                        </div>
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Architecture</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Led the transition to Salesforce softphone dialers and architected an AI-driven SDR agent capable of autonomous outreach, response gauging, and lead qualification.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50 border border-slate-200">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
+                            <p class="text-slate-700 font-medium">Eliminated manual friction from the top-of-funnel, automating lead qualification and significantly increasing rep productivity.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="relative p-12 bg-white border-2 border-slate-900 rounded-3xl group cursor-pointer">
-                    <h3 class="text-4xl font-space font-bold mb-6 text-slate-900">The Velocity <br/>Framework</h3>
-                    <p class="text-slate-600 text-lg mb-10 leading-relaxed">
-                        Bridging the gap between "possible" and "delivered" by removing organizational blockers.
-                    </p>
-                    <div class="text-slate-900 font-bold uppercase tracking-widest text-sm">Explore Impact &rarr;</div>
-                </div>
-            </section>
-        </div>
 
+                <!-- Project 5: AI Governance -->
+                <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div class="col-span-12 md:col-span-4">
+                        <div class="sticky top-32">
+                            <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_05</div>
+                            <h3 class="text-3xl font-outfit font-bold mb-4">Enterprise AI Governance</h3>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">LLM Ops</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Security</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Governance</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Fragmented AI adoption across the org created security vulnerabilities and unpredictable costs.</p>
+                        </div>
+                        <div class="mb-8">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Architecture</div>
+                            <p class="text-lg text-slate-600 leading-relaxed">Stood up and administered a governed enterprise OpenAI environment. Coordinated plugin development and established a monitoring system for model costs and token usage.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50 border border-slate-200">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
+                            <p class="text-slate-700 font-medium">Streamlined AI adoption while ensuring strict security controls and financial predictability across the enterprise.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE LAB (RESEARCH) -->
+        <section id="lab" class="py-32 section-border">
+            <div class="flex justify-between items-end mb-16">
+                <div class="max-w-2xl">
+                    <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-2">03 // Exploration</div>
+                    <h2 class="text-4xl font-outfit font-bold tracking-tight">The Lab</h2>
+                </div>
+                <div class="text-right text-slate-400 text-sm max-w-xs font-light leading-relaxed">
+                    Personal research in sports analytics and machine learning used to stress-test new technical approaches.
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 border border-slate-200 bg-white hover:bg-slate-50 transition-all cursor-pointer group">
+                    <div class="font-mono text-[10px] font-bold text-slate-400 mb-3 uppercase">Research: PlayerDev</div>
+                    <h4 class="text-lg font-bold mb-2 group-hover:text-slate-900 transition-colors">NBA Breakout Modeling</h4>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">Longitudinal analysis of player growth patterns using multi-season telemetry.</p>
+                    <div class="text-xs font-bold text-slate-900 uppercase tracking-widest">View Study &rarr;</div>
+                </div>
+                <div class="p-6 border border-slate-200 bg-white hover:bg-slate-50 transition-all cursor-pointer group">
+                    <div class="font-mono text-[10px] font-bold text-slate-400 mb-3 uppercase">Research: TeamChem</div>
+                    <h4 class="text-lg font-bold mb-2 group-hover:text-slate-900 transition-colors">Synergy Scoring Model</h4>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">Mapping interpersonal performance efficiency to optimize lineup construction.</p>
+                    <div class="text-xs font-bold text-slate-900 uppercase tracking-widest">View Study &rarr;</div>
+                </div>
+                <div class="p-6 border border-slate-200 bg-white hover:bg-slate-50 transition-all cursor-pointer group">
+                    <div class="font-mono text-[10px] font-bold text-slate-400 mb-3 uppercase">Research: StatsViz</div>
+                    <h4 class="text-lg font-bold mb-2 group-hover:text-slate-900 transition-colors">Spatial Telemetry Maps</h4>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">Translating raw X,Y court data into strategic heatmaps for coaching staff.</p>
+                    <div class="text-xs font-bold text-slate-900 uppercase tracking-widest">View Study &rarr;</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-32 section-border text-center">
+            <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-8">Contact_Initiate</div>
+            <h2 class="text-5xl font-outfit font-bold tracking-tighter mb-12">Ready for the next <br/>organizational challenge.</h2>
+            <a href="mailto:your@email.com" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all shadow-xl inline-block">Get in Touch</a>
+        </footer>
     </main>
 
-    <script>
-        function setAngle(type) {
-            document.querySelectorAll('.angle-content').forEach(el => el.classList.remove('active'));
-            document.getElementById(type).classList.add('active');
-
-            document.querySelectorAll('nav button').forEach(btn => {
-                btn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
-                btn.classList.add('text-slate-500');
-            });
-            const activeBtn = document.getElementById('btn-' + type);
-            activeBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
-            activeBtn.classList.remove('text-slate-500');
-
-            const body = document.body;
-            if (type === 'architect') {
-                body.className = 'bg-white text-slate-900';
-            } else if (type === 'strategist') {
-                body.className = 'bg-slate-50 text-slate-900';
-            }
-        }
-    </script>
 </body>
 </html>
