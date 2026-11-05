@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack Doehrman | Senior BI Analyst & Technical Steward</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #0f172a; scroll-behavior: smooth; }
+        .font-outfit { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .blueprint-grid {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .spec-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .spec-card:hover {
+            border-color: #0f172a;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+        .view-transition {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .hidden-view {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .visible-view {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-border {
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body class="antialiased blueprint-grid">
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="font-mono text-xs font-bold tracking-tighter text-slate-900 uppercase cursor-pointer" onclick="showView('main')">
+            JD // Systems_Identity: Leadership
+        </div>
+        <div class="flex gap-8 text-xs uppercase tracking-widest font-bold text-slate-500">
+            <a href="#specs" onclick="showView('main')" class="hover:text-slate-900 transition-colors">Core Specs</a>
+            <a href="#work" onclick="showView('main')" class="hover:text-slate-900 transition-colors">Technical Specs</a>
+            <a href="javascript:void(0)" onclick="showView('resume')" class="hover:text-slate-900 transition-colors">Dossier</a>
+        </div>
+    </nav>
+
+    <!-- MAIN BLUEPRINT VIEW -->
+    <div id="view-main" class="view-transition visible-view">
+        <main class="max-w-6xl mx-auto px-6">
+            
+            <!-- HERO SECTION -->
+            <section class="min-h-screen flex flex-col justify-center py-20 relative overflow-hidden">
+                <div class="border-l-8 border-slate-900 pl-8 md:pl-12">
+                    <div class="font-mono text-sm uppercase tracking-widest text-slate-400 mb-6">
+                        Senior BI Analyst & Technical Steward
+                    </div>
+                    <h1 class="text-6xl md:text-8xl font-outfit font-extrabold tracking-tighter leading-[0.9] mb-8">
+                        Bridging the gap between <br/>
+                        <span class="text-slate-400">complex data</span> and <br/>
+                        <span class="underline decoration-4 underline-offset-8">actionable insight.</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-600 max-w-2xl leading-relaxed font-light">
+                        I architect the systems that turn raw telemetry into institutional advantage. I specialize in scaling technical organizations where the foundation rests on reliability and the output drives executive decision-making.
+                    </p>
+                    <div class="mt-12 flex gap-4">
+                        <a href="#work" class="px-8 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-all shadow-lg">View Technical Specs</a>
+                        <a href="mailto:your@email.com" class="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg border border-slate-200 hover:bg-slate-50 transition-all">Get in Touch</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CORE SPECIFICATIONS -->
+            <section id="specs" class="py-32 section-border">
+                <div class="flex justify-between items-end mb-16">
+                    <div class="max-w-2xl">
+                        <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-2">01 // Capabilities</div>
+                        <h2 class="text-4xl font-outfit font-bold tracking-tight">Core Specifications</h2>
+                        <p class="text-slate-500 mt-4 leading-relaxed">
+                            A synthesis of technical mastery and organizational leadership, focused on creating high-performance, data-driven environments.
+                        </p>
+                    </div>
+                    <div class="text-right hidden md:block">
+                        <div class="font-mono text-xs text-slate-400">STATUS: Operational</div>
+                        <div class="font-mono text-xs text-slate-400">MODE: Strategic</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-8 border border-slate-200 bg-white spec-card">
+                        <div class="font-mono text-xs font-bold text-slate-400 mb-4">SPEC_01</div>
+                        <h3 class="text-xl font-bold mb-3">Data Infrastructure</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            Designing end-to-end ETL pipelines and data warehousing solutions that transform fragmented multi-source telemetry into a unified, scalable analytics platform.
+                        </p>
+                    </div>
+                    <div class="p-8 border border-slate-200 bg-white spec-card">
+                        <div class="font-mono text-xs font-bold text-slate-400 mb-4">SPEC_02</div>
+                        <h3 class="text-xl font-bold mb-3">Predictive Modeling</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            Developing high-accuracy forecast models and risk-scoring systems to quantify churn and prioritize high-value outreach strategies.
+                        </p>
+                    </div>
+                    <div class="p-8 border border-slate-200 bg-white spec-card">
+                        <div class="font-mono text-xs font-bold text-slate-400 mb-4">SPEC_03</div>
+                        <h3 class="text-xl font-bold mb-3">AI Stewardship</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            Enterprise-level governance of AI environments, overseeing model costs, token usage, and the deployment of autonomous agents.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TECHNICAL SPECIFICATIONS (WORK) -->
+            <section id="work" class="py-32 section-border">
+                <div class="flex justify-between items-end mb-16">
+                    <div class="max-w-2xl">
+                        <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-2">02 // Implementation</div>
+                        <h2 class="text-4xl font-outfit font-bold tracking-tight">Technical Specifications</h2>
+                        <p class="text-slate-500 mt-4 leading-relaxed">
+                            Case studies in organizational transformation through technical ownership and strategic BI.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-24">
+                    <!-- Project 1 -->
+                    <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <div class="col-span-12 md:col-span-4">
+                            <div class="sticky top-32">
+                                <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_01</div>
+                                <h3 class="text-3xl font-outfit font-bold mb-4">Enterprise Data Warehouse</h3>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">ETL Architecture</span>
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Scalability</span>
+                                </div>
+                                <button onclick="showProject('dw')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
+                            <div class="mb-8">
+                                <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
+                                <p class="text-lg text-slate-600 leading-relaxed">Fragmented data sources across the organization prevented real-time visibility and created friction in lead generation workflows.</p>
+                            </div>
+                            <div class="p-6 bg-slate-50 border border-slate-200">
+                                <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
+                                <p class="text-slate-700 font-medium">Established a single source of truth, enabling automated lead generation and real-time executive dashboards.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <div class="col-span-12 md:col-span-4">
+                            <div class="sticky top-32">
+                                <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_02</div>
+                                <h3 class="text-3xl font-outfit font-bold mb-4">Churn Prediction Engine</h3>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Predictive ML</span>
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">CRM Integration</span>
+                                </div>
+                                <button onclick="showProject('churn')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
+                            <div class="mb-8">
+                                <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
+                                <p class="text-lg text-slate-600 leading-relaxed">Lack of visibility into non-renewal risk led to reactive retention efforts and unpredictable revenue leakage.</p>
+                            </div>
+                            <div class="p-6 bg-slate-50 border border-slate-200">
+                                <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
+                                <p class="text-slate-700 font-medium">Shifted the organization from reactive to proactive retention, allowing the team to prioritize high-value, high-risk accounts.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <div class="col-span-12 md:col-span-4">
+                            <div class="sticky top-32">
+                                <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_03</div>
+                                <h3 class="text-3xl font-outfit font-bold mb-4">Sentiment Framework</h3>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">NPS Strategy</span>
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">CX</span>
+                                </div>
+                                <button onclick="showProject('nps')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
+                            <div class="mb-8">
+                                <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
+                                <p class="text-lg text-slate-600 leading-relaxed">Attendee feedback was fragmented and manually processed, resulting in a delayed response to systemic issues.</p>
+                            </div>
+                            <div class="p-6 bg-slate-50 border border-slate-200">
+                                <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
+                                <p class="text-slate-700 font-medium">Directly influenced service improvements, driving organization NPS from +30 in 2025 to +67 in 2026.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- THE LAB -->
+            <section id="lab" class="py-32 section-border">
+                <div class="flex justify-between items-end mb-16">
+                    <div class="max-w-2xl">
+                        <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-2">03 // Exploration</div>
+                        <h2 class="text-4xl font-outfit font-bold tracking-tight">The Lab</h2>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 border border-slate-200 bg-white hover:bg-slate-50 transition-all cursor-pointer group">
+                        <div class="font-mono text-[10px] font-bold text-slate-400 mb-3 uppercase">Research: PlayerDev</div>
+                        <h4 class="text-lg font-bold mb-2 group-hover:text-slate-900 transition-colors">NBA Breakout Modeling</h4>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Longitudinal analysis of player growth patterns using multi-season telemetry.</p>
+                        <div class="text-xs font-bold text-slate-900 uppercase tracking-widest">View Study &rarr;</div>
+                    </div>
+                    <div class="p-6 border border-slate-200 bg-white hover:bg-slate-50 transition-all cursor-pointer group">
+                        <div class="font-mono text-[10px] font-bold text-slate-400 mb-3 uppercase">Research: TeamChem</div>
+                        <h4 class="text-lg font-bold mb-2 group-hover:text-slate-900 transition-colors">Synergy Scoring Model</h4>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Mapping interpersonal performance efficiency to optimize lineup construction.</p>
+                        <div class="text-xs font-bold text-slate-900 uppercase tracking-widest">View Study &rarr;</div>
+                    </div>
+                    <div class="p-6 border border-slate-200 bg-white hover:bg-slate-50 transition-all cursor-pointer group">
+                        <div class="font-mono text-[10px] font-bold text-slate-400 mb-3 uppercase">Research: StatsViz</div>
+                        <h4 class="text-lg font-bold mb-2 group-hover:text-slate-900 transition-colors">Spatial Telemetry Maps</h4>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Translating raw X,Y court data into strategic heatmaps for coaching staff.</p>
+                        <div class="text-xs font-bold text-slate-900 uppercase tracking-widest">View Study &rarr;</div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="py-32 section-border text-center">
+                <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-8">Contact_Initiate</div>
+                <h2 class="text-5xl font-outfit font-bold tracking-tighter mb-12">Ready for the next <br/>organizational challenge.</h2>
+                <a href="mailto:your@email.com" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all shadow-xl inline-block">Get in Touch</a>
+            </footer>
+        </main>
+    </div>
+
+    <!-- PROJECT DETAIL VIEW -->
+    <div id="view-project" class="view-transition hidden-view min-h-screen px-6 py-32 max-w-5xl mx-auto">
+        <button onclick="showView('main')" class="mb-12 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
+            &larr; Return to Blueprint
+        </button>
+        <div id="project-content">
+            <!-- Content injected by JS -->
+        </div>
+    </div>
+
+    <!-- RESUME DOSSIER VIEW -->
+    <div id="view-resume" class="view-transition hidden-view min-h-screen px-6 py-32 max-w-4xl mx-auto">
+        <div class="flex justify-between items-center mb-12">
+            <button onclick="showView('main')" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
+                &larr; Back to Main
+            </button>
+            <a href="public/Jack_Doehrman_Resume.pdf" download class="px-6 py-2 bg-slate-900 text-white text-xs font-bold uppercase tracking-widest rounded hover:bg-slate-800 transition-all">
+                Download PDF
+            </a>
+        </div>
+        <div class="bg-white p-12 border border-slate-200 shadow-sm font-inter text-slate-800">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl font-outfit font-bold tracking-tight mb-2">Jack Doehrman</h1>
+                <p class="font-mono text-sm text-slate-500 uppercase tracking-widest">Senior BI Analyst & Technical Steward</p>
+                <div class="flex justify-center gap-4 mt-4 text-xs text-slate-400">
+                    <span>jackdoehrman@gmail.com</span>
+                    <span>•</span>
+                    <span>(317) 671-0581</span>
+                    <span>•</span>
+                    <span>linkedin.com/in/jdoehrman/</span>
+                </div>
+            </div>
+
+            <div class="space-y-12">
+                <section>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-100 pb-2">Executive Summary</h2>
+                    <p class="text-lg leading-relaxed font-light">
+                        Strategic Technical Leader with a proven track record of bridging the gap between complex data telemetry and executive decision-making. Expert in architecting scalable data warehouses, predictive ML models, and enterprise AI governance. Certified Salesforce Administrator specializing in the modernization of revenue operations and the reduction of systemic organizational friction.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-100 pb-2">Core Competencies</h2>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><strong class="font-bold">Technical Stewardship:</strong> Enterprise Data Warehousing, ETL Pipeline Design, Data Governance.</div>
+                        <div><strong class="font-bold">Predictive Analytics:</strong> Churn Prediction, Risk Scoring, ML Forecasting.</div>
+                        <div><strong class="font-bold">Operational Automation:</strong> AI Agent Deployment, Salesforce Ecosystem Management.</div>
+                        <div><strong class="font-bold">Strategic Leadership:</strong> Stakeholder Management, Cross-Functional Alignment.</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-100 pb-2">Professional Experience</h2>
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h3 class="font-bold text-lg">Senior BI Analyst | [Current Company]</h3>
+                                <span class="text-xs font-mono text-slate-400">[Date] – Present</span>
+                            </div>
+                            <ul class="list-disc ml-5 space-y-2 text-sm text-slate-600">
+                                <li>Designed and maintained a comprehensive data warehousing solution, engineering ETL pipelines that transform multi-source telemetry into a unified, scalable analytics platform.</li>
+                                <li>Modernized the sales stack by transitioning the organization to Salesforce softphone dialers and architecting an AI-driven SDR agent for autonomous outreach.</li>
+                                <li>Engineered a predictive "At-Risk" scoring system integrated into the CRM, shifting the organization from reactive to proactive retention.</li>
+                                <li>Developed an end-to-end post-match survey ecosystem, driving organization NPS from +30 in 2025 to +67 in 2026.</li>
+                                <li>Established a governed enterprise OpenAI environment, overseeing model costs, token usage, and AI plugin deployment.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-100 pb-2">Certifications & Education</h2>
+                    <div class="text-sm space-y-2">
+                        <div class="flex justify-between">
+                            <span class="font-bold">Certified Salesforce Administrator</span>
+                            <span class="text-slate-400">[Year]</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-bold">[Degree Name]</span>
+                            <span class="text-slate-400">[University]</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projectData = {
+            dw: {
+                title: 'Enterprise Data Warehouse',
+                tags: ['ETL Architecture', 'Scalability', 'Executive BI'],
+                challenge: 'Fragmented data sources across the organization prevented real-time visibility and created friction in lead generation workflows.',
+                architecture: 'Designed and maintained robust data warehousing solutions, engineering ETL pipelines that transform multi-source telemetry into a unified, scalable analytics platform. Implemented automated validation checks to ensure data integrity across the pipeline.',
+                impact: 'Established a single source of truth, enabling automated lead generation and real-time executive dashboards for high-stakes decision-making.',
+                stewardship: 'Led the cross-functional effort to map data requirements from Sales and Marketing, ensuring the technical architecture solved actual business pain points rather than just technical gaps.'
+            },
+            churn: {
+                title: 'Churn Prediction Engine',
+                tags: ['Predictive ML', 'CRM Integration', 'Revenue Retention'],
+                challenge: 'Lack of visibility into non-renewal risk led to reactive retention efforts and unpredictable revenue leakage.',
+                architecture: 'Engineered a predictive "At-Risk" scoring system using historical data. Integrated the model directly into the CRM to automate outreach prioritization based on probability scores.',
+                impact: 'Shifted the organization from reactive to proactive retention, allowing the team to prioritize high-value, high-risk accounts.',
+                stewardship: 'Collaborated with the Account Management team to define "Risk" not just by data, but by qualitative signals, creating a more holistic and accurate predictive model.'
+            },
+            nps: {
+                title: 'Sentiment Framework',
+                tags: ['NPS Strategy', 'Auto-Metadata', 'CX'],
+                challenge: 'Attendee feedback was fragmented and manually processed, resulting in a delayed response to systemic issues.',
+                architecture: 'Built an end-to-end post-match survey ecosystem with automatic metadata tracking and a real-time dashboard for NPS and satisfaction metrics.',
+                impact: 'Directly influenced service improvements, driving organization NPS from +30 in 2025 to +67 in 2026.',
+                stewardship: 'Managed the rollout of the survey across multiple touchpoints, ensuring high response rates through strategic timing and UX optimization.'
+            }
+        };
+
+        function showView(viewId) {
+            document.querySelectorAll('.view-transition').forEach(view => {
+                view.classList.remove('visible-view');
+                view.classList.add('hidden-view');
+            });
+            const target = document.getElementById('view-' + viewId);
+            target.classList.remove('hidden-view');
+            target.classList.add('visible-view');
+            window.scrollTo(0, 0);
+        }
+
+        function showProject(projectId) {
+            const data = projectData[projectId];
+            const content = document.getElementById('project-content');
+            
+            content.innerHTML = `
+                <div class="mb-12">
+                    <div class="font-mono text-xs font-bold text-slate-400 mb-2">TECHNICAL_SPEC_DETAIL</div>
+                    <h1 class="text-5xl font-outfit font-bold tracking-tight mb-6">${data.title}</h1>
+                    <div class="flex flex-wrap gap-2 mb-12">
+                        ${data.tags.map(tag => `<span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">${tag}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                    <div class="col-span-12 md:col-span-8 space-y-16">
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Challenge</h3>
+                            <p class="text-xl text-slate-600 leading-relaxed">${data.challenge}</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Architecture</h3>
+                            <p class="text-xl text-slate-600 leading-relaxed">${data.architecture}</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Stewardship</h3>
+                            <p class="text-xl text-slate-600 leading-relaxed">${data.stewardship}</p>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-4">
+                        <div class="p-8 bg-slate-900 text-white rounded-2xl sticky top-32">
+                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Institutional Impact</div>
+                            <p class="text-lg font-medium leading-relaxed mb-6">${data.impact}</p>
+                            <div class="h-px bg-slate-700 mb-6"></div>
+                            <div class="font-mono text-[10px] text-slate-400 uppercase">Verification: Validated</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showView('project');
+        }
+    </script>
+</body>
+</html>
