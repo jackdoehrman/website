@@ -3,110 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Final Angle | Leadership Mocks</title>
+    <title>Leadership Archetype Comparison</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;500;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        .angle-content { display: none; }
-        .angle-content.active { display: block; }
-        body { transition: background-color 0.4s ease; }
-        .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .archetype-content { display: none; }
+        .archetype-content.active { display: block; }
+        body { transition: background-color 0.4s ease, color 0.4s ease; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .font-space { font-family: 'Space Grotesk', sans-serif; }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-gray-50 text-slate-900 font-inter">
 
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm border-b border-slate-200 z-50 px-6 py-4 flex justify-between items-center">
-        <div class="font-bold text-lg tracking-tight">Visual Stress Test <span class="text-slate-400 font-normal">/ Final Angles</span></div>
-        <div class="flex gap-2 bg-slate-100 p-1 rounded-xl">
-            <button onclick="setAngle('architect')" id="btn-architect" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-white shadow-sm text-slate-900">The Architect</button>
-            <button onclick="setAngle('strategist')" id="btn-strategist" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-slate-500 hover:text-slate-700">The Strategist</button>
+    <!-- Navigation / Selector -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="font-bold text-xl tracking-tight text-slate-900">Brand Evolution <span class="text-gray-400 font-normal">/ Strategy</span></div>
+        <div class="flex gap-2 bg-gray-100 p-1 rounded-xl">
+            <button onclick="setArchetype('modern')" id="btn-modern" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-white shadow-sm text-slate-900">Modern Executive</button>
+            <button onclick="setArchetype('authority')" id="btn-authority" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-gray-500 hover:text-gray-700">Established Authority</button>
+            <button onclick="setArchetype('innovative')" id="btn-innovative" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-gray-500 hover:text-gray-700">Innovative Lead</button>
         </div>
     </nav>
 
     <main class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
         
-        <!-- THE ARCHITECT -->
-        <div id="architect" class="angle-content active">
-            <section class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 md:col-span-8 border-l-4 border-slate-900 pl-8 py-12">
-                    <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-4">System_Identity: Leadership</div>
-                    <h1 class="text-6xl font-mono font-bold tracking-tighter leading-none mb-8">
-                        Precision in <br/>
-                        <span class="text-slate-400">Architecture.</span> <br/>
-                        Authority in <span class="underline decoration-2 underline-offset-8">Execution.</span>
-                    </h1>
-                    <p class="text-xl text-slate-600 max-w-lg leading-relaxed font-light">
-                        I treat organizations as systems. By applying engineering rigor to human capital and data pipelines, I build foundations that cannot fail.
-                    </p>
-                </div>
-                <div class="col-span-12 md:col-span-4 bg-slate-100 p-8 border border-slate-200 font-mono text-xs leading-relaxed">
-                    <div class="text-slate-400 mb-4">// CORE_COMPETENCIES</div>
-                    <div class="mb-2">→ Data-to-Insight Bridge</div>
-                    <div class="mb-2">→ Org-Scale Optimization</div>
-                    <div class="mb-2">→ Technical Stewardship</div>
-                    <div class="mb-2">→ C-Suite Translation</div>
-                    <div class="mt-8 pt-8 border-t border-slate-200 text-slate-500">
-                        STATUS: Ready for Scale<br/>
-                        LOC: Distributed / Global
-                    </div>
+        <!-- MODERN EXECUTIVE -->
+        <div id="modern" class="archetype-content active">
+            <section class="py-12 text-left">
+                <div class="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-widest uppercase bg-blue-50 text-blue-600 rounded-full border border-blue-100">Systems Architecture & Leadership</div>
+                <h1 class="text-6xl font-extrabold tracking-tighter text-slate-900 mb-8 leading-[1.1]">
+                    Bridging the gap between <br/>
+                    <span class="text-blue-600">complex data and actionable insight.</span>
+                </h1>
+                <p class="text-xl text-slate-500 max-w-2xl mb-12 leading-relaxed">
+                    I specialize in scaling technical organizations where the foundation rests on reliability and the output drives executive decision-making.
+                </p>
+                <div class="flex gap-4">
+                    <button class="px-8 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-all">View Case Studies</button>
+                    <button class="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg border border-gray-200 hover:bg-gray-50 transition-all">Get in Touch</button>
                 </div>
             </section>
 
-            <section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-px bg-slate-200 border border-slate-200">
-                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
-                    <div class="font-mono text-xs text-slate-400 mb-6">01 // SYSTEM</div>
-                    <h3 class="text-2xl font-mono font-bold mb-4">The Data Engine</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">Reducing systemic friction in data delivery.</p>
-                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
-                </div>
-                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
-                    <div class="font-mono text-xs text-slate-400 mb-6">02 // HUMAN</div>
-                    <h3 class="text-2xl font-mono font-bold mb-4">The Governance Bridge</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">Architecting the flow between Product and Eng.</p>
-                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
-                </div>
-                <div class="bg-white p-12 hover:bg-slate-50 transition-colors cursor-pointer">
-                    <div class="font-mono text-xs text-slate-400 mb-6">03 // SCALE</div>
-                    <h3 class="text-2xl font-mono font-bold mb-4">Institutional Growth</h3>
-                    <p class="text-slate-500 leading-relaxed mb-8">10x throughput via structural redesign.</p>
-                    <div class="text-slate-900 font-bold text-sm">VIEW SPEC &rarr;</div>
+            <section class="mt-24">
+                <h2 class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-8">Selected Impact</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-8 border border-gray-200 rounded-2xl bg-white hover:border-blue-400 transition-all cursor-pointer group">
+                        <div class="text-blue-600 mb-4 font-mono text-xs font-bold uppercase tracking-wider">Case Study 01 / Infrastructure</div>
+                        <h3 class="text-2xl font-bold mb-3 group-hover:text-blue-600 transition-colors">Scaling Predictive Insight Engines</h3>
+                        <p class="text-slate-500 mb-6 leading-relaxed">Transforming raw telemetry into a strategic asset that reduced operational overhead by 30% across the org.</p>
+                        <div class="flex items-center text-sm font-bold text-slate-900 group-hover:translate-x-1 transition-transform">Explore Strategy &rarr;</div>
+                    </div>
+                    <div class="p-8 border border-gray-200 rounded-2xl bg-white hover:border-blue-400 transition-all cursor-pointer group">
+                        <div class="text-blue-600 mb-4 font-mono text-xs font-bold uppercase tracking-wider">Case Study 02 / Leadership</div>
+                        <h3 class="text-2xl font-bold mb-3 group-hover:text-blue-600 transition-colors">Bridging the Engineering-Product Divide</h3>
+                        <p class="text-slate-500 mb-6 leading-relaxed">Implementing a cross-functional governance model that accelerated feature delivery by 2x.</p>
+                        <div class="flex items-center text-sm font-bold text-slate-900 group-hover:translate-x-1 transition-transform">Explore Strategy &rarr;</div>
+                    </div>
                 </div>
             </section>
         </div>
 
-        <!-- THE STRATEGIST -->
-        <div id="strategist" class="angle-content">
-            <section class="py-12 relative">
-                <div class="absolute -top-10 -right-10 text-[15rem] font-space font-black text-slate-100 leading-none select-none z-0">LEAD</div>
-                <div class="relative z-10">
-                    <h1 class="text-8xl font-space font-extrabold tracking-tighter leading-[0.9] mb-8">
-                        Turning <span class="text-indigo-600">Complexity</span> <br/>
-                        into <span class="italic">Momentum.</span>
-                    </h1>
-                    <p class="text-2xl text-slate-600 max-w-2xl mb-12 leading-relaxed font-light">
-                        I don't just manage teams; I ignite them. I specialize in high-velocity environments where data provides the map and leadership provides the drive.
-                    </p>
-                    <button class="px-10 py-4 bg-indigo-600 text-white font-bold rounded-full text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200">View the Strategy</button>
+        <!-- ESTABLISHED AUTHORITY -->
+        <div id="authority" class="archetype-content">
+            <section class="py-12 text-center">
+                <h1 class="text-6xl font-serif text-slate-900 mb-8 leading-tight italic">
+                    The Foundation of <br/>
+                    <span class="not-italic font-bold">Organizational Excellence.</span>
+                </h1>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+                    A commitment to technical stewardship, ensuring that organizational growth is supported by a rigorous bridge between data and executive insight.
+                </p>
+                <div class="flex justify-center gap-8">
+                    <button class="px-10 py-3 bg-slate-800 text-white font-serif text-lg rounded-sm hover:bg-slate-700 transition-all shadow-md">The Portfolio</button>
+                    <button class="px-10 py-3 bg-transparent text-slate-800 font-serif text-lg border border-slate-800 rounded-sm hover:bg-slate-50 transition-all">Contact</button>
                 </div>
             </section>
 
-            <section class="mt-32 grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="relative p-12 bg-slate-900 text-white rounded-3xl overflow-hidden group cursor-pointer">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -mr-32 -mt-32 group-hover:bg-indigo-500/40 transition-all"></div>
-                    <h3 class="text-4xl font-space font-bold mb-6 relative z-10">The Insight <br/>Accelerator</h3>
-                    <p class="text-slate-400 text-lg mb-10 relative z-10 leading-relaxed">
-                        Transforming stagnant data lakes into real-time decision engines for the executive team.
-                    </p>
-                    <div class="text-indigo-400 font-bold uppercase tracking-widest text-sm relative z-10">Explore Impact &rarr;</div>
+            <section class="mt-24 grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div class="group cursor-pointer">
+                    <div class="aspect-[4/3] bg-slate-200 mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-slate-900/5 group-hover:bg-transparent transition-all duration-500"></div>
+                    </div>
+                    <h3 class="text-3xl font-serif font-bold mb-3 group-hover:text-slate-600 transition-colors">Institutional Scaling</h3>
+                    <p class="text-slate-600 leading-relaxed text-lg font-light">A study on redesigning the technical architecture to support a 10x increase in organizational throughput.</p>
                 </div>
-                <div class="relative p-12 bg-white border-2 border-slate-900 rounded-3xl group cursor-pointer">
-                    <h3 class="text-4xl font-space font-bold mb-6 text-slate-900">The Velocity <br/>Framework</h3>
-                    <p class="text-slate-600 text-lg mb-10 leading-relaxed">
-                        Bridging the gap between "possible" and "delivered" by removing organizational blockers.
-                    </p>
-                    <div class="text-slate-900 font-bold uppercase tracking-widest text-sm">Explore Impact &rarr;</div>
+                <div class="group cursor-pointer">
+                    <div class="aspect-[4/3] bg-slate-200 mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-slate-900/5 group-hover:bg-transparent transition-all duration-500"></div>
+                    </div>
+                    <h3 class="text-3xl font-serif font-bold mb-3 group-hover:text-slate-600 transition-colors">The Governance Bridge</h3>
+                    <p class="text-slate-600 leading-relaxed text-lg font-light">Establishing a framework for data-driven decision making at the highest levels of management.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- INNOVATIVE LEAD -->
+        <div id="innovative" class="archetype-content">
+            <section class="py-12 text-center">
+                <div class="mb-12 flex justify-center">
+                    <div class="h-1 w-16 bg-indigo-500 rounded-full"></div>
+                </div>
+                <h1 class="text-7xl font-extrabold tracking-tighter text-white mb-8 leading-none">
+                    I build the <br/>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">invisible architecture.</span>
+                </h1>
+                <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+                    Engineering leader bridging the gap between high-performance systems and intuitive data storytelling. The anchor of technical stability.
+                </p>
+                <div class="flex justify-center gap-6">
+                    <button class="px-8 py-3 bg-indigo-600 text-white font-bold rounded-full hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/30">Explore Work</button>
+                    <button class="px-8 py-3 bg-white/5 text-white font-bold rounded-full border border-white/10 hover:bg-white/10 transition-all">Get in Touch</button>
+                </div>
+            </section>
+
+            <section class="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="p-[1px] rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-500 group cursor-pointer">
+                    <div class="bg-slate-900 rounded-[23px] p-10 h-full group-hover:bg-slate-800 transition-all">
+                        <h3 class="text-3xl font-bold text-white mb-4">The Insight Engine</h3>
+                        <p class="text-slate-400 mb-8 leading-relaxed">Turning the data pipeline into a storytelling tool for the C-Suite. High impact. Zero friction.</p>
+                        <div class="text-indigo-400 font-mono text-sm font-bold uppercase tracking-widest">View Process &rarr;</div>
+                    </div>
+                </div>
+                <div class="p-[1px] rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-500 group cursor-pointer">
+                    <div class="bg-slate-900 rounded-[23px] p-10 h-full group-hover:bg-slate-800 transition-all">
+                        <h3 class="text-3xl font-bold text-white mb-4">Organizational Glue</h3>
+                        <p class="text-slate-400 mb-8 leading-relaxed">A blueprint for reducing cognitive load and friction between distributed technical teams.</p>
+                        <div class="text-indigo-400 font-mono text-sm font-bold uppercase tracking-widest">View Process &rarr;</div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -114,23 +139,25 @@
     </main>
 
     <script>
-        function setAngle(type) {
-            document.querySelectorAll('.angle-content').forEach(el => el.classList.remove('active'));
+        function setArchetype(type) {
+            document.querySelectorAll('.archetype-content').forEach(el => el.classList.remove('active'));
             document.getElementById(type).classList.add('active');
 
             document.querySelectorAll('nav button').forEach(btn => {
                 btn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
-                btn.classList.add('text-slate-500');
+                btn.classList.add('text-gray-500');
             });
             const activeBtn = document.getElementById('btn-' + type);
             activeBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
-            activeBtn.classList.remove('text-slate-500');
+            activeBtn.classList.remove('text-gray-500');
 
             const body = document.body;
-            if (type === 'architect') {
-                body.className = 'bg-white text-slate-900';
-            } else if (type === 'strategist') {
-                body.className = 'bg-slate-50 text-slate-900';
+            if (type === 'modern') {
+                body.className = 'bg-gray-50 text-slate-900 font-inter';
+            } else if (type === 'authority') {
+                body.className = 'bg-[#fdfcfb] text-slate-900 font-inter';
+            } else if (type === 'innovative') {
+                body.className = 'bg-slate-950 text-white font-inter';
             }
         }
     </script>
