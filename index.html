@@ -44,13 +44,13 @@
 
     <!-- Top Navigation -->
     <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div class="font-mono text-xs font-bold tracking-tighter text-slate-900 uppercase cursor-pointer" onclick="showView('main')">
+        <div class="font-mono text-xs font-bold tracking-tighter text-slate-900 uppercase cursor-pointer" onclick="navigateTo('main')">
             JD // Systems_Identity: Leadership
         </div>
         <div class="flex gap-8 text-xs uppercase tracking-widest font-bold text-slate-500">
-            <a href="#specs" onclick="showView('main')" class="hover:text-slate-900 transition-colors">Core Specs</a>
-            <a href="#work" onclick="showView('main')" class="hover:text-slate-900 transition-colors">Technical Specs</a>
-            <a href="javascript:void(0)" onclick="showView('resume')" class="hover:text-slate-900 transition-colors">Resume</a>
+            <a href="#specs" onclick="navigateTo('main')" class="hover:text-slate-900 transition-colors">Core Specs</a>
+            <a href="#work" onclick="navigateTo('main')" class="hover:text-slate-900 transition-colors">Technical Specs</a>
+            <a href="javascript:void(0)" onclick="navigateTo('resume')" class="hover:text-slate-900 transition-colors">Dossier</a>
         </div>
     </nav>
 
@@ -70,11 +70,11 @@
                         <span class="underline decoration-4 underline-offset-8">actionable insight.</span>
                     </h1>
                     <p class="text-xl md:text-2xl text-slate-600 max-w-2xl leading-relaxed font-light">
-                        I architect the systems that turn complex data into the insights that drive business decisions. I specialize in scaling technical solutions that organizations can actually rely on to drive executive decision-making.
+                        I build the systems that turn raw data into clear strategic advantages. I focus on scaling technical operations where reliability is the baseline and the output drives executive decisions.
                     </p>
                     <div class="mt-12 flex gap-4">
                         <a href="#work" class="px-8 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-all shadow-lg">View Technical Specs</a>
-                        <a href="mailto:jackdoehrman@gmail.com" class="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg border border-slate-200 hover:bg-slate-50 transition-all">Get in Touch</a>
+                        <a href="mailto:your@email.com" class="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg border border-slate-200 hover:bg-slate-50 transition-all">Get in Touch</a>
                     </div>
                 </div>
             </section>
@@ -86,7 +86,7 @@
                         <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-2">01 // Capabilities</div>
                         <h2 class="text-4xl font-outfit font-bold tracking-tight">Core Specifications</h2>
                         <p class="text-slate-500 mt-4 leading-relaxed">
-                            A synthesis of technical optimization and organizational leadership, focused on creating high-performance, data-driven environments.
+                            A synthesis of technical mastery and organizational leadership, focused on creating high-performance, data-driven environments.
                         </p>
                     </div>
                     <div class="text-right hidden md:block">
@@ -114,7 +114,7 @@
                         <div class="font-mono text-xs font-bold text-slate-400 mb-4">SPEC_03</div>
                         <h3 class="text-xl font-bold mb-3">AI Stewardship</h3>
                         <p class="text-slate-500 text-sm leading-relaxed">
-                            Enterprise-level governance of AI environments, overseeing model costs, token usage, and the creation of autonomous agents.
+                            Enterprise-level governance of AI environments, overseeing model costs, token usage, and the deployment of autonomous agents.
                         </p>
                     </div>
                 </div>
@@ -143,17 +143,17 @@
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">ETL Architecture</span>
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Scalability</span>
                                 </div>
-                                <button onclick="showProject('dw')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
+                                <button onclick="navigateTo('project', 'dw')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
                             <div class="mb-8">
                                 <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
-                                <p class="text-lg text-slate-600 leading-relaxed">Fragmented data sources across the organization prevented real-time visibility and created friction in unified sales reporting.</p>
+                                <p class="text-lg text-slate-600 leading-relaxed">Fragmented data sources across the organization prevented real-time visibility and created friction in lead generation workflows.</p>
                             </div>
                             <div class="p-6 bg-slate-50 border border-slate-200">
                                 <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
-                                <p class="text-slate-700 font-medium">Established a single source of truth and manufactured real-time data visualizations, enabling longstanding and ad-hoc executive decision-making.</p>
+                                <p class="text-slate-700 font-medium">Established a single source of truth, enabling automated lead generation and real-time executive dashboards.</p>
                             </div>
                         </div>
                     </div>
@@ -168,13 +168,13 @@
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Predictive ML</span>
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">CRM Integration</span>
                                 </div>
-                                <button onclick="showProject('churn')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
+                                <button onclick="navigateTo('project', 'churn')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
                             <div class="mb-8">
                                 <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
-                                <p class="text-lg text-slate-600 leading-relaxed">Lack of visibility into non-renewal risk led to rushed retention efforts and lost revenue</p>
+                                <p class="text-lg text-slate-600 leading-relaxed">Lack of visibility into non-renewal risk led to reactive retention efforts and unpredictable revenue leakage.</p>
                             </div>
                             <div class="p-6 bg-slate-50 border border-slate-200">
                                 <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
@@ -193,17 +193,17 @@
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">NPS Strategy</span>
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">CX</span>
                                 </div>
-                                <button onclick="showProject('nps')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
+                                <button onclick="navigateTo('project', 'nps')" class="text-xs font-bold uppercase tracking-widest text-slate-900 hover:underline">View Full Spec &rarr;</button>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-8 border-l border-slate-200 pl-8">
                             <div class="mb-8">
                                 <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">The Challenge</div>
-                                <p class="text-lg text-slate-600 leading-relaxed">Attendee feedback was fragmented and manually processed, with no real downstream changes being implemented.</p>
+                                <p class="text-lg text-slate-600 leading-relaxed">Attendee feedback was fragmented and manually processed, resulting in a delayed response to systemic issues.</p>
                             </div>
                             <div class="p-6 bg-slate-50 border border-slate-200">
                                 <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
-                                <p class="text-slate-700 font-medium">Directly influenced weekly service improvements, driving organization NPS from +30 in 2025 to +67 in 2026.</p>
+                                <p class="text-slate-700 font-medium">Directly influenced service improvements, driving organization NPS from +30 in 2025 to +67 in 2026.</p>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                     <div class="p-6 border border-slate-200 bg-white hover:bg-slate-50 transition-all cursor-pointer group">
                         <div class="font-mono text-[10px] font-bold text-slate-400 mb-3 uppercase">Research: StatsViz</div>
                         <h4 class="text-lg font-bold mb-2 group-hover:text-slate-900 transition-colors">Spatial Telemetry Maps</h4>
-                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Translating raw X, Y court data into strategic heatmaps for coaching staff.</p>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Translating raw X,Y court data into strategic heatmaps for coaching staff.</p>
                         <div class="text-xs font-bold text-slate-900 uppercase tracking-widest">View Study &rarr;</div>
                     </div>
                 </div>
@@ -243,14 +243,14 @@
             <footer class="py-32 section-border text-center">
                 <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-8">Contact_Initiate</div>
                 <h2 class="text-5xl font-outfit font-bold tracking-tighter mb-12">Ready for the next <br/>organizational challenge.</h2>
-                <a href="mailto:jackdoehrman@gmail.com" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all shadow-xl inline-block">Get in Touch</a>
+                <a href="mailto:your@email.com" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all shadow-xl inline-block">Get in Touch</a>
             </footer>
         </main>
     </div>
 
     <!-- PROJECT DETAIL VIEW -->
     <div id="view-project" class="view-transition hidden-view min-h-screen px-6 py-32 max-w-5xl mx-auto">
-        <button onclick="showView('main')" class="mb-12 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
+        <button onclick="navigateTo('main')" class="mb-12 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
             &larr; Return to Blueprint
         </button>
         <div id="project-content">
@@ -261,7 +261,7 @@
     <!-- RESUME DOSSIER VIEW -->
     <div id="view-resume" class="view-transition hidden-view min-h-screen px-6 py-32 max-w-6xl mx-auto">
         <div class="flex justify-between items-center mb-8">
-            <button onclick="showView('main')" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
+            <button onclick="navigateTo('main')" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
                 &larr; Back to Main
             </button>
             <a id="resume-download" href="" download class="px-6 py-2 bg-slate-900 text-white text-xs font-bold uppercase tracking-widest rounded hover:bg-slate-800 transition-all">
@@ -304,11 +304,12 @@
             }
         };
 
-        function showView(viewId) {
+        function showView(viewId, projectId = null) {
             document.querySelectorAll('.view-transition').forEach(view => {
                 view.classList.remove('visible-view');
                 view.classList.add('hidden-view');
             });
+            
             const target = document.getElementById('view-' + viewId);
             target.classList.remove('hidden-view');
             target.classList.add('visible-view');
@@ -318,48 +319,83 @@
                 document.getElementById('resume-download').href = resumeUrl;
             }
             
+            if(viewId === 'project' && projectId) {
+                const data = projectData[projectId];
+                const content = document.getElementById('project-content');
+                content.innerHTML = `
+                    <div class="mb-12">
+                        <div class="font-mono text-xs font-bold text-slate-400 mb-2">TECHNICAL_SPEC_DETAIL</div>
+                        <h1 class="text-5xl font-outfit font-bold tracking-tight mb-6">${data.title}</h1>
+                        <div class="flex flex-wrap gap-2 mb-12">
+                            ${data.tags.map(tag => `<span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                        <div class="col-span-12 md:col-span-8 space-y-16">
+                            <div>
+                                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Challenge</h3>
+                                <p class="text-xl text-slate-600 leading-relaxed">${data.challenge}</p>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Architecture</h3>
+                                <p class="text-xl text-slate-600 leading-relaxed">${data.architecture}</p>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Stewardship</h3>
+                                <p class="text-xl text-slate-600 leading-relaxed">${data.stewardship}</p>
+                            </div>
+                        </div>
+                        <div class="col-span-12 md:col-span-4">
+                            <div class="p-8 bg-slate-900 text-white rounded-2xl sticky top-32">
+                                <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Institutional Impact</div>
+                                <p class="text-lg font-medium leading-relaxed mb-6">${data.impact}</p>
+                                <div class="h-px bg-slate-700 mb-6"></div>
+                                <div class="font-mono text-[10px] text-slate-400 uppercase">Verification: Validated</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
             window.scrollTo(0, 0);
         }
 
-        function showProject(projectId) {
-            const data = projectData[projectId];
-            const content = document.getElementById('project-content');
+        // ROUTING SYSTEM
+        function navigateTo(viewId, projectId = null) {
+            let hash = viewId;
+            if(projectId) hash = `project/${projectId}`;
             
-            content.innerHTML = `
-                <div class="mb-12">
-                    <div class="font-mono text-xs font-bold text-slate-400 mb-2">TECHNICAL_SPEC_DETAIL</div>
-                    <h1 class="text-5xl font-outfit font-bold tracking-tight mb-6">${data.title}</h1>
-                    <div class="flex flex-wrap gap-2 mb-12">
-                        ${data.tags.map(tag => `<span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">${tag}</span>`).join('')}
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
-                    <div class="col-span-12 md:col-span-8 space-y-16">
-                        <div>
-                            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Challenge</h3>
-                            <p class="text-xl text-slate-600 leading-relaxed">${data.challenge}</p>
-                        </div>
-                        <div>
-                            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Architecture</h3>
-                            <p class="text-xl text-slate-600 leading-relaxed">${data.architecture}</p>
-                        </div>
-                        <div>
-                            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">The Stewardship</h3>
-                            <p class="text-xl text-slate-600 leading-relaxed">${data.stewardship}</p>
-                        </div>
-                    </div>
-                    <div class="col-span-12 md:col-span-4">
-                        <div class="p-8 bg-slate-900 text-white rounded-2xl sticky top-32">
-                            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Institutional Impact</div>
-                            <p class="text-lg font-medium leading-relaxed mb-6">${data.impact}</p>
-                            <div class="h-px bg-slate-700 mb-6"></div>
-                            <div class="font-mono text-[10px] text-slate-400 uppercase">Verification: Validated</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            showView('project');
+            window.history.pushState({viewId, projectId}, '', `#${hash}`);
+            showView(viewId, projectId);
         }
+
+        // HANDLE BACK/FORWARD BUTTONS
+        window.onpopstate = function(event) {
+            const hash = window.location.hash.replace('#', '');
+            if (!hash || hash === 'main') {
+                showView('main');
+            } else if (hash === 'resume') {
+                showView('resume');
+            } else if (hash.startsWith('project/')) {
+                const projectId = hash.split('/')[1];
+                showView('project', projectId);
+            } else {
+                showView('main');
+            }
+        };
+
+        // HANDLE INITIAL LOAD (if user enters via a link)
+        window.onload = function() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash === 'resume') {
+                showView('resume');
+            } else if (hash.startsWith('project/')) {
+                const projectId = hash.split('/')[1];
+                showView('project', projectId);
+            } else {
+                showView('main');
+            }
+        };
     </script>
 </body>
 </html>
