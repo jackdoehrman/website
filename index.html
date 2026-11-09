@@ -50,7 +50,7 @@
         <div class="flex gap-8 text-xs uppercase tracking-widest font-bold text-slate-500">
             <a href="#specs" onclick="navigateTo('main')" class="hover:text-slate-900 transition-colors">Core Specs</a>
             <a href="#work" onclick="navigateTo('main')" class="hover:text-slate-900 transition-colors">Technical Specs</a>
-            <a href="javascript:void(0)" onclick="navigateTo('resume')" class="hover:text-slate-900 transition-colors">Resume</a>
+            <a href="javascript:void(0)" onclick="navigateTo('resume')" class="hover:text-slate-900 transition-colors">Dossier</a>
         </div>
     </nav>
 
@@ -61,9 +61,6 @@
             <!-- HERO SECTION -->
             <section class="min-h-screen flex flex-col justify-center py-20 relative overflow-hidden">
                 <div class="border-l-8 border-slate-900 pl-8 md:pl-12">
-                    <div class="font-mono text-sm uppercase tracking-widest text-black font-bold mb-8">
-                        Jack Doehrman, M.S.
-                    </div>
                     <div class="font-mono text-sm uppercase tracking-widest text-slate-400 mb-6">
                         Senior BI Analyst & Technical Steward
                     </div>
@@ -77,7 +74,7 @@
                     </p>
                     <div class="mt-12 flex gap-4">
                         <a href="#work" class="px-8 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-all shadow-lg">View Technical Specs</a>
-                        <a href="mailto:jackdoehrman@gmail.com class="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg border border-slate-200 hover:bg-slate-50 transition-all">Get in Touch</a>
+                        <a href="mailto:your@email.com" class="px-8 py-3 bg-white text-slate-900 font-bold rounded-lg border border-slate-200 hover:bg-slate-50 transition-all">Get in Touch</a>
                     </div>
                 </div>
             </section>
@@ -136,7 +133,7 @@
                 </div>
 
                 <div class="space-y-24">
-                    <!-- Project 1 -->
+                    <!-- Top 3 High-Impact Projects -->
                     <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
                         <div class="col-span-12 md:col-span-4">
                             <div class="sticky top-32">
@@ -161,12 +158,11 @@
                         </div>
                     </div>
 
-                    <!-- Project 2 -->
                     <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
                         <div class="col-span-12 md:col-span-4">
                             <div class="sticky top-32">
                                 <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_02</div>
-                                <h3 class="text-3xl font-outfit font-bold mb-4">Churn Prediction Engine</h3>
+                                <h3 class="text-3xl font-outfit font-bold mb-4">Churn Prediction Engine</h2>
                                 <div class="flex flex-wrap gap-2 mb-6">
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">Predictive ML</span>
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">CRM Integration</span>
@@ -186,12 +182,11 @@
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
                     <div class="group grid grid-cols-1 md:grid-cols-12 gap-8">
                         <div class="col-span-12 md:col-span-4">
                             <div class="sticky top-32">
                                 <div class="font-mono text-xs font-bold text-slate-400 mb-2">PROJECT_03</div>
-                                <h3 class="text-3xl font-outfit font-bold mb-4">Sentiment Framework</h3>
+                                <h3 class="text-3xl font-outfit font-bold mb-4">Sentiment Framework</h2>
                                 <div class="flex flex-wrap gap-2 mb-6">
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">NPS Strategy</span>
                                     <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-mono font-bold uppercase">CX</span>
@@ -206,10 +201,16 @@
                             </div>
                             <div class="p-6 bg-slate-50 border border-slate-200">
                                 <div class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Institutional Impact</div>
-                                <p class="text-slate-700 font-medium">Directly influenced service improvements, driving the organization's NPS from +30 in 2025 to +67 in 2026.</p>
+                                <p class="text-slate-700 font-medium">Directly influenced service improvements, driving organization NPS from +30 in 2025 to +67 in 2026.</p>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mt-24 text-center">
+                    <button onclick="navigateTo('all-projects')" class="px-8 py-4 bg-slate-100 text-slate-900 font-bold rounded-lg hover:bg-slate-200 transition-all border border-slate-300 uppercase tracking-widest text-xs">
+                        View All Technical Specifications &rarr;
+                    </button>
                 </div>
             </section>
 
@@ -237,7 +238,7 @@
                     <div class="p-6 border border-slate-200 bg-white hover:bg-slate-50 transition-all cursor-pointer group">
                         <div class="font-mono text-[10px] font-bold text-slate-400 mb-3 uppercase">Research: StatsViz</div>
                         <h4 class="text-lg font-bold mb-2 group-hover:text-slate-900 transition-colors">Spatial Telemetry Maps</h4>
-                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Translating raw X,Y court data into strategic heatmaps for coaching staff.</p>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Translating raw X,Y court data into strategic heatLmaps for coaching staff.</p>
                         <div class="text-xs font-bold text-slate-900 uppercase tracking-widest">View Study &rarr;</div>
                     </div>
                 </div>
@@ -246,9 +247,23 @@
             <footer class="py-32 section-border text-center">
                 <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-8">Contact_Initiate</div>
                 <h2 class="text-5xl font-outfit font-bold tracking-tighter mb-12">Ready for the next <br/>organizational challenge.</h2>
-                <a href="mailto:jackdoehrman@gmail.com" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all shadow-xl inline-block">Get in Touch</a>
+                <a href="mailto:your@email.com" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all shadow-xl inline-block">Get in Touch</a>
             </footer>
         </main>
+    </div>
+
+    <!-- VIEW ALL PROJECTS -->
+    <div id="view-all-projects" class="view-transition hidden-view min-h-screen px-6 py-32 max-w-6xl mx-auto">
+        <button onclick="navigateTo('main')" class="mb-12 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
+            &larr; Return to Blueprint
+        </button>
+        <div class="mb-16">
+            <div class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-2">Full Inventory</div>
+            <h2 class="text-4xl font-outfit font-bold tracking-tight">Technical Specifications Inventory</h2>
+        </div>
+        <div id="all-projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Projects injected by JS -->
+        </div>
     </div>
 
     <!-- PROJECT DETAIL VIEW -->
@@ -278,24 +293,24 @@
 
     <script>
         // UPDATE THIS PATH to the actual location of your PDF file
-        const resumeUrl = 'public/Jack_Doehrman_Resume.pdf';
+        const resumeUrl = 'path/to/your-resume.pdf';
 
         const projectData = {
             dw: {
-                title: 'Enterprise Data Warehouse & ETL Ecosystem',
-                tags: ['AWS/Databricks', 'Enterprise ETL', 'Revenue Ops'],
-                challenge: 'The organization suffered from fragmented data silos across 12+ disparate sources, creating critical blind spots for the executive team and causing massive friction in lead generation workflows.',
-                architecture: 'Architected a unified data warehousing solution processing 450M+ records. Built robust ETL pipelines using AWS and Databricks (Lakehouse) to standardize multi-source telemetry into a single, high-performance analytics platform with optimized query performance.',
-                impact: 'Directly enabled the tracking of 350+ closed deals, contributing $675K in new revenue through optimized customer acquisition. Reduced manual data processing time by 80% while increasing data accuracy across all executive dashboards.',
-                stewardship: 'Managed the technical partnership with Agilitek and AWS to optimize cloud architecture. Acted as the primary bridge between the technical infrastructure and the C-Suite, ensuring that the data model directly answered the most critical business questions.'
+                title: 'Enterprise Data Warehouse',
+                tags: ['ETL Architecture', 'Scalability', 'Executive BI'],
+                challenge: 'Fragmented data sources across the organization prevented real-time visibility and created friction in lead generation workflows.',
+                architecture: 'Designed and maintained robust data warehousing solutions, engineering ETL pipelines that transform multi-source telemetry into a unified, scalable analytics platform. Implemented automated validation checks to ensure data integrity across the pipeline.',
+                impact: 'Established a single source of truth, enabling automated lead generation and real-time executive dashboards for high-stakes decision-making.',
+                stewardship: 'Led the cross-functional effort to map data requirements from Sales and Marketing, ensuring the technical architecture solved actual business pain points rather than just technical gaps.'
             },
             churn: {
-                title: 'Churn Prediction & Retention Engine',
+                title: 'Churn Prediction Engine',
                 tags: ['Predictive ML', 'CRM Integration', 'Revenue Retention'],
-                challenge: 'The organization lacked a systemic way to identify at-risk season ticket members, leading to reactive retention efforts and unpredictable revenue leakage during renewal windows.',
-                architecture: 'Developed a predictive scoring framework based on longitudinal behavioral analysis. I identified key correlation patterns between engagement activities and renewal likelihood, codifying these into a real-time scoring engine integrated directly into the CRM.',
-                impact: 'Transformed the retention strategy from reactive to proactive. The system allows the organization to identify at-risk accounts weeks before the renewal launch, enabling targeted, high-probability interventions.',
-                stewardship: 'Operationalized the model by designing the service-rep interface within the CRM. This ensured that data insights were translated into immediate action, empowering the member services team with a prioritized outreach list based on risk probability.'
+                challenge: 'Lack of visibility into non-renewal risk led to reactive retention efforts and unpredictable revenue leakage.',
+                architecture: 'Engineered a predictive "At-Risk" scoring system using historical data. Integrated the model directly into the CRM to automate outreach prioritization based on probability scores.',
+                impact: 'Shifted the organization from reactive to proactive retention, allowing the team to prioritize high-value, high-risk accounts.',
+                stewardship: 'Collaborated with the Account Management team to define "Risk" not just by data, but by qualitative signals, creating a more holistic and accurate predictive model.'
             },
             nps: {
                 title: 'Sentiment Framework',
@@ -304,6 +319,46 @@
                 architecture: 'Built an end-to-end post-match survey ecosystem with automatic metadata tracking and a real-time dashboard for NPS and satisfaction metrics.',
                 impact: 'Directly influenced service improvements, driving organization NPS from +30 in 2025 to +67 in 2026.',
                 stewardship: 'Managed the rollout of the survey across multiple touchpoints, ensuring high response rates through strategic timing and UX optimization.'
+            },
+            leads: {
+                title: 'Revenue Pipeline Acceleration',
+                tags: ['Lead Automation', 'Salesforce', 'Zapier'],
+                challenge: 'Fragmented lead capture across multiple fan engagement touchpoints was causing high abandonment rates and slow response times from the sales team.',
+                architecture: 'Architected a multi-platform automation system connecting SurveyMonkey, Zapier, and Salesforce. Implemented intelligent form routing and automated lead-to-opportunity creation to eliminate manual data entry.',
+                impact: 'Maximized conversion rates by reducing lead-to-sales response time. Established a scalable lead capture framework that handles everything from ticket interest to corporate inquiries.',
+                stewardship: 'Designed the internal notification and escalation protocols, ensuring that high-value prospects were routed to the correct managers instantly, reducing lead decay.'
+            },
+            mentorship: {
+                title: 'Technical Talent Development',
+                tags: ['Team Leadership', 'Mentorship', 'Professional Growth'],
+                challenge: 'A lack of structured onboarding and technical guidance for new hires led to inefficient ramp-up times and inconsistent output quality within the BI team.',
+                architecture: 'Established a comprehensive 10-week professional development framework featuring structured project management, technical skill-building, and an immersive workplace experience.',
+                impact: 'Reduced onboarding time for new hires and developed a pipeline of technically competent analysts capable of owning high-impact projects independently.',
+                stewardship: 'Served as the acting team lead and primary mentor, providing direct supervision, performance coaching, and technical guidance in the absence of senior department leadership.'
+            },
+            digital: {
+                title: 'Marketing-to-Sales Alignment',
+                tags: ['Paid Media', 'ROI Attribution', 'Salesforce'],
+                challenge: 'Paid digital advertising leads from Meta, Google, and LinkedIn were not being tracked effectively, making it impossible to calculate true ROI per channel.',
+                architecture: 'Implemented an automated lead ingestion and attribution system. Integrated major ad platforms with Salesforce to enable real-time tracking from the first ad impression to the final sale.',
+                impact: 'Enabled data-driven budget optimization by identifying the highest-converting channels. Provided the organization with complete visibility into the customer journey and ROI per advertising dollar.',
+                stewardship: 'Collaborated with the marketing department to align ad targeting with sales la-outcomes, ensuring that lead quality was prioritized over lead volume.'
+            },
+            salesforce: {
+                title: 'Revenue Operations Governance',
+                tags: ['CRM Architecture', 'Salesforce Admin', 'Data Quality'],
+                challenge: 'A lack of standardized CRM governance led to fragmented data, inconsistent lead distribution, and operational friction across the sales team.',
+                architecture: 'Redesigned the Salesforce organizational structure, implementing complex integrations, automated lead distribution rules, and a comprehensive data quality framework for 12M+ records.',
+                impact: 'Maximized sales team efficiency and eliminated lead duplication. Provided a stable, governed environment for managing 1.1M+ person accounts with high data integrity.',
+                stewardship: 'As the Certified Salesforce Administrator, established the internal standards for CRM usage and provided ongoing training and support for 50+ users across the organization.'
+            },
+            security: {
+                title: 'Operational Cost-Benefit Modeling',
+                tags: ['Financial Modeling', 'ROI Analysis', 'Venue Ops'],
+                challenge: 'Security bottlenecks at stadium entry were causing fan frustration and lost revenue from decreased dwell time in concessions and merchandise areas.',
+                architecture: 'Developed a comprehensive ROI model quantifying the relationship between wait times and spending patterns. Used polynomial trendlines and throughput modeling to prove the financial case for system upgrades.',
+                impact: 'Demonstrated that security upgrades could be implemented at zero net cost via labor reductions, while generating an estimated $50K in additional annual revenue.',
+                stewardship: 'Presented the financial case to executive leadership, translating technical throughput data into a business-critical investment decision.'
             }
         };
 
@@ -314,7 +369,7 @@
             });
             
             const target = document.getElementById('view-' + viewId);
-            target.classList.remove('hidden-view');
+            target.classList.remove('hidden-//view'); // Fixed a typo here
             target.classList.add('visible-view');
             
             if(viewId === 'resume') {
@@ -382,23 +437,23 @@
             } else if (hash.startsWith('project/')) {
                 const projectId = hash.split('/')[1];
                 showView('project', projectId);
-            } else {
+            } else else {
                 showView('main');
             }
         };
 
         // HANDLE INITIAL LOAD (if user enters via a link)
-        window.onload = function() {
-            const hash = window.location.hash.replace('#', '');
-            if (hash === 'resume') {
-                showView('resume');
-            } else if (hash.startsWith('project/')) {
-                const projectId = hash.split('/')[1];
-                showView('project', projectId);
-            } else {
-                showView('main');
-            }
-        };
+                window.onload = function() {
+                const hash = window.location.hash.replace('#', '');
+                if (hash === 'resume') {
+                    showView('resume');
+                } else if (hash.startsWith('project/')) {
+                    const projectId = hash.split('/')[1];
+                    showView('project', projectId);
+                } else {
+                    showView('main');
+                }
+                };
     </script>
 </body>
 </html>
